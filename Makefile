@@ -136,7 +136,7 @@ rpm: gpg-agent
 		expect -c "spawn rpmsign \
 				-D \"%__gpg_sign_cmd  %{__gpg} gpg --batch  --no-armor --use-agent --no-secmem-warning -u '\%{_gpg_name}' -sbo \%{__signature_filename} \%{__plaintext_filename}\" \
 				-D \"%__gpg_check_password_cmd  /bin/true\" \
-			--resign --key-id=ED7D414C $$f; \
+			--resign --key-id=$(GPGKEY) $$f; \
 			expect \"Enter pass phrase: \"; \
 			send -- \"FuckRPM\r\n\"; expect eof"; \
 		rpm --checksig --verbose $$f | grep -i $(GPGKEY); \
