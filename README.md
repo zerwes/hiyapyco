@@ -45,8 +45,8 @@ All `args` are handled as file names. They may be strings or list of strings.
 
 * `method`: bit (one of the listed below):
 
-  * `hiyapyco.METHOD_SIMPLE`: replace values (except for lists a simple merge is performed) (default method)
-  * `hiyapyco.METHOD_MERGE`: perform a deep merge
+    * `hiyapyco.METHOD_SIMPLE`: replace values (except for lists a simple merge is performed) (default method)
+    * `hiyapyco.METHOD_MERGE`: perform a deep merge
 
 * `interpolate`: boolean : perform interpolation after the merge (default: False)
 
@@ -110,8 +110,8 @@ Install the latest wheel package using:
 
 ### rpm packages
 
-use `http://repo.zero-sys.net/hiyapyco/rpm` as URL for the yum repo
-and `http://jwhoisserver.net/key.asc` as the URL for the key.
+use [http://repo.zero-sys.net/hiyapyco/rpm](http://repo.zero-sys.net/hiyapyco/rpm) as URL for the yum repo
+and [http://jwhoisserver.net/key.asc](http://jwhoisserver.net/key.asc) as the URL for the key.
 
 ## License
 
