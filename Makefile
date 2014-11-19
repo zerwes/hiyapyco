@@ -90,11 +90,13 @@ dch-increment:
 	@DEBEMAIL=$$(git config --local --get user.email) \
 		 DEBFULLNAME="Klaus Zerwes zero-sys.net" \
 		 dch -i "new debian release"
+	@git diff debian/changelog
 dch-version:
 	@# use this after updating hiyapyco/version.py
 	@DEBEMAIL=$$(git config --local --get user.email) \
 		 DEBFULLNAME="Klaus Zerwes zero-sys.net" \
 		 dch -v $(HIYAPYCOVERSION)-1 -D stable "release version $(HIYAPYCOVERSION)"
+	@git diff debian/changelog
 
 deb: gpg-agent
 	rm -rf release/deb/build
