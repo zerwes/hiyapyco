@@ -5,8 +5,7 @@ HiYaPyCo - A Hierarchical Yaml Python Config
 
 ## Description
 
-A simple python lib allowing hierarchical config files in YAML syntax.
-
+A simple python lib allowing hierarchical overlay of config files in YAML syntax, offering different merge methods and variable interpolation based on jinja2.
 
 ## Key Features
 
@@ -19,6 +18,14 @@ A simple python lib allowing hierarchical config files in YAML syntax.
 
 * PyYAML aka. python-yaml
 * Jinja2 aka. python-jinja2
+
+### Python Version
+
+HiYaPyCo was designed to run on both current major python versions without changes.
+Tested versions:
+* 2.6
+* 2.7
+* 3.2
 
 
 ## Usage
@@ -71,15 +78,24 @@ See: [jinja2.Environment](http://jinja.pocoo.org/docs/dev/api/#jinja2.Environmen
 
 ## Install
 
-### from source
+### From Source
 
-Using python setuptools:
+#### GitHub
 
     git clone https://github.com/zerwes/hiyapyco
     cd hiyapyco
     sudo python setup.py install
 
+#### PyPi
+
+Download the latest or desired version of the source package from [https://pypi.python.org/pypi/HiYaPyCo](https://pypi.python.org/pypi/HiYaPyCo).
+Unpack the archive and install by executing:
+
+    sudo python setup.py install
+
 ### pip
+
+Install the latest wheel package using:
 
     pip install HiYaPyCo
 
