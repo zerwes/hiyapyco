@@ -107,7 +107,7 @@ deb: gpg-agent
 	mkdir -p release/deb/build
 	tar cv -Sp --exclude=dist --exclude=build --exclude='*/.git*' -f - . | ( cd release/deb/build && tar x -Sp -f - )
 	cd release/deb/build && dpkg-buildpackage -b -k$(GPGKEY) -p'gpg --use-agent'
-	gpg --verify release/deb/hiyapyco_0.1.0-1_amd64.changes
+	gpg --verify release/deb/hiyapyco_*.changes
 	rm -rf release/deb/build
 	lintian release/deb/*.deb
 
@@ -180,5 +180,6 @@ testdebversion:
 		false; \
 		fi
 
+releasetest: distclean alltest repo pypi
 release: distclean alltest testdebversion tag upload pushtag
 
