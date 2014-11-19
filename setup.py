@@ -9,10 +9,15 @@ basepath = os.path.dirname(os.path.realpath(__file__))
 sys.path.insert(0, os.path.dirname(basepath))
 from hiyapyco import __version__ as hiyapycoversion
 
+
+long_description='A simple python lib allowing hierarchical overlay of config files in YAML syntax, offering different merge methods and variable interpolation based on jinja2'
+if os.path.exists('README.txt'):
+    long_description = open('README.txt').read()
+
 setup(name='HiYaPyCo',
     version=hiyapycoversion,
     description='Hierarchical Yaml Python Config',
-    long_description='A simple python lib allowing hierarchical overlay of config files in YAML syntax, offering different merge methods and variable interpolation based on jinja2',
+    long_description="%s" % long_description,
     author='Klaus Zerwes zero-sys.net',
     author_email='zerwes@users.noreply.github.com',
     url='https://github.com/zerwes/hiyapyco',

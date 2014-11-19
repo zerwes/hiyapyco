@@ -23,6 +23,7 @@ A simple python lib allowing hierarchical overlay of config files in YAML syntax
 
 HiYaPyCo was designed to run on both current major python versions without changes.
 Tested versions:
+
 * 2.6
 * 2.7
 * 3.2
