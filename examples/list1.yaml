@@ -1,0 +1,19 @@
+# vim: tabstop=4 expandtab shiftwidth=4 softtabstop=4 smartindent
+l:
+    a:
+        - laa
+        - lab
+        - lac
+    b:
+        - lba
+        - lbb
+        - lcc
+    c:
+        - csub:
+            - lcc1
+            - lcc2
+        - lcc 2 only
+        - csub2:
+            - csub2 1
+            - csub2 2
+

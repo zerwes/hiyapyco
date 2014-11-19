@@ -1,0 +1,26 @@
+# vim: tabstop=4 expandtab shiftwidth=4 softtabstop=4 smartindent
+singel: ext
+int: 10
+array:
+    - baseext1
+    - baseext2
+hash:
+    ek1: be1
+    ek2: be2
+deeplist:
+    - d1:
+        d1ext: vext
+    - dext1:
+        d1k1ext: v1ext
+    - d31:
+        a: AAA
+      d32:
+        a: A2A2
+        c: CCC
+deepmap:
+    l1k1:
+        l2k1: overwr
+        l2k3: new val
+    l1k1ext:
+        l2k1ext: ext
+ext: extendet only

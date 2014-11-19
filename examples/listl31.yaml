@@ -1,0 +1,7 @@
+# vim: tabstop=4 expandtab shiftwidth=4 softtabstop=4 smartindent
+
+l3:
+    - a: a
+      b: b
+    - a: A
+      b: B

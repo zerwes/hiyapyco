@@ -1,0 +1,9 @@
+# vim: tabstop=4 expandtab shiftwidth=4 softtabstop=4 smartindent
+l1:
+    - d1:
+        d1k3: v3
+    - d2:
+        d2k1: xxx
+    - d3:
+        d3k1: only in 2
+

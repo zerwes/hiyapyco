@@ -1,0 +1,40 @@
+# vim: tabstop=4 expandtab shiftwidth=4 softtabstop=4 smartindent
+first: first element
+firstcopy: "{{ first }}"
+second: again {{ first }}
+list:
+    - abc
+    - bcd
+    - "cde"
+    - "{{ list[0] }}"
+elist:
+deep:
+    k1:
+        - 10
+        - 11
+        - 12
+    k2:
+        - 22
+        - 23
+    k3:
+        - ali
+        - baba
+        - and
+        - the
+        - 40
+        - thieves
+    interp:
+        str: "{{ deep['k1'][0] }} + {{ deep.k2.1 }}"
+        sum: "{{ deep['k1'][0] + deep.k2.1 }}"
+        join: "{{ deep.k3|join(' ') }}"
+m:
+    - a: A
+      b: "{{ undefined }}"
+      c: "{{ deep.k3[0:2]|join(' ')|upper }}" 
+    - a: B
+      b: "{{ second }}"
+      c: "{{ m.2.a }}" #this is not working because m.2.a must be interpolated too
+    - a: "C & {{ m.0.a }}"
+      b: cc
+      c: ccc
+

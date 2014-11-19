@@ -1,0 +1,22 @@
+#!/usr/bin/make -f
+
+PACKAGE=python-hiyapyco
+PACKAGE_PYTHON3=python3-hiyapyco
+
+PYVERS:=$(shell pyversions -r)
+PY3VERS:=$(shell py3versions -r)
+
+
+%:
+	dh $@ --with python2 --with python3 --buildsystem=python_distutils
+
+override_dh_auto_build:
+	dh_auto_build -p$(PACKAGE)
+	python3 setup.py build
+
+override_dh_auto_install:
+	dh_auto_install -p$(PACKAGE) --destdir=$(CURDIR)/debian/$(PACKAGE)
+	python3 setup.py install --install-layout=deb \
+                        --root=$(CURDIR)/debian/$(PACKAGE_PYTHON3); \
+
+
