@@ -10,7 +10,11 @@ HIYAPYCOVERSION=$(shell python -c 'from hiyapyco import __version__ as hiyapycov
 
 export GPGKEY=ED7D414C
 
-all: test examples
+pypiupload: PYPIREPO := pypi
+pypiuploadtest: PYPIREPO := pypitest
+
+quicktest: test examples
+alltest: clean quicktest testinstall pypiuploadtest
 
 test:
 	@RET=0; \
@@ -65,10 +69,12 @@ wheel:
 	python setup.py bdist_wheel
 
 pypi: sdist wheel
-pypiupload: pypi
+pypiuploadtest: pypi pypiuploaddo
+pypiupload: pypi pypiuploaddo
+pypiuploaddo:
 	# set use-agent in ~/.gnupg/gpg.conf to use the agent
-	python setup.py sdist upload -s -i $(GPGKEY)
-	python setup.py bdist_wheel upload -s -i $(GPGKEY)
+	python setup.py sdist upload -r $(PYPIREPO) -s -i $(GPGKEY)
+	python setup.py bdist_wheel upload -r $(PYPIREPO) -s -i $(GPGKEY)
 
 gpg-agent:
 	gpg-agent; \
@@ -78,6 +84,7 @@ gpg-agent:
 			echo 'please run eval "eval $$(gpg-agent --daemon)"'; \
 			exit 1; \
 			fi
+
 deb: gpg-agent
 	rm -rf release/deb/build
 	mkdir -p release/deb/build
@@ -141,7 +148,6 @@ tag:
 pushtag:
 	git push origin "release-$(HIYAPYCOVERSION)"
 
-
 repo: debrepo rpmrepo
 
 upload: uploadrepo pypiupload
@@ -149,5 +155,5 @@ upload: uploadrepo pypiupload
 uploadrepo: repo
 	scp -r release/* repo.zero-sys.net:/srv/www/repo.zero-sys.net/hiyapyco/
 
-release: distclean tag pypi repo upload pushtag
+release: distclean alltest tag upload pushtag
 
