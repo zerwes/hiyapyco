@@ -56,7 +56,7 @@ The default jinja2.Environment for the interpolation is
     hiyapyco.jinja2env = Environment(undefined=Undefined)
 
 This means that undefined vars will be ignored and replaced with a empty string.
-If you like to change the jinja2 Environment use dfor the interpolation, set `hiyapyco.jinja2env` **before** calling `hiyapyco.load`!
+If you like to change the jinja2 Environment used for the interpolation, set `hiyapyco.jinja2env` **before** calling `hiyapyco.load`!
 
 If you like to keep the undefined var as string but raise no error, use
 
