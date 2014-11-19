@@ -93,10 +93,14 @@ dch-increment:
 	@git diff debian/changelog
 dch-version:
 	@# use this after updating hiyapyco/version.py
-	@DEBEMAIL=$$(git config --local --get user.email) \
-		 DEBFULLNAME="Klaus Zerwes zero-sys.net" \
-		 dch -v $(HIYAPYCOVERSION)-1 -D stable "release version $(HIYAPYCOVERSION)"
-	@git diff debian/changelog
+	@if $$(dpkg --compare-versions $$(dpkg-parsechangelog | sed '/^Version: /!d; s/^Version: \([.0-9]*\).*/\1/g') lt $(HIYAPYCOVERSION)); then \
+		DEBEMAIL=$$(git config --local --get user.email) \
+			DEBFULLNAME="Klaus Zerwes zero-sys.net" \
+			dch -v $(HIYAPYCOVERSION)-1 -D stable "release version $(HIYAPYCOVERSION)"; \
+			git diff debian/changelog; \
+		else \
+			echo "nothing to do"; \
+		fi
 
 deb: gpg-agent
 	rm -rf release/deb/build
@@ -169,5 +173,12 @@ upload: uploadrepo pypiupload
 uploadrepo: repo
 	scp -r release/* repo.zero-sys.net:/srv/www/repo.zero-sys.net/hiyapyco/
 
-release: distclean alltest tag upload pushtag
+testdebversion:
+	@if $$(dpkg --compare-versions $$(dpkg-parsechangelog | sed '/^Version: /!d; s/^Version: \([.0-9]*\).*/\1/g') lt $(HIYAPYCOVERSION)); then \
+		echo "debian version must be incremented to HIYAPYCOVERSION $(HIYAPYCOVERSION)"; \
+		echo "run make dch-version"; \
+		false; \
+		fi
+
+release: distclean alltest testdebversion tag upload pushtag
 
