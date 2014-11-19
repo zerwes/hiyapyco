@@ -14,7 +14,7 @@ pypiupload: PYPIREPO := pypi
 pypiuploadtest: PYPIREPO := pypitest
 
 quicktest: test examples
-alltest: clean quicktest testinstall pypiuploadtest
+alltest: clean quicktest testinstall
 
 test:
 	@RET=0; \
