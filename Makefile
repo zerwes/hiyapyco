@@ -85,6 +85,16 @@ gpg-agent:
 			echo 'please run eval "eval $$(gpg-agent --daemon)"'; \
 			exit 1; \
 			fi
+dch-increment:
+	@# use this to increment the deb relese number for a existing release
+	@DEBEMAIL=$$(git config --local --get user.email) \
+		 DEBFULLNAME="Klaus Zerwes zero-sys.net" \
+		 dch -i "new debian release"
+dch-version:
+	@# use this after updating hiyapyco/version.py
+	@DEBEMAIL=$$(git config --local --get user.email) \
+		 DEBFULLNAME="Klaus Zerwes zero-sys.net" \
+		 dch -v $(HIYAPYCOVERSION)-1 -D stable "release version $(HIYAPYCOVERSION)"
 
 deb: gpg-agent
 	rm -rf release/deb/build
