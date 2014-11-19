@@ -112,9 +112,10 @@ debrepo: deb
 	gpg --verify release/deb/Release.gpg release/deb/Release
 
 rpm: gpg-agent
-	# FIXME: require yaml and jinja2
 	mkdir -p release/rpm/noarch
-	python setup.py bdist_rpm --binary-only --doc-files README.md -d release/rpm/noarch
+	python setup.py bdist_rpm --binary-only \
+		--doc-files README.md --requires python-yaml,python-jinja2 \
+		-d release/rpm/noarch
 	for f in release/rpm/noarch/*.rpm; do \
 		expect -c "spawn rpmsign \
 				-D \"%__gpg_sign_cmd  %{__gpg} gpg --batch  --no-armor --use-agent --no-secmem-warning -u '\%{_gpg_name}' -sbo \%{__signature_filename} \%{__plaintext_filename}\" \
