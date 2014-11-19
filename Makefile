@@ -73,8 +73,9 @@ pypiuploadtest: pypi pypiuploaddo
 pypiupload: pypi pypiuploaddo
 pypiuploaddo:
 	# set use-agent in ~/.gnupg/gpg.conf to use the agent
-	python setup.py sdist upload -r $(PYPIREPO) -s -i $(GPGKEY)
-	python setup.py bdist_wheel upload -r $(PYPIREPO) -s -i $(GPGKEY)
+	pandoc -f markdown -t rst README.md > README.txt
+	python setup.py sdist bdist_wheel upload -r $(PYPIREPO) -s -i $(GPGKEY)
+	rm -rf README.txt
 
 gpg-agent:
 	gpg-agent; \
