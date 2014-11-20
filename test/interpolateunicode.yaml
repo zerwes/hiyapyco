@@ -1,0 +1,9 @@
+# vim: tabstop=4 expandtab shiftwidth=4 softtabstop=4 smartindent
+# vim: set fileencoding=utf-8
+one: Öns
+t: 40
+Zwö: ölybaba {{ one }} zwö ... {{ t }}
+UnicoDict:
+    Umlkäy: Umlwäl
+    umlinterploate: "UnIcöDe {{ UnicoDict['Umlkäy'] }}" # UnicoDict.Umlkäy will NOT work!
+
