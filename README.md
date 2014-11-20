@@ -68,10 +68,12 @@ If you like to change the jinja2 Environment used for the interpolation, set `hi
 
 If you like to keep the undefined var as string but raise no error, use
 
+    from jinja2 import Environment, Undefined, DebugUndefined, StrictUndefined
     hiyapyco.jinja2env = Environment(undefined=DebugUndefined)
 
 If you like to raise a error on undefined vars, use
 
+    from jinja2 import Environment, Undefined, DebugUndefined, StrictUndefined
     hiyapyco.jinja2env = Environment(undefined=StrictUndefined)
 
 See: [jinja2.Environment](http://jinja.pocoo.org/docs/dev/api/#jinja2.Environment)
