@@ -1,5 +1,6 @@
 #! /usr/bin/env python -tt
-
+# vim: set fileencoding=utf-8
+from __future__ import unicode_literals
 """
 Hierarchical Yaml Python Config
 ===============================
@@ -23,7 +24,6 @@ import os
 import yaml
 import logging
 from jinja2 import Environment, Undefined, DebugUndefined,StrictUndefined
-
 
 __all__ = [
     'load',
