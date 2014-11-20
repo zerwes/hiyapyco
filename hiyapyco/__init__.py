@@ -47,7 +47,8 @@ class HiYaPyCoImplementationException(Exception):
     """dummy Exception raised if we are unable to merge some YAML stuff"""
     pass
 
-primitiveTypes = (int, str, bool, float)
+primitiveTypes = (int, str, bool, float, unicode)
+strTypes = (str, unicode)
 listTypes = (list, tuple)
 
 # you may set this to something suitable for you
@@ -137,7 +138,7 @@ class HiYaPyCo():
             self._data = self._interpolate(self._data)
 
     def _updatefiles(self, arg):
-        if isinstance(arg, str):
+        if isinstance(arg, strTypes):
             if arg in self._files:
                 logger.warn('ignoring duplicated file %s' % arg)
                 return
@@ -149,10 +150,10 @@ class HiYaPyCo():
             raise HiYaPyCoInvocationException('unable to handle arg %s of type %s' % (arg, type(arg),))
 
     def _interpolate(self, d):
-        logger.debug('interpolate "%s" ...' % d)
+        logger.debug('interpolate "%s" of type %s ...' % (d, type(d),))
         if d is None:
             return None
-        if isinstance(d, str):
+        if isinstance(d, strTypes):
             return self._interpolatestr(d)
         if isinstance(d, primitiveTypes):
             return d
