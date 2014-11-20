@@ -46,6 +46,7 @@ for mergemethod in hiyapyco.METHODS.keys():
     conf = hiyapyco.load(
         *args.file,
         method=hiyapyco.METHODS[mergemethod],
+        interpolate=True,
         failonmissingfiles=True
         )
     print(conf)
