@@ -137,6 +137,7 @@ class HiYaPyCo():
                     self._data = self._simplemerge(self._data, ydata)
                 else:
                     self._data = self._deepmerge(self._data, ydata)
+                logger.debug('merged data: %s' % self._data)
 
         if self.interpolate:
             self._data = self._interpolate(self._data)
