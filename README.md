@@ -37,6 +37,41 @@ A simple example:
     conf = hiyapyco.load('yamlfile1' [,'yamlfile2' [,'yamlfile3' [...]]] [,kwargs])
     print(hiyapyco.dump(conf))
 
+### real life example:
+
+    yaml1.yaml:
+    ---
+    first: first element
+    second: xxx
+    deep:
+        k1:
+            - 1
+            - 2
+
+    yaml2.yaml:
+    ---
+    second: again {{ first }}
+    deep:
+        k1:
+            - 4 
+            - 6
+        k2:
+            - 3
+            - 6
+
+
+load ...
+
+    >>> import pprint
+    >>> import hiyapyco
+    >>> conf = hiyapyco.load('yaml1.yaml', 'yaml2.yaml', method=hiyapyco.METHOD_MERGE, interpolate=True, failonmissingfiles=True)
+    >>> pprint.PrettyPrinter(indent=4).pprint(conf)
+    {   'deep': {   'k1': [1, 2, 4, 6], 'k2': [3, 6]},
+        'first': u'first element',
+        'ma': {   'ones': u'12', 'sum': u'22'},
+        'second': u'again first element'}
+
+
 ### args
 
 All `args` are handled as file names. They may be strings or list of strings.
@@ -105,7 +140,7 @@ Install the latest wheel package using:
 ### debian packages
 
     echo "deb http://repo.zero-sys.net/hiyapyco/deb ./" > /etc/apt/sources.list.d/hiyapyco.list
-    gpg --keyserver subkeys.pgp.net --recv-key ED7D414C
+    gpg --recv-key ED7D414C
     gpg --armor --export ED7D414C | apt-key add -
     apt-get update
     apt-get install python3-hiyapyco python-hiyapyco
