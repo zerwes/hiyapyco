@@ -56,7 +56,8 @@ class ODYL(yaml.SafeLoader):
 
 class ODYD(yaml.SafeDumper):
     """Ordered Dict Yaml Dumper"""
-    pass
+    def __init__(self, *args, **kwargs):
+        yaml.add_representer(OrderedDict, type(self)._odyrepr)
 
 class ODYR(yaml.representer.SafeRepresenter):
     """Ordered Dict Yaml Representer"""
