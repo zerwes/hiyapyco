@@ -1,0 +1,13 @@
+# vim: tabstop=4 expandtab shiftwidth=4 softtabstop=4 smartindent
+source:
+    domain: nowhere.example.net
+    domainDN: dc={{ source.domain.split('.')|join(',dc=') }}
+    baseDN: ou=Users,{{ source.domainDN }}
+    bindDN: cn=Administrator,{{ source.baseDN }}
+
+destination:
+    domain: somewhere.example.net
+    domainDN: dc={{ destination.domain.split('.')|join(',dc=') }}
+    baseDN: ou=Users,{{ destination['domainDN'] }}
+    bindDN: cn=Administrator,{{ destination.baseDN }}
+
