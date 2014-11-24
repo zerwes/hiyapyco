@@ -60,6 +60,7 @@ clean: distclean
 distclean:
 	python setup.py clean
 	rm -rf release dist build HiYaPyCo.egg-info
+	find . -type f -name \*.pyc -exec rm -v {} \;
 
 sdist:
 	python setup.py sdist
