@@ -25,6 +25,8 @@ import yaml
 import logging
 from jinja2 import Environment, Undefined, DebugUndefined,StrictUndefined
 
+from . import odyldo
+
 __all__ = [
     'load',
     'dump',
@@ -38,6 +40,7 @@ __version__ = version.VERSION
 
 logger = logging.getLogger(__name__)
 
+_usedefaultyamlloader = False
 
 class HiYaPyCoInvocationException(Exception):
     """dummy Exception raised on wrong invocation"""
@@ -86,6 +89,11 @@ class HiYaPyCo():
             self.interpolate = kwargs['interpolate']
             del kwargs['interpolate']
 
+        if 'usedefaultyamlloader' in kwargs:
+            global _usedefaultyamlloader
+            _usedefaultyamlloader = True
+            del kwargs['usedefaultyamlloader']
+
         self.failonmissingfiles = True
         if 'failonmissingfiles' in kwargs:
             self.failonmissingfiles = bool(kwargs['failonmissingfiles'])
@@ -127,7 +135,10 @@ class HiYaPyCo():
                     logger.log(self.loglevelonmissingfiles, 'file not found: %s' % yamlfile)
                 if self.failonmissingfiles:
                     raise HiYaPyCoInvocationException('yaml file not found: \'%s\'' % yamlfile )
-            ydata = yaml.safe_load(f)
+            if _usedefaultyamlloader:
+                ydata = yaml.safe_load(f)
+            else:
+                ydata = odyldo.safe_load(f)
             if logger.isEnabledFor(logging.DEBUG):
                 logger.debug('yaml data: %s' % ydata)
             if self._data is None:
@@ -302,7 +313,10 @@ class HiYaPyCo():
 
 def dump(data, default_flow_style = False):
     """dump the data as YAML"""
-    return yaml.safe_dump(data, default_flow_style = default_flow_style)
+    if _usedefaultyamlloader:
+        return yaml.safe_dump(data, default_flow_style = default_flow_style)
+    else:
+        return odyldo.safe_dump(data, default_flow_style = default_flow_style)
 
 def load(*args, **kwargs):
     """
@@ -310,7 +324,7 @@ def load(*args, **kwargs):
     --------------------------------------
 
     args: YAMLfile(s)
-    kwargs: method, interpolate, loglevel, failonmissingfiles, loglevelmissingfiles
+    kwargs: method, interpolate, usedefaultyamlloader, loglevel, failonmissingfiles, loglevelmissingfiles
 
     Returns a representation of the merged and (if requested) interpolated config.
     Will mostly be a dict, but can be of any other type, depending on the yaml files.
