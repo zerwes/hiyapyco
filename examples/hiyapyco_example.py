@@ -31,6 +31,10 @@ parser.add_argument(
     choices=[k for k in logging._levelNames.keys() if isinstance(k, str)],
     action=LoggingAction
     )
+parser.add_argument(
+        '-y', '--usedefaultyamlloader', dest='usedefaultyamlloader',
+        action='store_true', default=False, help='yaml file(s) to parse'
+    )
 parser.add_argument('-f', '--file', type=str, nargs='+', help='yaml file(s) to parse')
 args = parser.parse_args()
 
@@ -47,7 +51,8 @@ for mergemethod in hiyapyco.METHODS.keys():
         *args.file,
         method=hiyapyco.METHODS[mergemethod],
         interpolate=True,
-        failonmissingfiles=True
+        failonmissingfiles=True,
+        usedefaultyamlloader=args.usedefaultyamlloader
         )
     print(conf)
     print('-'*10, 'YAML', '-'*10)
