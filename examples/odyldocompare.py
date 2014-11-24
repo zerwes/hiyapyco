@@ -1,8 +1,8 @@
 #! /usr/bin/env python
 """
-PYTHONPATH=hiyapyco python examples/odyldocompare.py [FILE]
+PYTHONPATH=. python examples/odyldocompare.py [FILE]
 """
-import odyldo
+import hiyapyco.odyldo as odyldo
 import yaml
 import sys
 import os
