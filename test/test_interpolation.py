@@ -67,10 +67,11 @@ try:
         failonmissingfiles=True,
         interpolate=True
         )
-except UndefinedError as e:
+except hiyapyco.HiYaPyCoImplementationException as e:
     logger.info('test UndefinedError: "%s"' % e)
     undefmsg = '\'undefined\' is undefined'
-    assert '%s' % e == '%s' % undefmsg or '%s' % e == 'b"%s"' % undefmsg
+    hiyapmsg = 'error interpolating string "{{ undefined }}"'
+    assert '%s' % e == '%s : %s' % (hiyapmsg, undefmsg,) or '%s' % e == '%s : b"%s"' % (hiyapmsg, undefmsg,)
 
 
 logger.info('test DebugUndefined ...')
