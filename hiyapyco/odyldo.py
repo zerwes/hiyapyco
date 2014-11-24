@@ -26,7 +26,7 @@ import yaml.loader
 import yaml.dumper
 import yaml.representer
 
-
+# @see: yaml.resolver.DEFAULT_MAPPING_TAG
 ODYLDoYAMLMAPS = [
     u'tag:yaml.org,2002:map',
     u'tag:yaml.org,2002:omap',
@@ -57,9 +57,17 @@ class ODYL(yaml.SafeLoader):
 class ODYD(yaml.SafeDumper):
     """Ordered Dict Yaml Dumper"""
     def __init__(self, *args, **kwargs):
-        yaml.add_representer(OrderedDict, type(self)._odyrepr)
+        yaml.SafeDumper.__init__(self, *args, **kwargs)
+        yaml.representer.SafeRepresenter.add_representer(OrderedDict, type(self)._odyrepr)
+    def _odyrepr(self, data):
+        """see: yaml.representer.represent_mapping"""
+        return self.represent_mapping('tag:yaml.org,2002:map', data.iteritems())
 
-class ODYR(yaml.representer.SafeRepresenter):
-    """Ordered Dict Yaml Representer"""
-    pass
+def safe_load(stream):
+    """implementation of safe loader using Ordered Dict Yaml Loader"""
+    return yaml.load(stream, ODYL)
+
+def safe_dump(data, stream=None, **kwds):
+    """implementation of safe dumper using Ordered Dict Yaml Dumper"""
+    return yaml.dump(data, stream=None, Dumper=ODYD, **kwds)
 
