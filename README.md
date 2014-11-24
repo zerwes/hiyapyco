@@ -18,6 +18,7 @@ A simple python lib allowing hierarchical overlay of config files in YAML syntax
 
 * PyYAML aka. python-yaml
 * Jinja2 aka. python-jinja2
+* ordereddict for python2.6 (if you like to use the OrderedDict PyYAML loader / dumper [ODYLDo](#ODYLDo))
 
 ### Python Version
 
@@ -39,7 +40,8 @@ A simple example:
 
 ### real life example:
 
-    yaml1.yaml:
+`yaml1.yaml`:
+
     ---
     first: first element
     second: xxx
@@ -48,7 +50,8 @@ A simple example:
             - 1
             - 2
 
-    yaml2.yaml:
+`yaml2.yaml`:
+
     ---
     second: again {{ first }}
     deep:
@@ -85,6 +88,8 @@ All `args` are handled as file names. They may be strings or list of strings.
 
 * `interpolate`: boolean : perform interpolation after the merge (default: False)
 
+* `usedefaultyamlloader`: boolean : force the usage of the default *PyYAML* loader/dumper instead of *HiYaPyCo*s implementation of a OrderedDict loader/dumper (see: [ODYLDo](#ODYLDo) (default: False)
+
 * `failonmissingfiles`: boolean : fail if a supplied YAML file can not be found (default: True)
 
 * `loglevel`: int : loglevel for the hiyapyco logger; should be one of the valid levels from `logging`: 'WARN', 'ERROR', 'DEBUG', 'I    NFO', 'WARNING', 'CRITICAL', 'NOTSET' (default: default of `logging`)
@@ -94,24 +99,47 @@ All `args` are handled as file names. They may be strings or list of strings.
 
 ### interpolation
 
+For using interpolation, I strongly recomend *not* to use the default PyYAML loader, as it sorts the dict entrys alphabetically, a fact that may break interpolation in some cases (see `test/odict.yaml` and `test/test_odict.py` for an example).
+See [ODYLDo](#ODYLDo)
+
+#### default
 The default jinja2.Environment for the interpolation is
 
     hiyapyco.jinja2env = Environment(undefined=Undefined)
 
 This means that undefined vars will be ignored and replaced with a empty string.
+
+#### change the jinja2 Environment
+
 If you like to change the jinja2 Environment used for the interpolation, set `hiyapyco.jinja2env` **before** calling `hiyapyco.load`!
+
+#### use jinja2 DebugUndefined
 
 If you like to keep the undefined var as string but raise no error, use
 
     from jinja2 import Environment, Undefined, DebugUndefined, StrictUndefined
     hiyapyco.jinja2env = Environment(undefined=DebugUndefined)
 
+#### use jinja2 StrictUndefined
+
 If you like to raise a error on undefined vars, use
 
     from jinja2 import Environment, Undefined, DebugUndefined, StrictUndefined
     hiyapyco.jinja2env = Environment(undefined=StrictUndefined)
 
+This will raise a `hiyapyco.HiYaPyCoImplementationException` wrapped arround the `jinja2.UndefinedError` pointing at the strig causing the error.
+
+#### more informations
+
 See: [jinja2.Environment](http://jinja.pocoo.org/docs/dev/api/#jinja2.Environment)
+
+### Ordered Dict Yaml Loader / Dumper aka. ODYLDo <a name="ODYLDo"></a>
+
+This is a simple implementation of a PyYAML loader / dumper using `OrderedDict` from collections.  
+**Because chaos is fun but order matters on loading dicts from a yaml file.**  
+In order to use this on python 2.6, please install ordereddict:
+
+    sudo pip-2.6 install ordereddict
 
 
 ## Install
@@ -158,4 +186,15 @@ This software is licensed under the terms of the
 GNU LESSER GENERAL PUBLIC LICENSE version 3 or later,
 as published by the Free Software Foundation.  
 See [https://www.gnu.org/licenses/lgpl.html](https://www.gnu.org/licenses/lgpl.html)
+
+## Changelog
+
+### 0.1.0 / 0.1.1
+Initial release
+
+### 0.2.0
+Fixed unicode handling
+
+### 0.3.0
+Implemented a Ordered Dict Yaml Loader
 
