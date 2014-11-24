@@ -104,7 +104,7 @@ class HiYaPyCo():
 
         if 'usedefaultyamlloader' in kwargs:
             global _usedefaultyamlloader
-            _usedefaultyamlloader = True
+            _usedefaultyamlloader = kwargs['usedefaultyamlloader']
             del kwargs['usedefaultyamlloader']
 
         self.failonmissingfiles = True
