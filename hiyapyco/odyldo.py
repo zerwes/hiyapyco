@@ -19,6 +19,7 @@ try:
     from collections import OrderedDict
 except ImportError:
     # try importing the backported replacement
+    # requires a: `pip-2.6 install ordereddict`
     from ordereddict import OrderedDict 
 
 import yaml
