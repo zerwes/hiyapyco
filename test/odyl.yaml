@@ -7,3 +7,18 @@ zwo:
         x: one
         y: two
         a: 3
+deep:
+        X:
+                x: 1
+                a: 2
+                z: 3
+                b: 4
+        Y: False
+        A:
+                z: 1
+                a: 2
+                deep:
+                        XXX: 1
+                        AAA: 2
+                        ZZZ: 3
+
