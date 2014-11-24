@@ -23,7 +23,7 @@ import sys
 import os
 import yaml
 import logging
-from jinja2 import Environment, Undefined, DebugUndefined,StrictUndefined
+from jinja2 import Environment, Undefined, DebugUndefined, StrictUndefined, TemplateError
 
 from . import odyldo
 
@@ -197,7 +197,10 @@ class HiYaPyCo():
         raise HiYaPyCoImplementationException('can not interpolate "%s" of type %s' % (d, type(d),))
 
     def _interpolatestr(self, s):
-        si = jinja2env.from_string(s).render(self._data)
+        try:
+            si = jinja2env.from_string(s).render(self._data)
+        except TemplateError as e:
+            raise HiYaPyCoImplementationException('error interpolating string "%s" : %s' % (s, e,))
         if not s == si:
             logger.debug('interpolated "%s" to "%s"' % (s, si,))
         return si
