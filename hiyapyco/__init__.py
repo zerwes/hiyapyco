@@ -68,6 +68,19 @@ METHOD_MERGE = METHODS['METHOD_MERGE']
 class HiYaPyCo():
     """Main class"""
     def __init__(self, *args, **kwargs):
+        """
+        args: YAMLfile(s)
+        kwargs:
+          * method: one of hiyapyco.METHOD_SIMPLE | hiyapyco.METHOD_MERGE
+          * interpolate: boolean (default: False)
+          * usedefaultyamlloader: boolean (default: False)
+          * loglevel: one of  the valid levels from the logging module
+          * failonmissingfiles: boolean (default: True)
+          * loglevelmissingfiles
+
+        Returns a representation of the merged and (if requested) interpolated config.
+        Will mostly be a OrderedDict (dict if usedefaultyamlloader), but can be of any other type, depending on the yaml files.
+        """
         self._data = None
         self._files = []
 
@@ -324,10 +337,16 @@ def load(*args, **kwargs):
     --------------------------------------
 
     args: YAMLfile(s)
-    kwargs: method, interpolate, usedefaultyamlloader, loglevel, failonmissingfiles, loglevelmissingfiles
+    kwargs:
+      * method: one of hiyapyco.METHOD_SIMPLE | hiyapyco.METHOD_MERGE
+      * interpolate: boolean (default: False)
+      * usedefaultyamlloader: boolean (default: False)
+      * loglevel: one of  the valid levels from the logging module
+      * failonmissingfiles: boolean (default: True)
+      * loglevelmissingfiles
 
     Returns a representation of the merged and (if requested) interpolated config.
-    Will mostly be a dict, but can be of any other type, depending on the yaml files.
+    Will mostly be a OrderedDict (dict if usedefaultyamlloader), but can be of any other type, depending on the yaml files.
     """
     hiyapyco = HiYaPyCo(*args, **kwargs)
     return hiyapyco.data()
