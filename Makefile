@@ -34,7 +34,7 @@ examples:
 		for p in $(PYVERSIONS); do \
 			echo "python version $$p"; \
 			for t in examples/*.py; do \
-				[ "$$t" = "examples/hiyapyco.py" ] && continue; \
+				[ "$$t" = "examples/hiyapyco_example.py" ] && continue; \
 				echo "$$p -t $$t ..."; \
 				$$p -t $$t > /dev/null 2>&1; \
 				RET=$$?; \
