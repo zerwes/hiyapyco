@@ -168,7 +168,7 @@ Install the latest wheel package using:
 ### debian packages
 
     echo "deb http://repo.zero-sys.net/hiyapyco/deb ./" > /etc/apt/sources.list.d/hiyapyco.list
-    gpg --recv-key ED7D414C
+    gpg --keyserver keys.gnupg.net --recv-key ED7D414C
     gpg --armor --export ED7D414C | apt-key add -
     apt-get update
     apt-get install python3-hiyapyco python-hiyapyco
