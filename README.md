@@ -195,6 +195,5 @@ Initial release
 ### 0.2.0
 Fixed unicode handling
 
-### 0.3.0
+### 0.3.0 / 0.3.1
 Implemented a Ordered Dict Yaml Loader
-
