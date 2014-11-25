@@ -18,7 +18,7 @@ A simple python lib allowing hierarchical overlay of config files in YAML syntax
 
 * PyYAML aka. python-yaml
 * Jinja2 aka. python-jinja2
-* ordereddict for python2.6 (if you like to use the OrderedDict PyYAML loader / dumper [ODYLDo](#ODYLDo))
+* ordereddict for python2.6 (if you like to use the Ordered Dict Yaml Loader / Dumper aka. ODYLDo)
 
 ### Python Version
 
@@ -88,7 +88,7 @@ All `args` are handled as file names. They may be strings or list of strings.
 
 * `interpolate`: boolean : perform interpolation after the merge (default: False)
 
-* `usedefaultyamlloader`: boolean : force the usage of the default *PyYAML* loader/dumper instead of *HiYaPyCo*s implementation of a OrderedDict loader/dumper (see: [ODYLDo](#ODYLDo) (default: False)
+* `usedefaultyamlloader`: boolean : force the usage of the default *PyYAML* loader/dumper instead of *HiYaPyCo*s implementation of a OrderedDict loader/dumper (see: Ordered Dict Yaml Loader / Dumper aka. ODYLDo) (default: False)
 
 * `failonmissingfiles`: boolean : fail if a supplied YAML file can not be found (default: True)
 
@@ -100,7 +100,7 @@ All `args` are handled as file names. They may be strings or list of strings.
 ### interpolation
 
 For using interpolation, I strongly recomend *not* to use the default PyYAML loader, as it sorts the dict entrys alphabetically, a fact that may break interpolation in some cases (see `test/odict.yaml` and `test/test_odict.py` for an example).
-See [ODYLDo](#ODYLDo)
+See Ordered Dict Yaml Loader / Dumper aka. ODYLDo
 
 #### default
 The default jinja2.Environment for the interpolation is
@@ -133,7 +133,7 @@ This will raise a `hiyapyco.HiYaPyCoImplementationException` wrapped arround the
 
 See: [jinja2.Environment](http://jinja.pocoo.org/docs/dev/api/#jinja2.Environment)
 
-### Ordered Dict Yaml Loader / Dumper aka. ODYLDo <a name="ODYLDo"></a>
+### Ordered Dict Yaml Loader / Dumper aka. ODYLDo
 
 This is a simple implementation of a PyYAML loader / dumper using `OrderedDict` from collections.  
 **Because chaos is fun but order matters on loading dicts from a yaml file.**  
