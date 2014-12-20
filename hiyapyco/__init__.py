@@ -108,6 +108,11 @@ class HiYaPyCo():
             del kwargs['interpolate']
 
         if 'usedefaultyamlloader' in kwargs:
+            if not isinstance(kwargs['usedefaultyamlloader'], bool):
+                raise HiYaPyCoInvocationException(
+                        'value of "usedefaultyamlloader" must be boolean (got: "%s" as %s)' %
+                        (kwargs['usedefaultyamlloader'], type(kwargs['usedefaultyamlloader']),)
+                        )
             global _usedefaultyamlloader
             _usedefaultyamlloader = kwargs['usedefaultyamlloader']
             del kwargs['usedefaultyamlloader']
