@@ -40,7 +40,7 @@ try:
             )
     raise Exception('we should newer get here: missing exception')
 except hiyapyco.HiYaPyCoInvocationException as e:
-    assert e.message.startswith('value of "interpolate" must be boolean')
+    assert str(e).startswith('value of "interpolate" must be boolean')
 try:
     conf = hiyapyco.HiYaPyCo(
             os.path.join(basepath, 'base.yaml'),
@@ -48,7 +48,7 @@ try:
             )
     raise Exception('we should newer get here: missing exception')
 except hiyapyco.HiYaPyCoInvocationException as e:
-    assert e.message.startswith('value of "usedefaultyamlloader" must be boolean')
+    assert str(e).startswith('value of "usedefaultyamlloader" must be boolean')
 try:
     conf = hiyapyco.HiYaPyCo(
             os.path.join(basepath, 'base.yaml'),
@@ -56,7 +56,7 @@ try:
             )
     raise Exception('we should newer get here: missing exception')
 except hiyapyco.HiYaPyCoInvocationException as e:
-    assert e.message.startswith('value of "failonmissingfiles" must be boolean')
+    assert str(e).startswith('value of "failonmissingfiles" must be boolean')
 
 logger.info('test undef kwarg ...')
 try:
