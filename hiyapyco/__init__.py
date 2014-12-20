@@ -119,6 +119,11 @@ class HiYaPyCo():
 
         self.failonmissingfiles = True
         if 'failonmissingfiles' in kwargs:
+            if not isinstance(kwargs['failonmissingfiles'], bool):
+                raise HiYaPyCoInvocationException(
+                        'value of "failonmissingfiles" must be boolean (got: "%s" as %s)' %
+                        (kwargs['failonmissingfiles'], type(kwargs['failonmissingfiles']),)
+                        )
             self.failonmissingfiles = bool(kwargs['failonmissingfiles'])
             del kwargs['failonmissingfiles']
 
