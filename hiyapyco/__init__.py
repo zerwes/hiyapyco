@@ -99,6 +99,11 @@ class HiYaPyCo():
 
         self.interpolate = False
         if 'interpolate' in kwargs:
+            if not isinstance(kwargs['interpolate'], bool):
+                raise HiYaPyCoInvocationException(
+                        'value of "interpolate" must be boolean (got: "%s" as %s)' %
+                        (kwargs['interpolate'], type(kwargs['interpolate']),)
+                        )
             self.interpolate = kwargs['interpolate']
             del kwargs['interpolate']
 
