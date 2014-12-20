@@ -32,6 +32,28 @@ conf = hiyapyco.HiYaPyCo(
         failonmissingfiles=True
         )
 
+logger.info('test kwarg nonbool ...')
+try:
+    conf = hiyapyco.HiYaPyCo(
+            os.path.join(basepath, 'base.yaml'),
+            interpolate='ABC'
+            )
+except hiyapyco.HiYaPyCoInvocationException as e:
+    assert e.message.startswith('value of "interpolate" must be boolean')
+try:
+    conf = hiyapyco.HiYaPyCo(
+            os.path.join(basepath, 'base.yaml'),
+            usedefaultyamlloader='ABC'
+            )
+except hiyapyco.HiYaPyCoInvocationException as e:
+    assert e.message.startswith('value of "usedefaultyamlloader" must be boolean')
+try:
+    conf = hiyapyco.HiYaPyCo(
+            os.path.join(basepath, 'base.yaml'),
+            failonmissingfiles='ABC'
+            )
+except hiyapyco.HiYaPyCoInvocationException as e:
+    assert e.message.startswith('value of "failonmissingfiles" must be boolean')
 
 logger.info('test undef kwarg ...')
 try:
