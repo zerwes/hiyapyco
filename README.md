@@ -7,6 +7,8 @@ HiYaPyCo - A Hierarchical Yaml Python Config
 
 A simple python lib allowing hierarchical overlay of config files in YAML syntax, offering different merge methods and variable interpolation based on jinja2.
 
+The goal was to have something similar to puppets hiera `deeper merge_behavior` for python.
+
 ## Key Features
 
 * hierarchical overlay of multiple YAML files
@@ -182,7 +184,8 @@ and [http://jwhoisserver.net/key.asc](http://jwhoisserver.net/key.asc) as the UR
 
 ## License
 
-(c) 2014 Klaus Zerwes [zero-sys.net](http://zero-sys.net)  
+(c) 2014 Klaus Zerwes [zero-sys.net](https://zero-sys.net)
+
 This package is free software.  
 This software is licensed under the terms of the
 GNU LESSER GENERAL PUBLIC LICENSE version 3 or later,
