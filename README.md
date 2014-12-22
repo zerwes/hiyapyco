@@ -76,10 +76,31 @@ load ...
         'ma': {   'ones': u'12', 'sum': u'22'},
         'second': u'again first element'}
 
+### real life example using yaml documents as strings
+
+    >>> import hiyapyco
+    >>> y1="""
+    ... yaml: 1
+    ... y:
+    ...   y1: abc
+    ...   y2: xyz
+    ... """
+    >>> y2="""
+    ... yaml: 2
+    ... y:
+    ...   y2: def
+    ...   y3: XYZ
+    ... """
+    >>> conf = hiyapyco.load([y1, y2], method=hiyapyco.METHOD_MERGE)
+    >>> print (conf)
+    OrderedDict([('yaml', 2), ('y', OrderedDict([('y1', 'abc'), ('y2', 'def'), ('y3', 'XYZ')]))])
+    >>> hiyapyco.dump(conf, default_flow_style=True)
+    '{yaml: 2, y: {y1: abc, y2: def, y3: XYZ}}\n'
+
 
 ### args
 
-All `args` are handled as file names. They may be strings or list of strings.
+All `args` are handled as *file names* or *yaml documents*. They may be strings or list of strings.
 
 ### kwargs
 
