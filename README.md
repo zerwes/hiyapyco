@@ -227,3 +227,5 @@ Implemented a Ordered Dict Yaml Loader
 ### 0.3.2
 Improved tests and bool args checks
 
+### 0.4.0
+Implemented: loading yaml docs from string
