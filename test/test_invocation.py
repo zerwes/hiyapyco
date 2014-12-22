@@ -86,7 +86,7 @@ try:
 except hiyapyco.HiYaPyCoInvocationException as e:
     assert '%s' % e == 'yaml file not found: \'nosuchfile.yaml\''
 
-logger.info('test normal file list')
+logger.info('test normal file list ...')
 conf = hiyapyco.load(
         os.path.join(basepath, 'base.yaml'),
         os.path.join(basepath, 'baseext.yaml'),
@@ -94,7 +94,7 @@ conf = hiyapyco.load(
         failonmissingfiles=True
         )
 
-logger.info('test files as list')
+logger.info('test files as list ...')
 conf = hiyapyco.load(
         [
             os.path.join(basepath, 'base.yaml'),
@@ -104,6 +104,67 @@ conf = hiyapyco.load(
         failonmissingfiles=True
         )
 
+logger.info('test yaml doc as str ...')
+y1 = """
+---
+yaml: from str 1
+h:
+    y1: abc
+    y2: xyz
+l:
+    - l1
+    - l2
+"""
+y2 = """
+---
+yaml: from str 2
+h:
+    y1: ABC
+    y3: DEF
+l:
+    - lll
+"""
+conf = hiyapyco.load(
+        y1,
+        method=hiyapyco.METHOD_MERGE,
+        failonmissingfiles=True
+    )
+assert conf == {'yaml': 'from str 1', 'h': {'y1': 'abc', 'y2': 'xyz'}, 'l': ['l1', 'l2']}
+conf = hiyapyco.load(
+        y1, y2,
+        method=hiyapyco.METHOD_MERGE,
+        failonmissingfiles=True
+    )
+assert conf == {'yaml': 'from str 2', 'h': {'y1': 'ABC', 'y2': 'xyz', 'y3': 'DEF'}, 'l': ['l1', 'l2', 'lll']}
+conf = hiyapyco.load(
+        [y1, y2,],
+        method=hiyapyco.METHOD_MERGE,
+        failonmissingfiles=True
+    )
+assert conf == {'yaml': 'from str 2', 'h': {'y1': 'ABC', 'y2': 'xyz', 'y3': 'DEF'}, 'l': ['l1', 'l2', 'lll']}
+
+logger.info('test default yaml loader ...')
+conf = hiyapyco.load(
+        y1,
+        method=hiyapyco.METHOD_MERGE,
+        usedefaultyamlloader=True,
+        failonmissingfiles=True
+    )
+assert conf == {'yaml': 'from str 1', 'h': {'y1': 'abc', 'y2': 'xyz'}, 'l': ['l1', 'l2']}
+conf = hiyapyco.load(
+        y1, y2,
+        method=hiyapyco.METHOD_MERGE,
+        usedefaultyamlloader=True,
+        failonmissingfiles=True
+    )
+assert conf == {'yaml': 'from str 2', 'h': {'y1': 'ABC', 'y2': 'xyz', 'y3': 'DEF'}, 'l': ['l1', 'l2', 'lll']}
+conf = hiyapyco.load(
+        [y1, y2,],
+        method=hiyapyco.METHOD_MERGE,
+        usedefaultyamlloader=True,
+        failonmissingfiles=True
+    )
+assert conf == {'yaml': 'from str 2', 'h': {'y1': 'ABC', 'y2': 'xyz', 'y3': 'DEF'}, 'l': ['l1', 'l2', 'lll']}
 
 print('passed test %s' % __file__)
 
