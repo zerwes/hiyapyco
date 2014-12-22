@@ -94,9 +94,12 @@ conf = hiyapyco.load(
         failonmissingfiles=True
         )
 
-logger.info('test normal file list')
+logger.info('test files as list')
 conf = hiyapyco.load(
-        [os.path.join(basepath, 'base.yaml'), os.path.join(basepath, 'baseext.yaml')],
+        [
+            os.path.join(basepath, 'base.yaml'),
+            os.path.join(basepath, 'baseext.yaml')
+        ],
         method=hiyapyco.METHOD_SIMPLE,
         failonmissingfiles=True
         )
