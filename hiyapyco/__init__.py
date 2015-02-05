@@ -223,6 +223,7 @@ class HiYaPyCo():
         try:
             si = jinja2env.from_string(s).render(self._data)
         except TemplateError as e:
+            # FIXME: this seems to be broken for unicode str?
             raise HiYaPyCoImplementationException('error interpolating string "%s" : %s' % (s, e,))
         if not s == si:
             logger.debug('interpolated "%s" to "%s"' % (s, si,))
