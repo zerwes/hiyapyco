@@ -215,17 +215,17 @@ See [https://www.gnu.org/licenses/lgpl.html](https://www.gnu.org/licenses/lgpl.h
 
 ## Changelog
 
-### 0.1.0 / 0.1.1
-Initial release
-
-### 0.2.0
-Fixed unicode handling
-
-### 0.3.0 / 0.3.1
-Implemented a Ordered Dict Yaml Loader
+### 0.4.0
+Implemented: loading yaml docs from string
 
 ### 0.3.2
 Improved tests and bool args checks
 
-### 0.4.0
-Implemented: loading yaml docs from string
+### 0.3.0 / 0.3.1
+Implemented a Ordered Dict Yaml Loader
+
+### 0.2.0
+Fixed unicode handling
+
+### 0.1.0 / 0.1.1
+Initial release
