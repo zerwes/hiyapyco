@@ -393,6 +393,7 @@ def load(*args, **kwargs):
     kwargs:
       * method: one of hiyapyco.METHOD_SIMPLE | hiyapyco.METHOD_MERGE
       * interpolate: boolean (default: False)
+      * castinterpolated: boolean (default: False) try to cast values after interpolating
       * usedefaultyamlloader: boolean (default: False)
       * loglevel: one of  the valid levels from the logging module
       * failonmissingfiles: boolean (default: True)
