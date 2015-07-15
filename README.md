@@ -213,7 +213,7 @@ and [http://jwhoisserver.net/key.asc](http://jwhoisserver.net/key.asc) as the UR
 
 ## License
 
-(c) 2014 Klaus Zerwes [zero-sys.net](https://zero-sys.net)
+(c) 2014 - 2015 Klaus Zerwes [zero-sys.net](https://zero-sys.net)
 
 This package is free software.  
 This software is licensed under the terms of the
