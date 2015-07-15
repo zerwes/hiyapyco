@@ -1,0 +1,11 @@
+---
+one: 1
+two: 2
+three: "{{ one + two }}"
+a: 2.1
+b: 3.8
+c: "{{ a + b }}"
+b1: a
+b2: a
+bool: "{{ b1 == b2 }}"
+
