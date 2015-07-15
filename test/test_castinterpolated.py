@@ -27,7 +27,7 @@ print('start test %s for hiyapyco %s using python %s (loglevel:%s)' % (
             platform.python_version(),
             logging.getLevelName(logger.getEffectiveLevel())
         )
-    )   
+    )
 
 yamlfile = os.path.join(basepath, 'castinterpolated.yaml')
 

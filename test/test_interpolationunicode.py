@@ -24,8 +24,12 @@ logger = testsetup.setup(sys.argv[1:])
 
 basepath = os.path.dirname(os.path.realpath(__file__))
 
-print('start test %s using python %s (loglevel:%s)' %
-        (__file__, platform.python_version(), logging.getLevelName(logger.getEffectiveLevel()))
+print('start test %s for hiyapyco %s using python %s (loglevel:%s)' % (
+            __file__,
+            hiyapyco.__version__,
+            platform.python_version(),
+            logging.getLevelName(logger.getEffectiveLevel())
+        )
     )
 
 logger.info('test simple vals ...')
