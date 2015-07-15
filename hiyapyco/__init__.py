@@ -23,6 +23,8 @@ import sys
 import os
 import yaml
 import logging
+from distutils.util import strtobool
+import re
 from jinja2 import Environment, Undefined, DebugUndefined, StrictUndefined, TemplateError
 
 from . import odyldo
@@ -73,6 +75,7 @@ class HiYaPyCo():
         kwargs:
           * method: one of hiyapyco.METHOD_SIMPLE | hiyapyco.METHOD_MERGE
           * interpolate: boolean (default: False)
+          * castinterpolated: boolean (default: False) try to cast values after interpolating
           * usedefaultyamlloader: boolean (default: False)
           * loglevel: one of  the valid levels from the logging module
           * failonmissingfiles: boolean (default: True)
@@ -98,6 +101,7 @@ class HiYaPyCo():
             self.method = METHOD_SIMPLE
 
         self.interpolate = False
+        self.castinterpolated = False
         if 'interpolate' in kwargs:
             if not isinstance(kwargs['interpolate'], bool):
                 raise HiYaPyCoInvocationException(
@@ -106,6 +110,14 @@ class HiYaPyCo():
                         )
             self.interpolate = kwargs['interpolate']
             del kwargs['interpolate']
+            if 'castinterpolated' in kwargs:
+                if not isinstance(kwargs['castinterpolated'], bool):
+                    raise HiYaPyCoInvocationException(
+                            'value of "castinterpolated" must be boolean (got: "%s" as %s)' %
+                            (kwargs['castinterpolated'], type(kwargs['castinterpolated']),)
+                        )
+                self.castinterpolated = kwargs['castinterpolated']
+                del kwargs['castinterpolated']
 
         if 'usedefaultyamlloader' in kwargs:
             if not isinstance(kwargs['usedefaultyamlloader'], bool):
@@ -226,7 +238,21 @@ class HiYaPyCo():
             # FIXME: this seems to be broken for unicode str?
             raise HiYaPyCoImplementationException('error interpolating string "%s" : %s' % (s, e,))
         if not s == si:
-            logger.debug('interpolated "%s" to "%s"' % (s, si,))
+            if self.castinterpolated:
+                if not re.match( r'^\d+\.*\d*$', si):
+                    try:
+                        si = bool(strtobool(si))
+                    except ValueError:
+                        pass
+                else:
+                    try:
+                        if '.' in si:
+                            si = float(si)
+                        else:
+                            si = int(si)
+                    except ValueError:
+                        pass
+            logger.debug('interpolated "%s" to "%s" (type: %s)' % (s, si, type(si),))
         return si
 
     def _simplemerge(self, a, b):
