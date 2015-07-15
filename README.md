@@ -111,6 +111,8 @@ All `args` are handled as *file names* or *yaml documents*. They may be strings 
 
 * `interpolate`: boolean : perform interpolation after the merge (default: False)
 
+* `castinterpolated`: boolean : try to perform a *best possible match* cast for interpolated strings
+
 * `usedefaultyamlloader`: boolean : force the usage of the default *PyYAML* loader/dumper instead of *HiYaPyCo*s implementation of a OrderedDict loader/dumper (see: Ordered Dict Yaml Loader / Dumper aka. ODYLDo) (default: False)
 
 * `failonmissingfiles`: boolean : fail if a supplied YAML file can not be found (default: True)
@@ -155,6 +157,12 @@ This will raise a `hiyapyco.HiYaPyCoImplementationException` wrapped arround the
 #### more informations
 
 See: [jinja2.Environment](http://jinja.pocoo.org/docs/dev/api/#jinja2.Environment)
+
+### cast interpolated strings
+As you must use interpolation as strings (PyYAML will weep if you try to start a value with `{{`),
+you can set `castinterpolated` to *True* in order to try to get a `best match` cast for the
+interpolated values.
+**The `best match` cast is currently only a q&d implementation and may not give you the expected results!**
 
 ### Ordered Dict Yaml Loader / Dumper aka. ODYLDo
 
@@ -214,6 +222,9 @@ as published by the Free Software Foundation.
 See [https://www.gnu.org/licenses/lgpl.html](https://www.gnu.org/licenses/lgpl.html)
 
 ## Changelog
+
+### 0.4.1
+Implemented: `castinterpolated`
 
 ### 0.4.0
 Implemented: loading yaml docs from string
