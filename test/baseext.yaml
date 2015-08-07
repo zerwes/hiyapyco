@@ -24,3 +24,8 @@ deepmap:
     l1k1ext:
         l2k1ext: ext
 ext: extendet only
+missing_key_parent:
+    a: b
+common_key:
+    common_subkey_deep: oneext
+    missing_key_ext: val2missingInBase

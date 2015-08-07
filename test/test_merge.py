@@ -107,6 +107,18 @@ t = conf['ext']
 logger.info('test extonly ... %s' % t)
 assert t == 'extendet only'
 
+t = conf['missing_key']
+logger.info('test missing_key ... %s' % t)
+assert t == 'one'
+
+t = conf['missing_key_parent']
+logger.info('test missing_key_parent ... %s' % t)
+assert t == {'a': 'b'}
+
+t = conf['common_key']
+logger.info('test common_key ... %s' % t)
+assert t == {'common_subkey_deep': 'oneext', 'missing_key_base': 'val2', 'missing_key_ext': 'val2missingInBase'}
+
 try:
     conf['nosuchelement']
     raise Error

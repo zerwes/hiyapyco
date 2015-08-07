@@ -29,3 +29,7 @@ deepmap:
         l2k1: bli
         l2k2: bla
         l2k3: blub
+missing_key: one
+common_key:
+    common_subkey_deep: one
+    missing_key_base: val2
