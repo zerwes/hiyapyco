@@ -100,6 +100,7 @@ conf = hiyapyco.HiYaPyCo(
     'nosuchfile.yaml',
     failonmissingfiles=False
     )
+assert conf.yamlfiles() == [os.path.join(basepath, 'base.yaml')]
 assert '%s' % conf == 'hiyapyco [%s]' % os.path.join(basepath, 'base.yaml')
 
 logger.info('test normal file list ...')
