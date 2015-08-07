@@ -84,12 +84,23 @@ try:
 except hiyapyco.HiYaPyCoInvocationException as e:
     assert '%s' % e == 'no yaml files defined'
 
-logger.info('test missing file ...')
+logger.info('test missing file w/ default value for failonmissingfiles ...')
 try:
-    conf = hiyapyco.HiYaPyCo('nosuchfile.yaml')
+    conf = hiyapyco.HiYaPyCo(os.path.join(
+        basepath, 'base.yaml'),
+        'nosuchfile.yaml'
+        )
     raise Exception('we should newer get here: missing exception')
 except hiyapyco.HiYaPyCoInvocationException as e:
     assert '%s' % e == 'yaml file not found: \'nosuchfile.yaml\''
+
+logger.info('test missing file w/ failonmissingfiles=False ...')
+conf = hiyapyco.HiYaPyCo(
+    os.path.join(basepath, 'base.yaml'),
+    'nosuchfile.yaml',
+    failonmissingfiles=False
+    )
+assert '%s' % conf == 'hiyapyco [%s]' % os.path.join(basepath, 'base.yaml')
 
 logger.info('test normal file list ...')
 conf = hiyapyco.load(
