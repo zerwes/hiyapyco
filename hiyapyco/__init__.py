@@ -172,6 +172,7 @@ class HiYaPyCo():
                 try:
                     f = open(fn, 'r')
                 except IOError as e:
+                    f = None
                     logger.log(self.loglevelonmissingfiles, e)
                     if not fn == yamlfile:
                         logger.log(self.loglevelonmissingfiles,
@@ -184,20 +185,23 @@ class HiYaPyCo():
                                 'yaml file not found: \'%s\'' % yamlfile
                             )
                     self._files.remove(yamlfile)
-            if _usedefaultyamlloader:
-                ydata = yaml.safe_load(f)
-            else:
-                ydata = odyldo.safe_load(f)
-            if logger.isEnabledFor(logging.DEBUG):
-                logger.debug('yaml data: %s' % ydata)
-            if self._data is None:
-                self._data = ydata
-            else:
-                if self.method == METHOD_SIMPLE:
-                    self._data = self._simplemerge(self._data, ydata)
+            if f != None:
+                if _usedefaultyamlloader:
+                    ydata = yaml.safe_load(f)
                 else:
-                    self._data = self._deepmerge(self._data, ydata)
-                logger.debug('merged data: %s' % self._data)
+                    ydata = odyldo.safe_load(f)
+                if isinstance(f, file):
+                    f.close()
+                if logger.isEnabledFor(logging.DEBUG):
+                    logger.debug('yaml data: %s' % ydata)
+                if self._data is None:
+                    self._data = ydata
+                else:
+                    if self.method == METHOD_SIMPLE:
+                        self._data = self._simplemerge(self._data, ydata)
+                    else:
+                        self._data = self._deepmerge(self._data, ydata)
+                    logger.debug('merged data: %s' % self._data)
 
         if self.interpolate:
             self._data = self._interpolate(self._data)
