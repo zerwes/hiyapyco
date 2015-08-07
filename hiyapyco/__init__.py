@@ -366,6 +366,9 @@ class HiYaPyCo():
         logger.debug('<'*30)
         return a
 
+    def yamlfiles(self):
+        return self._files
+
     def __str__(self):
         """String representation of the class"""
         return '%s [%s]' % (__name__, os.pathsep.join(self._files))
