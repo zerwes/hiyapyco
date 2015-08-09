@@ -159,7 +159,7 @@ class HiYaPyCo():
         for arg in args:
             self._updatefiles(arg)
 
-        for yamlfile in self._files:
+        for yamlfile in self._files[:]:
             logger.debug('yamlfile: %s ...' % yamlfile)
             if '\n' in yamlfile:
                 logger.debug('loading yaml doc from str ...')
@@ -171,6 +171,7 @@ class HiYaPyCo():
                     logger.debug('path extended for yamlfile: %s' % fn)
                 try:
                     f = open(fn, 'r')
+                    logger.debug('open4reading: file %s' % f)
                 except IOError as e:
                     logger.log(self.loglevelonmissingfiles, e)
                     if not fn == yamlfile:
