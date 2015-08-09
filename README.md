@@ -152,7 +152,7 @@ If you like to raise a error on undefined vars, use
     from jinja2 import Environment, Undefined, DebugUndefined, StrictUndefined
     hiyapyco.jinja2env = Environment(undefined=StrictUndefined)
 
-This will raise a `hiyapyco.HiYaPyCoImplementationException` wrapped arround the `jinja2.UndefinedError` pointing at the strig causing the error.
+This will raise a `hiyapyco.HiYaPyCoImplementationException` wrapped arround the `jinja2.UndefinedError` pointing at the string causing the error.
 
 #### more informations
 
