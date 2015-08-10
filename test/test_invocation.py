@@ -164,6 +164,20 @@ conf = hiyapyco.load(
     )
 assert conf == {'yaml': 'from str 2', 'h': {'y1': 'ABC', 'y2': 'xyz', 'y3': 'DEF'}, 'l': ['l1', 'l2', 'lll']}
 
+logger.info('test missing file at middle of list ...')
+thrown_exception = None
+try:
+    conf = hiyapyco.load(
+        [os.path.join(basepath, 'base.yaml'), 'missingfile.yaml', os.path.join(basepath, 'baseext.yaml')],
+        method=hiyapyco.METHOD_MERGE,
+        interpolate=False,
+        failonmissingfiles=False
+    )
+except e:
+    thrown_exception = e
+
+assert thrown_exception == None
+
 print('passed test %s' % __file__)
 
 # vim: tabstop=4 expandtab shiftwidth=4 softtabstop=4 smartindent nu
