@@ -33,6 +33,10 @@ from . import odyldo
 __all__ = [
     'load',
     'dump',
+    'dumpyaml',
+    'saveyaml',
+    'dumpjson',
+    'savejson',
     'HiYaPyCo',
     'HiYaPyCoInvocationException',
     'HiYaPyCoImplementationException',
