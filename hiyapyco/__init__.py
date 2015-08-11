@@ -408,14 +408,29 @@ class HiYaPyCo():
 
 def dump(data, default_flow_style = False):
     """dump the data as YAML"""
+    return dumpyaml(data, default_flow_style=default_flow_style)
+
+def dumpyaml(data, default_flow_style = False):
+    """dump the data as YAML"""
     if _usedefaultyamlloader:
         return yaml.safe_dump(data, default_flow_style = default_flow_style)
     else:
         return odyldo.safe_dump(data, default_flow_style = default_flow_style)
 
+def saveyaml(data, fp, default_flow_style = False):
+    """save yaml to file"""
+    if _usedefaultyamlloader:
+        return yaml.safe_dump(data, stream=fp, default_flow_style = default_flow_style)
+    else:
+        return odyldo.safe_dump(data, stream=fp, default_flow_style = default_flow_style)
+
 def dumpjson(data, **kwargs):
     """wrapper around json.dumps"""
     return json.dumps(data, **kwargs)
+
+def savejson(data, fp, **kwargs):
+    """wrapper around json.dump"""
+    return json.dump(data, fp, **kwargs)
 
 def load(*args, **kwargs):
     """
