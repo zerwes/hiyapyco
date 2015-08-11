@@ -22,6 +22,7 @@ See https://www.gnu.org/licenses/gpl.html
 import sys
 import os
 import yaml
+import json
 import logging
 from distutils.util import strtobool
 import re
@@ -129,6 +130,16 @@ class HiYaPyCo():
             _usedefaultyamlloader = kwargs['usedefaultyamlloader']
             del kwargs['usedefaultyamlloader']
 
+        self.json = False
+        if 'json' in kwargs:
+            if not isinstance(kwargs['json'], bool):
+                raise HiYaPyCoInvocationException(
+                        'value of "json" must be boolean (got: "%s" as %s)' %
+                        (kwargs['json'], type(kwargs['json']),)
+                        )
+            self.json = kwargs['json']
+            del kwargs['json']
+
         self.failonmissingfiles = True
         if 'failonmissingfiles' in kwargs:
             if not isinstance(kwargs['failonmissingfiles'], bool):
@@ -185,10 +196,22 @@ class HiYaPyCo():
                                 'yaml file not found: \'%s\'' % yamlfile
                             )
                     self._files.remove(yamlfile)
-            if _usedefaultyamlloader:
-                ydata = yaml.safe_load(f)
+            if self.json:
+                logger.debug('loading json ....')
+                if isinstance(f, file):
+                    ydata = json.load(f)
+                elif isinstance(f, strTypes):
+                    ydata = json.loads(f)
+                else:
+                    raise HiYaPyCoInvocationException(
+                            'can not load json from type %s' % type(f)
+                        )
             else:
-                ydata = odyldo.safe_load(f)
+                logger.debug('loading yaml ...')
+                if _usedefaultyamlloader:
+                    ydata = yaml.safe_load(f)
+                else:
+                    ydata = odyldo.safe_load(f)
             if logger.isEnabledFor(logging.DEBUG):
                 logger.debug('yaml data: %s' % ydata)
             if self._data is None:
