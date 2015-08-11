@@ -27,6 +27,9 @@ test:
 			done; \
 			echo ""; \
 		done; \
+		echo "==================="; \
+		echo " finished $@ : $$RET"; \
+		echo "==================="; \
 		exit $$RET
 
 examples:
@@ -42,6 +45,9 @@ examples:
 			done; \
 			echo ""; \
 		done; \
+		echo "==================="; \
+		echo " finished $@ : $$RET"; \
+		echo "==================="; \
 		exit $$RET
 
 testinstall:
@@ -54,6 +60,9 @@ testinstall:
 			if [ $$RET -gt 0 ]; then $$p -t $$t; break; fi; \
 			echo ""; \
 		done; \
+		echo "==================="; \
+		echo " finished $@ : $$RET"; \
+		echo "==================="; \
 		exit $$RET
 clean: distclean
 
