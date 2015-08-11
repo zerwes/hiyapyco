@@ -217,9 +217,9 @@ and [http://jwhoisserver.net/key.asc](http://jwhoisserver.net/key.asc) as the UR
 
 This package is free software.  
 This software is licensed under the terms of the
-GNU LESSER GENERAL PUBLIC LICENSE version 3 or later,
+GNU GENERAL PUBLIC LICENSE version 3 or later,
 as published by the Free Software Foundation.  
-See [https://www.gnu.org/licenses/lgpl.html](https://www.gnu.org/licenses/lgpl.html)
+See [https://www.gnu.org/licenses/gpl.html](https://www.gnu.org/licenses/gpl.html)
 
 ## Changelog
 
