@@ -10,9 +10,9 @@ because chaos is fun but order matters on loading dicts from a yaml file;
 (c) 2014 - 2015 Klaus Zerwes zero-sys.net
 This package is free software.
 This software is licensed under the terms of the
-GNU LESSER GENERAL PUBLIC LICENSE version 3 or later,
+GNU GENERAL PUBLIC LICENSE version 3 or later,
 as published by the Free Software Foundation.
-See https://www.gnu.org/licenses/lgpl.html
+See https://www.gnu.org/licenses/gpl.html
 """
 
 try:
