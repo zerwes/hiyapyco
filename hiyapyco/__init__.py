@@ -413,6 +413,9 @@ def dump(data, default_flow_style = False):
     else:
         return odyldo.safe_dump(data, default_flow_style = default_flow_style)
 
+def dumpjson(*args, **kwargs):
+    return json.dumps(*args, **kwargs)
+
 def load(*args, **kwargs):
     """
     Load a Hierarchical Yaml Python Config
