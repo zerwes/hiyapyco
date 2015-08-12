@@ -186,4 +186,8 @@ releasetest: distclean alltest repo pypi
 	@echo "$@ done"
 	@echo "you may like to run $(MAKE) pypiuploadtest after this ..."
 release: distclean alltest testdebversion tag upload pushtag
+	@echo "done $@ for version $(HIYAPYCOVERSION)"
+
+all: releasetest pypiuploadtest release
+	@echo "done $@ for version $(HIYAPYCOVERSION)"
 
