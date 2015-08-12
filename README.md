@@ -179,6 +179,8 @@ In order to use this on python 2.6, please install ordereddict:
 
 #### GitHub
 
+[https://github.com/zerwes/hiyapyco](https://github.com/zerwes/hiyapyco)
+
     git clone https://github.com/zerwes/hiyapyco
     cd hiyapyco
     sudo python setup.py install
@@ -225,6 +227,7 @@ See [https://www.gnu.org/licenses/gpl.html](https://www.gnu.org/licenses/gpl.htm
 
 ### 0.4.2
 Changed: moved to GPL
+
 Improvements: missing files handling, doc
 
 ### 0.4.1
