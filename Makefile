@@ -38,6 +38,7 @@ examples:
 			echo "python version $$p"; \
 			for t in examples/*.py; do \
 				[ "$$t" = "examples/hiyapyco_example.py" ] && continue; \
+				[ "$$t" = "examples/yaml2json.py" ] && continue; \
 				echo "$$p -t $$t ..."; \
 				$$p -t $$t > /dev/null 2>&1; \
 				RET=$$?; \
