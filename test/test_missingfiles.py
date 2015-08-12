@@ -39,7 +39,8 @@ try:
         )
     raise Exception('we should newer get here: missing exception')
 except hiyapyco.HiYaPyCoInvocationException as e:
-    assert '%s' % e == 'yaml file not found: \'nosuchfile.yaml\''
+    logger.info('test missing file exception: "%s" ...' % e)
+    assert '%s' % e == 'file not found: \'nosuchfile.yaml\''
 
 logger.info('test missing file as list w/ default value for failonmissingfiles ...')
 try:
@@ -49,7 +50,8 @@ try:
         ])
     raise Exception('we should newer get here: missing exception')
 except hiyapyco.HiYaPyCoInvocationException as e:
-    assert '%s' % e == 'yaml file not found: \'nosuchfile.yaml\''
+    logger.info('test missing file exception: "%s" ...' % e)
+    assert '%s' % e == 'file not found: \'nosuchfile.yaml\''
 
 logger.info('test missing file w/ failonmissingfiles=False ...')
 conf = hiyapyco.HiYaPyCo(
