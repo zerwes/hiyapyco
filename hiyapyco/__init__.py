@@ -72,6 +72,11 @@ METHODS = { 'METHOD_SIMPLE':0x0001, 'METHOD_MERGE':0x0002 }
 METHOD_SIMPLE = METHODS['METHOD_SIMPLE']
 METHOD_MERGE = METHODS['METHOD_MERGE']
 
+FILEEXTENSIONS = {
+        'json': ['.json',],
+        'yaml': ['.yaml', '.yml',],
+    }
+
 class HiYaPyCo():
     """Main class"""
     def __init__(self, *args, **kwargs):
@@ -178,11 +183,21 @@ class HiYaPyCo():
 
         for yamlfile in self._files[:]:
             logger.debug('file or data: %s ...' % yamlfile)
+            thisasjson = False
             if '\n' in yamlfile:
-                logger.debug('loading %s doc from str ...' % ('json' if self.json else 'yaml',))
+                # TODO: is there a fast and safe way to detect if a str is json or yaml?
+                thisasjson = self.json
+                logger.debug('loading %s doc from str ...' % ('json' if thisasjson else 'yaml',))
                 f = yamlfile
             else:
                 fn = yamlfile
+                if self._checkfileextisyaml(fn):
+                    thisasjson = False
+                elif self._checkfileextisjson(fn):
+                    thisasjson = True
+                else:
+                    logger.info('unable to detect file type by extension for %s ... using defaults' % fn)
+                    thisasjson = self.json
                 if not os.path.isabs(yamlfile):
                     fn = os.path.join(os.getcwd(), yamlfile)
                     logger.debug('path extended for file: %s' % fn)
@@ -202,7 +217,7 @@ class HiYaPyCo():
                                 'file not found: \'%s\'' % yamlfile
                             )
                     self._files.remove(yamlfile)
-            if self.json:
+            if thisasjson:
                 logger.debug('loading json ....')
                 if isinstance(f, file):
                     ydata = json.load(f)
@@ -232,6 +247,17 @@ class HiYaPyCo():
 
         if self.interpolate:
             self._data = self._interpolate(self._data)
+
+    def _checkfileextisyaml(self, f):
+        return self._checkfileext(f, 'yaml')
+    def _checkfileextisjson(self, f):
+        return self._checkfileext(f, 'json')
+    def _checkfileext(self, f, extype):
+        extype = extype.lower()
+        if extype not in FILEEXTENSIONS.keys():
+            raise HiYaPyCoInvocationException('extension type %s is not valid' % extype)
+        ext = _getfileextension(f).lower()
+        return ext in FILEEXTENSIONS[extype]
 
     def _updatefiles(self, arg):
         if isinstance(arg, strTypes):
@@ -411,6 +437,13 @@ class HiYaPyCo():
     def dump(self, default_flow_style = False):
         """dump the data as YAML"""
         return dump(self._data, default_flow_style=default_flow_style)
+
+def _filenamext(file):
+    return os.path.splitext(file)
+def _getfileextension(file):
+    return _filenamext(file)[1]
+def _getfilenamesplitext(file):
+    return _filenamext(file)[0]
 
 def dump(data, default_flow_style = False):
     """dump the data as YAML"""
