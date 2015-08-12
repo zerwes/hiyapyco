@@ -2,10 +2,10 @@
 # vim: set fileencoding=utf-8
 from __future__ import unicode_literals
 """
-Hierarchical Yaml Python Config
+Hierarchical Yaml / Json Python Config
 ===============================
 
-A simple python lib allowing hierarchical config files in YAML syntax.
+A simple python lib allowing hierarchical config files in YAML (and/or JSON) syntax.
 
 License
 -------
@@ -54,7 +54,7 @@ class HiYaPyCoInvocationException(Exception):
     pass
 
 class HiYaPyCoImplementationException(Exception):
-    """dummy Exception raised if we are unable to merge some YAML stuff"""
+    """dummy Exception raised if we are unable to merge some YAML/JSON stuff"""
     pass
 
 try:
@@ -76,7 +76,7 @@ class HiYaPyCo():
     """Main class"""
     def __init__(self, *args, **kwargs):
         """
-        args: YAMLfile(s)
+        args: YAML/JSON file(s) or data in YAML/JSON syntax
         kwargs:
           * method: one of hiyapyco.METHOD_SIMPLE | hiyapyco.METHOD_MERGE
           * interpolate: boolean (default: False)
@@ -88,7 +88,8 @@ class HiYaPyCo():
           * loglevelmissingfiles
 
         Returns a representation of the merged and (if requested) interpolated config.
-        Will mostly be a OrderedDict (dict if usedefaultyamlloader), but can be of any other type, depending on the yaml files.
+        Will mostly be a OrderedDict (dict if usedefaultyamlloader), but
+        can be of any other type, depending on the yaml/json files.
         """
         self._data = None
         self._files = []
@@ -176,18 +177,18 @@ class HiYaPyCo():
             self._updatefiles(arg)
 
         for yamlfile in self._files[:]:
-            logger.debug('yamlfile: %s ...' % yamlfile)
+            logger.debug('file or data: %s ...' % yamlfile)
             if '\n' in yamlfile:
-                logger.debug('loading yaml doc from str ...')
+                logger.debug('loading %s doc from str ...' % ('json' if self.json else 'yaml',))
                 f = yamlfile
             else:
                 fn = yamlfile
                 if not os.path.isabs(yamlfile):
                     fn = os.path.join(os.getcwd(), yamlfile)
-                    logger.debug('path extended for yamlfile: %s' % fn)
+                    logger.debug('path extended for file: %s' % fn)
                 try:
                     f = open(fn, 'r')
-                    logger.debug('open4reading: file %s' % f)
+                    logger.debug('open file for reading: "%s"' % f)
                 except IOError as e:
                     logger.log(self.loglevelonmissingfiles, e)
                     if not fn == yamlfile:
@@ -198,7 +199,7 @@ class HiYaPyCo():
                                 'file not found: %s' % yamlfile)
                     if self.failonmissingfiles:
                         raise HiYaPyCoInvocationException(
-                                'yaml file not found: \'%s\'' % yamlfile
+                                'file not found: \'%s\'' % yamlfile
                             )
                     self._files.remove(yamlfile)
             if self.json:
@@ -217,6 +218,7 @@ class HiYaPyCo():
                     ydata = yaml.safe_load(f)
                 else:
                     ydata = odyldo.safe_load(f)
+
             if logger.isEnabledFor(logging.DEBUG):
                 logger.debug('yaml data: %s' % ydata)
             if self._data is None:
@@ -422,26 +424,27 @@ def dumpyaml(data, default_flow_style = False):
         return odyldo.safe_dump(data, default_flow_style = default_flow_style)
 
 def saveyaml(data, fp, default_flow_style = False):
-    """save yaml to file"""
+    """save YAML to file"""
+    # FIXME: make this a real wrapper arround the safe_dump fct. like for json to allow users to use all stuff it offers
     if _usedefaultyamlloader:
         return yaml.safe_dump(data, stream=fp, default_flow_style = default_flow_style)
     else:
         return odyldo.safe_dump(data, stream=fp, default_flow_style = default_flow_style)
 
 def dumpjson(data, **kwargs):
-    """wrapper around json.dumps"""
+    """dump data as JSON; wrapper around json.dumps"""
     return json.dumps(data, **kwargs)
 
 def savejson(data, fp, **kwargs):
-    """wrapper around json.dump"""
+    """save JSON to file; wrapper around json.dump"""
     return json.dump(data, fp, **kwargs)
 
 def load(*args, **kwargs):
     """
-    Load a Hierarchical Yaml Python Config
+    Load a Hierarchical Yaml / Json Python Config
     --------------------------------------
 
-    args: YAMLfile(s)
+    args: YAML/JSON file(s)
     kwargs:
       * method: one of hiyapyco.METHOD_SIMPLE | hiyapyco.METHOD_MERGE
       * interpolate: boolean (default: False)
