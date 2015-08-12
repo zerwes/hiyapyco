@@ -224,10 +224,8 @@ See [https://www.gnu.org/licenses/gpl.html](https://www.gnu.org/licenses/gpl.htm
 ## Changelog
 
 ### 0.4.2
-Chamged: moved to GPL
-Improvements:
- * missing files handling
- * doc
+Changed: moved to GPL
+Improvements: missing files handling, doc
 
 ### 0.4.1
 Implemented: `castinterpolated`
