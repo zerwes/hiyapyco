@@ -77,6 +77,7 @@ pypiuploaddo:
 	pandoc -f markdown -t rst README.md > README.txt
 	python setup.py sdist bdist_wheel upload -r $(PYPIREPO) -s -i $(GPGKEY)
 	rm -rf README.txt
+	@echo "test the result at: https://$(PYPIREPO).python.org/pypi/HiYaPyCo"
 
 gpg-agent:
 	gpg-agent; \
@@ -182,5 +183,7 @@ testdebversion:
 		fi
 
 releasetest: distclean alltest repo pypi
+	@echo "$@ done"
+	@echo "you may like to run $(MAKE) pypiuploadtest after this ..."
 release: distclean alltest testdebversion tag upload pushtag
 
