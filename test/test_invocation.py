@@ -37,7 +37,7 @@ conf = hiyapyco.HiYaPyCo(
         failonmissingfiles=True
         )
 
-logger.info('test kwarg nonbool ...')
+logger.info('test kwarg interpolate nonbool ...')
 try:
     conf = hiyapyco.HiYaPyCo(
             os.path.join(basepath, 'base.yaml'),
@@ -46,6 +46,15 @@ try:
     raise Exception('we should newer get here: missing exception')
 except hiyapyco.HiYaPyCoInvocationException as e:
     assert str(e).startswith('value of "interpolate" must be boolean')
+logger.info('test kwarg json nonbool ...')
+try:
+    conf = hiyapyco.HiYaPyCo(
+            os.path.join(basepath, 'base.yaml'),
+            json='ABC'
+            )
+    raise Exception('we should newer get here: missing exception')
+except hiyapyco.HiYaPyCoInvocationException as e:
+    assert str(e).startswith('value of "json" must be boolean')
 try:
     conf = hiyapyco.HiYaPyCo(
             os.path.join(basepath, 'base.yaml'),
