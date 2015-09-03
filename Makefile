@@ -17,7 +17,7 @@ pypiuploadtest: PYPIREPO := pypitest
 
 quicktest: test examples
 alltest: clean quicktest testinstall
-# FIXME: testinstallvirtualenv fails due to jinja2 2.8 error w/ python3.2
+# FIXME: testinstallvirtualenv fails due to jinja2 2.8 error w/ python3.2 but works w/ python3.4 ... WTF
 #alltest: clean quicktest testinstall testinstallvirtualenv
 
 printversions:
