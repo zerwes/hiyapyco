@@ -205,6 +205,13 @@ upload: uploadrepo pypiupload
 uploadrepo: repo
 	scp -r release/* repo.zero-sys.net:/srv/www/repo.zero-sys.net/hiyapyco/
 
+testversion: testdebversion testsetupversion
+testsetupversion:
+	@if $$(dpkg --compare-versions $$(python setup.py -V) lt $(HIYAPYCOVERSION)); then \
+		echo "setup.py version must be incremented to HIYAPYCOVERSION $(HIYAPYCOVERSION)"; \
+		false; \
+		fi
+
 testdebversion:
 	@if $$(dpkg --compare-versions $$(dpkg-parsechangelog | sed '/^Version: /!d; s/^Version: \([.0-9]*\).*/\1/g') lt $(HIYAPYCOVERSION)); then \
 		echo "debian version must be incremented to HIYAPYCOVERSION $(HIYAPYCOVERSION)"; \
@@ -212,10 +219,10 @@ testdebversion:
 		false; \
 		fi
 
-releasetest: distclean alltest repo pypi
+releasetest: distclean alltest testversion repo pypi
 	@echo "$@ done"
 	@echo "you may like to run $(MAKE) pypiuploadtest after this ..."
-release: distclean alltest testdebversion tag upload pushtag
+release: distclean alltest testversion tag upload pushtag
 	@echo "done $@ for version $(HIYAPYCOVERSION)"
 
 all: releasetest pypiuploadtest release
