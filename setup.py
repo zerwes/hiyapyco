@@ -7,8 +7,9 @@ from setuptools import setup
 
 basepath = os.path.dirname(os.path.realpath(__file__))
 sys.path.insert(0, os.path.dirname(basepath))
-from hiyapyco import __version__ as hiyapycoversion
 
+sys.path.insert(0, os.path.join(os.path.dirname(basepath), 'hiyapyco', 'hiyapyco'))
+from version import VERSION as hiyapycoversion
 
 long_description='A simple python lib allowing hierarchical overlay of config files in YAML syntax, offering different merge methods and variable interpolation based on jinja2'
 if os.path.exists('README.txt'):
