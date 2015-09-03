@@ -17,6 +17,8 @@ pypiuploadtest: PYPIREPO := pypitest
 
 quicktest: test examples
 alltest: clean quicktest testinstall
+# FIXME: testinstallvirtualenv fails due to jinja2 2.8 error w/ python3.2
+#alltest: clean quicktest testinstall testinstallvirtualenv
 
 printversions:
 	@echo -e "HIYAPYCOVERSION:\t$(HIYAPYCOVERSION)"
@@ -52,16 +54,37 @@ examples:
 		exit $$RET
 
 testinstall:
-	@RET=0; \
-		rm -rf /tmp/hiyapyco; \
+	@set -e; \
 		for p in $(PYVERSIONS); do \
-			echo "$@ w/ python version $$p"; \
-			$$p setup.py install --root=/tmp/hiyapyco; \
-			RET=$$?; \
-			if [ $$RET -gt 0 ]; then $$p -t $$t; break; fi; \
+			rm -rf /tmp/hiyapyco; \
 			echo ""; \
-		done; \
-		exit $$RET
+			echo "$@ w/ python version $$p ..."; \
+			echo ""; \
+			$$p setup.py install --root=/tmp/hiyapyco; \
+			echo ""; \
+			echo "$@ w/ python version $$p : OK"; \
+			echo ""; \
+		done
+
+testinstallvirtualenv:
+	@set -e; \
+		BASETMP=/tmp/hiyapyco; \
+		rm -rf $$BASETMP; \
+		for p in $(PYVERSIONSPATHS); do \
+			VENV=$$BASETMP/$$(basename $$p); \
+			mkdir -p $$VENV; \
+			echo "$@ w/ python version $$(basename $$p) in $$VENV ..."; \
+			virtualenv -p $$p $$VENV; \
+			source $$VENV/bin/activate; \
+			which python; \
+			python --version; \
+			python setup.py install; \
+			echo ""; \
+			echo " ... test install ..."; \
+			python -c 'import sys; from hiyapyco import __version__ as hiyapycoversion; print ("hiyapyco %s" % hiyapycoversion); print (sys.version)'; \
+			deactivate; \
+		done
+
 clean: distclean
 
 distclean:
