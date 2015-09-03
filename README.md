@@ -226,6 +226,9 @@ See [https://www.gnu.org/licenses/gpl.html](https://www.gnu.org/licenses/gpl.htm
 
 ## Changelog
 
+### 0.4.3
+FIXED: issue #6 *import of hiyapyco __version__ in setup.py causes pip install failures*
+
 ### 0.4.2
 Changed: moved to GPL
 
