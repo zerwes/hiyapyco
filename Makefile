@@ -1,12 +1,14 @@
+SHELL = /bin/bash
 
 PYVERSIONS = $(shell pyversions -i; py3versions -i)
+PYVERSIONSPATHS = $(shell for PV in $(PYVERSIONS); do which $$PV; done)
 
 .PHONY: test examples testinstall all
 
 PYTHONPATH=$(shell pwd)
 export PYTHONPATH
 
-HIYAPYCOVERSION=$(shell python -c 'from hiyapyco import version; print version.VERSION')
+HIYAPYCOVERSION=$(shell PYTHONPATH=$(PYTHONPATH)/hiyapyco:$(PYTHONPATH) python -c 'from version import VERSION; print VERSION')
 
 export GPGKEY=ED7D414C
 
@@ -16,8 +18,10 @@ pypiuploadtest: PYPIREPO := pypitest
 quicktest: test examples
 alltest: clean quicktest testinstall
 
-version:
-	@echo "HIYAPYCOVERSION=$(HIYAPYCOVERSION)"
+printversions:
+	@echo -e "HIYAPYCOVERSION:\t$(HIYAPYCOVERSION)"
+	@echo -e "PYVERSIONS:\t\t$(PYVERSIONS)"
+	@echo -e "PYVERSIONSPATHS:\t$(PYVERSIONSPATHS)"
 
 test:
 	@RET=0; \
