@@ -6,7 +6,7 @@ PYVERSIONS = $(shell pyversions -i; py3versions -i)
 PYTHONPATH=$(shell pwd)
 export PYTHONPATH
 
-HIYAPYCOVERSION=$(shell python -c 'from hiyapyco import __version__ as hiyapycoversion; print hiyapycoversion')
+HIYAPYCOVERSION=$(shell python -c 'from hiyapyco import version; print version.VERSION')
 
 export GPGKEY=ED7D414C
 
@@ -15,6 +15,9 @@ pypiuploadtest: PYPIREPO := pypitest
 
 quicktest: test examples
 alltest: clean quicktest testinstall
+
+version:
+	@echo "HIYAPYCOVERSION=$(HIYAPYCOVERSION)"
 
 test:
 	@RET=0; \
