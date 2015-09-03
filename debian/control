@@ -7,6 +7,7 @@ Build-Depends: python-setuptools (>= 0.6b3),
 		python3-all (>= 3.2.3-6),
 		python-setuptools,
 		python3-setuptools,
+		python-virtualenv,
 		debhelper (>= 7)
 Standards-Version: 3.9.1
 X-Python-Version: >= 2.6

@@ -1,12 +1,14 @@
+SHELL = /bin/bash
 
 PYVERSIONS = $(shell pyversions -i; py3versions -i)
+PYVERSIONSPATHS = $(shell for PV in $(PYVERSIONS); do which $$PV; done)
 
 .PHONY: test examples testinstall all
 
 PYTHONPATH=$(shell pwd)
 export PYTHONPATH
 
-HIYAPYCOVERSION=$(shell python -c 'from hiyapyco import __version__ as hiyapycoversion; print hiyapycoversion')
+HIYAPYCOVERSION=$(shell PYTHONPATH=$(PYTHONPATH)/hiyapyco:$(PYTHONPATH) python -c 'from version import VERSION; print VERSION')
 
 export GPGKEY=ED7D414C
 
@@ -15,6 +17,13 @@ pypiuploadtest: PYPIREPO := pypitest
 
 quicktest: test examples
 alltest: clean quicktest testinstall
+# FIXME: testinstallvirtualenv fails due to jinja2 2.8 error w/ python3.2 but works w/ python3.4 ... WTF
+#alltest: clean quicktest testinstall testinstallvirtualenv
+
+printversions:
+	@echo -e "HIYAPYCOVERSION:\t$(HIYAPYCOVERSION)"
+	@echo -e "PYVERSIONS:\t\t$(PYVERSIONS)"
+	@echo -e "PYVERSIONSPATHS:\t$(PYVERSIONSPATHS)"
 
 test:
 	@RET=0; \
@@ -52,19 +61,40 @@ examples:
 		exit $$RET
 
 testinstall:
-	@RET=0; \
-		rm -rf /tmp/hiyapyco; \
+	@set -e; \
 		for p in $(PYVERSIONS); do \
-			echo "$@ w/ python version $$p"; \
+			rm -rf /tmp/hiyapyco; \
+			echo ""; \
+			echo "$@ w/ python version $$p ..."; \
+			echo ""; \
 			$$p setup.py install --root=/tmp/hiyapyco; \
-			RET=$$?; \
-			if [ $$RET -gt 0 ]; then $$p -t $$t; break; fi; \
+			echo ""; \
+			echo "$@ w/ python version $$p : OK"; \
 			echo ""; \
 		done; \
 		echo "==================="; \
-		echo " finished $@ : $$RET"; \
-		echo "==================="; \
-		exit $$RET
+		echo " finished $@"; \
+		echo "==================="
+
+testinstallvirtualenv:
+	@set -e; \
+		BASETMP=/tmp/hiyapyco; \
+		rm -rf $$BASETMP; \
+		for p in $(PYVERSIONSPATHS); do \
+			VENV=$$BASETMP/$$(basename $$p); \
+			mkdir -p $$VENV; \
+			echo "$@ w/ python version $$(basename $$p) in $$VENV ..."; \
+			virtualenv -p $$p $$VENV; \
+			source $$VENV/bin/activate; \
+			which python; \
+			python --version; \
+			python setup.py install; \
+			echo ""; \
+			echo " ... test install ..."; \
+			python -c 'import sys; from hiyapyco import __version__ as hiyapycoversion; print ("hiyapyco %s" % hiyapycoversion); print (sys.version)'; \
+			deactivate; \
+		done
+
 clean: distclean
 
 distclean:
@@ -87,6 +117,7 @@ pypiuploaddo:
 	pandoc -f markdown -t rst README.md > README.txt
 	python setup.py sdist bdist_wheel upload -r $(PYPIREPO) -s -i $(GPGKEY)
 	rm -rf README.txt
+	@echo "test the result at: https://$(PYPIREPO).python.org/pypi/HiYaPyCo"
 
 gpg-agent:
 	gpg-agent; \
@@ -192,5 +223,11 @@ testdebversion:
 		fi
 
 releasetest: distclean alltest repo pypi
+	@echo "$@ done"
+	@echo "you may like to run $(MAKE) pypiuploadtest after this ..."
 release: distclean alltest testdebversion tag upload pushtag
+	@echo "done $@ for version $(HIYAPYCOVERSION)"
+
+all: releasetest pypiuploadtest release
+	@echo "done $@ for version $(HIYAPYCOVERSION)"
 

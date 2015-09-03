@@ -7,12 +7,19 @@ from setuptools import setup
 
 basepath = os.path.dirname(os.path.realpath(__file__))
 sys.path.insert(0, os.path.dirname(basepath))
-from hiyapyco import __version__ as hiyapycoversion
 
+sys.path.insert(0, os.path.join(os.path.dirname(basepath), 'hiyapyco', 'hiyapyco'))
+from version import VERSION as hiyapycoversion
 
 long_description='A simple python lib allowing hierarchical overlay of config files in YAML syntax, offering different merge methods and variable interpolation based on jinja2'
 if os.path.exists('README.txt'):
     long_description = open('README.txt').read()
+
+installrequires = ['PyYAML', 'Jinja2',]
+try:
+    from collections import OrderedDict
+except ImportError:
+    installrequires.append('ordereddict')
 
 setup(name='HiYaPyCo',
     version=hiyapycoversion,
@@ -31,10 +38,11 @@ setup(name='HiYaPyCo',
         'Programming Language :: Python :: 2.7',
         'Programming Language :: Python :: 3',
         'Programming Language :: Python :: 3.2',
+        'Programming Language :: Python :: 3.4',
     ],
     packages=['hiyapyco'],
     keywords='configuration parser yaml',
-    install_requires = ['PyYAML', 'Jinja2',],
+    install_requires = installrequires,
     platforms = 'any',
     )
 
