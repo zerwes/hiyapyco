@@ -11,12 +11,17 @@ class LoggingAction(argparse.Action):
         setattr(namespace, self.dest, values)
 
 def setup_parser(args):
+    try:
+        # python 3.4 up ...
+        loggingchoices = logging._nameToLevel.keys()
+    except AttributeError:
+        loggingchoices = [k for k in logging._levelNames.keys() if isinstance(k, str)],
     parser = argparse.ArgumentParser()
     parser.add_argument(
             '-l', '--loglevel',
             help='set loglevel',
             type=str,
-            choices=[k for k in logging._levelNames.keys() if isinstance(k, str)],
+            choices=loggingchoices,
             action=LoggingAction
             )
     return parser.parse_args(args)
