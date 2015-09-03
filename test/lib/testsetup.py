@@ -15,7 +15,7 @@ def setup_parser(args):
         # python 3.4 up ...
         loggingchoices = logging._nameToLevel.keys()
     except AttributeError:
-        loggingchoices = [k for k in logging._levelNames.keys() if isinstance(k, str)],
+        loggingchoices = [k for k in logging._levelNames.keys() if isinstance(k, str)]
     parser = argparse.ArgumentParser()
     parser.add_argument(
             '-l', '--loglevel',
