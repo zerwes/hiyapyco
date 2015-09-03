@@ -15,6 +15,12 @@ long_description='A simple python lib allowing hierarchical overlay of config fi
 if os.path.exists('README.txt'):
     long_description = open('README.txt').read()
 
+installrequires = ['PyYAML', 'Jinja2',]
+try:
+    from collections import OrderedDict
+except ImportError:
+    installrequires.append('ordereddict')
+
 setup(name='HiYaPyCo',
     version=hiyapycoversion,
     description='Hierarchical Yaml Python Config',
@@ -35,7 +41,7 @@ setup(name='HiYaPyCo',
     ],
     packages=['hiyapyco'],
     keywords='configuration parser yaml',
-    install_requires = ['PyYAML', 'Jinja2',],
+    install_requires = installrequires,
     platforms = 'any',
     )
 
