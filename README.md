@@ -226,6 +226,11 @@ See [https://www.gnu.org/licenses/gpl.html](https://www.gnu.org/licenses/gpl.htm
 
 ## Changelog
 
+### 0.4.4
+deb packages:
+ * removed support for python 2.6
+ * include examples as doc
+
 ### 0.4.3
 FIXED: issue #6 *import of hiyapyco __version__ in setup.py causes pip install failures*
 
