@@ -186,6 +186,7 @@ class HiYaPyCo():
             thisasjson = False
             if '\n' in yamlfile:
                 # TODO: is there a fast and safe way to detect if a str is json or yaml?
+                #       strip head comments and see if trimmed str starts w/ { ?
                 thisasjson = self.json
                 logger.debug('loading %s doc from str ...' % ('json' if thisasjson else 'yaml',))
                 f = yamlfile
