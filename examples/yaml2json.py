@@ -33,9 +33,21 @@ parser.add_argument(
     )
 parser.add_argument(
         '-y', '--usedefaultyamlloader', dest='usedefaultyamlloader',
-        action='store_true', default=False, help='yaml file(s) to parse'
+        action='store_true', default=False, help='use default yaml loader (default: False)'
+    )
+parser.add_argument(
+        '-i', '--interpolate', dest='interpolate',
+        action='store_true', default=False, help='use interpolation using jinja2 (default: False)'
     )
 parser.add_argument('-f', '--file', type=str, nargs='+', help='yaml file(s) to parse')
+parser.add_argument(
+        '-j', '--json',
+        type=str,
+        action='store',
+        dest='jsonfile',
+        default=None,
+        help='write json data to file (default: print dump)'
+        )
 args = parser.parse_args()
 
 if args.loglevel is None:
@@ -47,13 +59,18 @@ if args.file is None or len(args.file) == 0:
 
 conf = hiyapyco.load(
     *args.file,
-    interpolate=True,
+    usedefaultyamlloader=args.usedefaultyamlloader,
+    interpolate=args.interpolate,
     failonmissingfiles=True
     )
-print('-'*10, 'YAML', '-'*10)
-print(hiyapyco.dump(conf))
-print('-'*10, 'JSON', '-'*10)
-print(hiyapyco.dumpjson(conf,  indent=2))
+if args.jsonfile is None:
+    print('-'*10, 'YAML', '-'*10)
+    print(hiyapyco.dump(conf))
+    print('-'*10, 'JSON', '-'*10)
+    print(hiyapyco.dumpjson(conf, indent=2))
+else:
+    jfp = open(args.jsonfile, 'w')
+    hiyapyco.savejson(conf, jfp, indent=2)
 
 # vim: tabstop=4 expandtab shiftwidth=4 softtabstop=4 smartindent nu
 
