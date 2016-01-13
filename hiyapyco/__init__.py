@@ -185,6 +185,7 @@ class HiYaPyCo():
                                 'yaml file not found: \'%s\'' % yamlfile
                             )
                     self._files.remove(yamlfile)
+                    continue
             if _usedefaultyamlloader:
                 ydata = yaml.safe_load(f)
             else:
