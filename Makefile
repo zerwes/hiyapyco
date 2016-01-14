@@ -13,6 +13,7 @@ HIYAPYCOVERSION=$(shell PYTHONPATH=$(PYTHONPATH)/hiyapyco:$(PYTHONPATH) python -
 export GPGKEY=ED7D414C
 
 pypiupload: PYPIREPO := pypi
+# TODO: fixme required? upload works to test but the URL https://pypitest.python.org/pypi/HiYaPyCo is not working (working: https://testpypi.python.org/pypi/HiYaPyCo)
 pypiuploadtest: PYPIREPO := pypitest
 
 quicktest: test examples
