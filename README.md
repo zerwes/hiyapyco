@@ -226,6 +226,9 @@ See [https://www.gnu.org/licenses/gpl.html](https://www.gnu.org/licenses/gpl.htm
 
 ## Changelog
 
+### 0.4.5
+FIXED: issues #9 and #11
+
 ### 0.4.4
 deb packages:
 * removed support for python 2.6
