@@ -216,7 +216,7 @@ and [http://jwhoisserver.net/key.asc](http://jwhoisserver.net/key.asc) as the UR
 
 ## License
 
-(c) 2014 - 2015 Klaus Zerwes [zero-sys.net](https://zero-sys.net)
+(c) 2014 - 2016 Klaus Zerwes [zero-sys.net](https://zero-sys.net)
 
 This package is free software.  
 This software is licensed under the terms of the
@@ -225,6 +225,9 @@ as published by the Free Software Foundation.
 See [https://www.gnu.org/licenses/gpl.html](https://www.gnu.org/licenses/gpl.html)
 
 ## Changelog
+
+### 0.4.6
+MERGED: fixes from mmariani
 
 ### 0.4.5
 FIXED: issues #9 and #11
