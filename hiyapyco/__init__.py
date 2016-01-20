@@ -29,8 +29,6 @@ from jinja2 import Environment, Undefined, DebugUndefined, StrictUndefined, Temp
 
 from . import odyldo
 
-logging.basicConfig()
-
 __all__ = [
     'load',
     'dump',
@@ -42,7 +40,6 @@ __all__ = [
 from . import version
 __version__ = version.VERSION
 
-logger = logging.getLogger(__name__)
 
 _usedefaultyamlloader = False
 
@@ -88,6 +85,17 @@ class HiYaPyCo():
         """
         self._data = None
         self._files = []
+        global logger
+
+        if 'logger' in kwargs:
+            logger = kwargs['logger']
+            del kwargs['logger']
+        else:
+            logger = logging.getLogger(__name__)
+            console = logging.StreamHandler(sys.stderr)
+            console.setFormatter(logging.Formatter(logging.BASIC_FORMAT))
+            console.setLevel(logging.DEBUG)
+            logger.addHandler(console)
 
         self.method = None
         if 'method' in kwargs:
@@ -192,7 +200,6 @@ class HiYaPyCo():
                 ydata = yaml.safe_load(f)
             else:
                 ydata = odyldo.safe_load(f)
-            if logger.isEnabledFor(logging.DEBUG):
                 logger.debug('yaml data: %s' % ydata)
             if self._data is None:
                 self._data = ydata
