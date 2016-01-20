@@ -200,7 +200,6 @@ class HiYaPyCo():
                 ydata = yaml.safe_load(f)
             else:
                 ydata = odyldo.safe_load(f)
-            if logger.isEnabledFor(logging.DEBUG):
                 logger.debug('yaml data: %s' % ydata)
             if self._data is None:
                 self._data = ydata
