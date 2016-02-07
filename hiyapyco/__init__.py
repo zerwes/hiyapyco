@@ -388,16 +388,16 @@ class HiYaPyCo():
         """return the data, merged and interpolated if required"""
         return self._data
 
-    def dump(self, default_flow_style = False):
+    def dump(self, **kwds):
         """dump the data as YAML"""
-        return dump(self._data, default_flow_style=default_flow_style)
+        return dump(self._data, **kwds)
 
-def dump(data, default_flow_style = False):
+def dump(data, **kwds):
     """dump the data as YAML"""
     if _usedefaultyamlloader:
-        return yaml.safe_dump(data, default_flow_style = default_flow_style)
+        return yaml.safe_dump(data, **kwds)
     else:
-        return odyldo.safe_dump(data, default_flow_style = default_flow_style)
+        return odyldo.safe_dump(data, **kwds)
 
 def load(*args, **kwargs):
     """
