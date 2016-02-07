@@ -12,6 +12,10 @@ HIYAPYCOVERSION=$(shell PYTHONPATH=$(PYTHONPATH)/hiyapyco:$(PYTHONPATH) python -
 
 export GPGKEY=ED7D414C
 
+# FIXME: why this hack! w/ -p
+DPKGBUILDPKGVERSION = $(shell dpkg-buildpackage --version | sed '1!d;s/^.* //g;s/\.$//g')
+DPKGBUILDPKGSIGNARG = $(shell dpkg --compare-versions $DPKGBUILDPKGVERSION lt 1.17.26 && echo "-p'gpg --use-agent'")
+
 pypiupload: PYPIREPO := pypi
 # TODO: fixme required? upload works to test but the URL https://pypitest.python.org/pypi/HiYaPyCo is not working (working: https://testpypi.python.org/pypi/HiYaPyCo)
 pypiuploadtest: PYPIREPO := pypitest
@@ -139,7 +143,7 @@ deb: gpg-agent
 	rm -rf release/deb/build
 	mkdir -p release/deb/build
 	tar cv -Sp --exclude=dist --exclude=build --exclude='*/.git*' -f - . | ( cd release/deb/build && tar x -Sp -f - )
-	cd release/deb/build && dpkg-buildpackage -b -k$(GPGKEY) -p'gpg --use-agent'
+	cd release/deb/build && dpkg-buildpackage -b -k$(GPGKEY) $(DPKGBUILDPKGSIGNARG)
 	gpg --verify release/deb/hiyapyco_*.changes
 	rm -rf release/deb/build
 	lintian release/deb/*.deb
