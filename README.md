@@ -214,6 +214,10 @@ Install the latest wheel package using:
 use [http://repo.zero-sys.net/hiyapyco/rpm](http://repo.zero-sys.net/hiyapyco/rpm) as URL for the yum repo
 and [http://jwhoisserver.net/key.asc](http://jwhoisserver.net/key.asc) as the URL for the key.
 
+### Arch Linux
+
+An [AUR package](https://aur.archlinux.org/packages/python-hiyapyco/) is available.
+
 ## License
 
 (c) 2014 - 2016 Klaus Zerwes [zero-sys.net](https://zero-sys.net)
