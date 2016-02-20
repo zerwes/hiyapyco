@@ -392,12 +392,12 @@ class HiYaPyCo():
         """dump the data as YAML"""
         return dump(self._data, default_flow_style=default_flow_style)
 
-def dump(data, default_flow_style = False):
+def dump(data, default_flow_style = False, allow_unicode = None):
     """dump the data as YAML"""
     if _usedefaultyamlloader:
-        return yaml.safe_dump(data, default_flow_style = default_flow_style)
+        return yaml.safe_dump(data, default_flow_style = default_flow_style, allow_unicode = allow_unicode)
     else:
-        return odyldo.safe_dump(data, default_flow_style = default_flow_style)
+        return odyldo.safe_dump(data, default_flow_style = default_flow_style, allow_unicode = allow_unicode)
 
 def load(*args, **kwargs):
     """
