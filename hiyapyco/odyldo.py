@@ -55,6 +55,9 @@ class ODYL(yaml.SafeLoader):
             m[self.construct_object(k, deep=deep)] = self.construct_object(v, deep=deep)
         return m
 
+    # see pyyaml def flatten_mapping
+    #def flatten_mapping(self, node):
+
 class ODYD(yaml.SafeDumper):
     """Ordered Dict Yaml Dumper"""
     def __init__(self, *args, **kwargs):

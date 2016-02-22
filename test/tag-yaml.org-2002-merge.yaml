@@ -1,0 +1,16 @@
+---
+
+
+testmerge:
+        - ABC: &ABC [a, b, c]
+        - XYZ: &XYZ {x: X, y: Y, z: Z}
+        - scal: &SCAL Bli Bla Blub
+        -
+                m: M
+                e: E
+                r: R
+                g: G
+                e: E
+        - abc: *ABC
+        - xyz: *XYZ
+        - scal2: *SCAL
