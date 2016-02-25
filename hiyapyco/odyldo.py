@@ -50,6 +50,7 @@ class ODYL(yaml.SafeLoader):
 
     # see pyyaml construct_mapping
     def construct_mapping(self, node, deep=False):
+        self.flatten_mapping(node)
         m = OrderedDict()
         for k, v in node.value:
             m[self.construct_object(k, deep=deep)] = self.construct_object(v, deep=deep)
