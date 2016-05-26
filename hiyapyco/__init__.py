@@ -29,8 +29,6 @@ from jinja2 import Environment, Undefined, DebugUndefined, StrictUndefined, Temp
 
 from . import odyldo
 
-logging.basicConfig()
-
 __all__ = [
     'load',
     'dump',
