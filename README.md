@@ -7,7 +7,7 @@ HiYaPyCo - A Hierarchical Yaml Python Config
 
 A simple python lib allowing hierarchical overlay of config files in YAML syntax, offering different merge methods and variable interpolation based on jinja2.
 
-The goal was to have something similar to puppets hiera `deeper merge_behavior` for python.
+The goal was to have something similar to puppets hiera `merge_behavior: deeper` for python.
 
 ## Key Features
 
