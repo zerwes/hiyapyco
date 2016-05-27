@@ -232,15 +232,10 @@ class HiYaPyCo():
                 else:
                     object_pairs_hook = OrderedDict
                 logger.debug('loading json ....')
-                # FIXME: not working in py3.4
-                if isinstance(f, file):
-                    ydata = json.load(f, object_pairs_hook=object_pairs_hook)
-                elif isinstance(f, strTypes):
+                if isinstance(f, strTypes):
                     ydata = json.loads(f, object_pairs_hook=object_pairs_hook)
                 else:
-                    raise HiYaPyCoInvocationException(
-                            'can not load json from type %s' % type(f)
-                        )
+                    ydata = json.load(f, object_pairs_hook=object_pairs_hook)
             else:
                 logger.debug('loading yaml ...')
                 if _usedefaultyamlloader:
