@@ -4,6 +4,8 @@ import sys
 import os
 import logging
 import platform
+
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.realpath(os.path.abspath(sys.argv[0])))))
 import hiyapyco
 
 sys.path.insert(
@@ -54,7 +56,9 @@ try:
             )
     raise Exception('we should newer get here: missing exception')
 except hiyapyco.HiYaPyCoInvocationException as e:
+    logger.info('test hiyapyco.HiYaPyCoInvocationException message: "%s"' % str(e))
     assert str(e).startswith('value of "json" must be boolean')
+
 try:
     conf = hiyapyco.HiYaPyCo(
             os.path.join(basepath, 'base.yaml'),

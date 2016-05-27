@@ -4,6 +4,8 @@ import sys
 import os
 import logging
 import platform
+
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.realpath(os.path.abspath(sys.argv[0])))))
 import hiyapyco
 
 sys.path.insert(
