@@ -103,6 +103,35 @@ assert '%s' % conf == 'hiyapyco [%s]' % os.pathsep.join([
         ])
 assert conf.data() == {'m': ['a', 'b', 'c'], 'm1': 'abc', 'm2': 'xyz', 'm3': 123}
 
+logger.info('test deep merge w/ missing file as list w/ failonmissingfiles=False ...')
+conf = hiyapyco.HiYaPyCo(
+    [
+        os.path.join(basepath, 'm.yaml'),
+        'nosuchfile.yaml',
+        os.path.join(basepath, 'm1.yaml'),
+        os.path.join(basepath, 'm2.yaml'),
+        os.path.join(basepath, 'm3.yaml'),
+        os.path.join(basepath, 'm4.yaml'),
+    ],
+    failonmissingfiles=False,
+    method=hiyapyco.METHOD_MERGE
+    )
+assert conf.yamlfiles() == [
+        os.path.join(basepath, 'm.yaml'),
+        os.path.join(basepath, 'm1.yaml'),
+        os.path.join(basepath, 'm2.yaml'),
+        os.path.join(basepath, 'm3.yaml'),
+        os.path.join(basepath, 'm4.yaml'),
+        ]
+assert '%s' % conf == 'hiyapyco [%s]' % os.pathsep.join([
+        os.path.join(basepath, 'm.yaml'),
+        os.path.join(basepath, 'm1.yaml'),
+        os.path.join(basepath, 'm2.yaml'),
+        os.path.join(basepath, 'm3.yaml'),
+        os.path.join(basepath, 'm4.yaml'),
+        ])
+assert conf.data() == {'m': ['a', 'b', 'c', 'd', 'e', 'f'], 'm1': 'abc', 'm2': 'xyz', 'm3': 123}
+
 print('passed test %s' % __file__)
 
 # vim: tabstop=4 expandtab shiftwidth=4 softtabstop=4 smartindent nu

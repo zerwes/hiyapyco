@@ -10,7 +10,7 @@ A simple python lib allowing hierarchical config files in YAML (and/or JSON) syn
 License
 -------
 
-(c) 2014 - 2015 Klaus Zerwes zero-sys.net
+(c) 2014 - 2016 Klaus Zerwes zero-sys.net
 This package is free software.
 This software is licensed under the terms of the
 GNU GENERAL PUBLIC LICENSE version 3 or later,
@@ -443,9 +443,9 @@ class HiYaPyCo():
         """return the data, merged and interpolated if required"""
         return self._data
 
-    def dump(self, default_flow_style = False):
+    def dump(self, **kwds):
         """dump the data as YAML"""
-        return dump(self._data, default_flow_style=default_flow_style)
+        return dump(self._data, **kwds)
 
 def _filenamext(file):
     return os.path.splitext(file)
@@ -454,16 +454,16 @@ def _getfileextension(file):
 def _getfilenamesplitext(file):
     return _filenamext(file)[0]
 
-def dump(data, default_flow_style = False):
+def dump(data, **kwds):
     """dump the data as YAML"""
     return dumpyaml(data, default_flow_style=default_flow_style)
 
 def dumpyaml(data, default_flow_style = False):
     """dump the data as YAML"""
     if _usedefaultyamlloader:
-        return yaml.safe_dump(data, default_flow_style = default_flow_style)
+        return yaml.safe_dump(data, **kwds)
     else:
-        return odyldo.safe_dump(data, default_flow_style = default_flow_style)
+        return odyldo.safe_dump(data, **kwds)
 
 def saveyaml(data, fp, default_flow_style = False):
     """save YAML to file"""

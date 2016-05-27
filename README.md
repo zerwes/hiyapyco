@@ -7,7 +7,7 @@ HiYaPyCo - A Hierarchical Yaml Python Config
 
 A simple python lib allowing hierarchical overlay of config files in YAML syntax, offering different merge methods and variable interpolation based on jinja2.
 
-The goal was to have something similar to puppets hiera `deeper merge_behavior` for python.
+The goal was to have something similar to puppets hiera `merge_behavior: deeper` for python.
 
 ## Key Features
 
@@ -214,9 +214,13 @@ Install the latest wheel package using:
 use [http://repo.zero-sys.net/hiyapyco/rpm](http://repo.zero-sys.net/hiyapyco/rpm) as URL for the yum repo
 and [http://jwhoisserver.net/key.asc](http://jwhoisserver.net/key.asc) as the URL for the key.
 
+### Arch Linux
+
+An [AUR package](https://aur.archlinux.org/packages/python-hiyapyco/) is available.
+
 ## License
 
-(c) 2014 - 2015 Klaus Zerwes [zero-sys.net](https://zero-sys.net)
+(c) 2014 - 2016 Klaus Zerwes [zero-sys.net](https://zero-sys.net)
 
 This package is free software.  
 This software is licensed under the terms of the
@@ -225,6 +229,20 @@ as published by the Free Software Foundation.
 See [https://www.gnu.org/licenses/gpl.html](https://www.gnu.org/licenses/gpl.html)
 
 ## Changelog
+
+### 0.4.6
+MERGED: fixes from mmariani
+
+### 0.4.5
+FIXED: issues #9 and #11
+
+### 0.4.4
+deb packages:
+* removed support for python 2.6
+* include examples as doc
+
+### 0.4.3
+FIXED: issue #6 *import of hiyapyco __version__ in setup.py causes pip install failures*
 
 ### 0.4.2
 Changed: moved to GPL

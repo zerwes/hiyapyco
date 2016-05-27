@@ -12,7 +12,12 @@ HIYAPYCOVERSION=$(shell PYTHONPATH=$(PYTHONPATH)/hiyapyco:$(PYTHONPATH) python -
 
 export GPGKEY=ED7D414C
 
+# FIXME: why this hack! w/ -p
+DPKGBUILDPKGVERSION = $(shell dpkg-buildpackage --version | sed '1!d;s/^.* //g;s/\.$//g')
+DPKGBUILDPKGSIGNARG = $(shell dpkg --compare-versions $DPKGBUILDPKGVERSION lt 1.17.26 && echo "-p'gpg --use-agent'")
+
 pypiupload: PYPIREPO := pypi
+# TODO: fixme required? upload works to test but the URL https://pypitest.python.org/pypi/HiYaPyCo is not working (working: https://testpypi.python.org/pypi/HiYaPyCo)
 pypiuploadtest: PYPIREPO := pypitest
 
 quicktest: test examples
@@ -148,7 +153,7 @@ deb: gpg-agent
 	rm -rf release/deb/build
 	mkdir -p release/deb/build
 	tar cv -Sp --exclude=dist --exclude=build --exclude='*/.git*' -f - . | ( cd release/deb/build && tar x -Sp -f - )
-	cd release/deb/build && dpkg-buildpackage -b -k$(GPGKEY) -p'gpg --use-agent'
+	cd release/deb/build && dpkg-buildpackage -b -k$(GPGKEY) $(DPKGBUILDPKGSIGNARG)
 	gpg --verify release/deb/hiyapyco_*.changes
 	rm -rf release/deb/build
 	lintian release/deb/*.deb
@@ -215,6 +220,13 @@ upload: uploadrepo pypiupload
 uploadrepo: repo
 	scp -r release/* repo.zero-sys.net:/srv/www/repo.zero-sys.net/hiyapyco/
 
+testversion: testdebversion testsetupversion
+testsetupversion:
+	@if $$(dpkg --compare-versions $$(python setup.py -V) lt $(HIYAPYCOVERSION)); then \
+		echo "setup.py version must be incremented to HIYAPYCOVERSION $(HIYAPYCOVERSION)"; \
+		false; \
+		fi
+
 testdebversion:
 	@if $$(dpkg --compare-versions $$(dpkg-parsechangelog | sed '/^Version: /!d; s/^Version: \([.0-9]*\).*/\1/g') lt $(HIYAPYCOVERSION)); then \
 		echo "debian version must be incremented to HIYAPYCOVERSION $(HIYAPYCOVERSION)"; \
@@ -222,10 +234,10 @@ testdebversion:
 		false; \
 		fi
 
-releasetest: distclean alltest repo pypi
+releasetest: distclean alltest testversion repo pypi
 	@echo "$@ done"
 	@echo "you may like to run $(MAKE) pypiuploadtest after this ..."
-release: distclean alltest testdebversion tag upload pushtag
+release: distclean alltest testversion tag upload pushtag
 	@echo "done $@ for version $(HIYAPYCOVERSION)"
 
 all: releasetest pypiuploadtest release
