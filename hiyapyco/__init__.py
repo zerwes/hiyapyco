@@ -28,6 +28,14 @@ from distutils.util import strtobool
 import re
 from jinja2 import Environment, Undefined, DebugUndefined, StrictUndefined, TemplateError
 
+try:
+    from collections import OrderedDict
+except ImportError:
+    # try importing the backported replacement
+    # requires a: `pip-2.6 install ordereddict`
+    from ordereddict import OrderedDict
+
+
 from . import odyldo
 
 __all__ = [
@@ -219,11 +227,16 @@ class HiYaPyCo():
                             )
                     self._files.remove(yamlfile)
             if thisasjson:
+                if _usedefaultyamlloader:
+                    object_pairs_hook = None
+                else:
+                    object_pairs_hook = OrderedDict
                 logger.debug('loading json ....')
+                # FIXME: not working in py3.4
                 if isinstance(f, file):
-                    ydata = json.load(f)
+                    ydata = json.load(f, object_pairs_hook=object_pairs_hook)
                 elif isinstance(f, strTypes):
-                    ydata = json.loads(f)
+                    ydata = json.loads(f, object_pairs_hook=object_pairs_hook)
                 else:
                     raise HiYaPyCoInvocationException(
                             'can not load json from type %s' % type(f)
