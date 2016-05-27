@@ -64,9 +64,9 @@ conf = hiyapyco.load(
     failonmissingfiles=True
     )
 if args.jsonfile is None:
-    print('-'*10, 'YAML', '-'*10)
+    print('%s %s %s' % ('-'*15, 'YAML', '-'*15))
     print(hiyapyco.dump(conf))
-    print('-'*10, 'JSON', '-'*10)
+    print('%s %s %s' % ('-'*15, 'JSON', '-'*15))
     print(hiyapyco.dumpjson(conf, indent=2))
 else:
     jfp = open(args.jsonfile, 'w')
