@@ -226,6 +226,7 @@ class HiYaPyCo():
                                 'file not found: \'%s\'' % yamlfile
                             )
                     self._files.remove(yamlfile)
+                    continue
             if thisasjson:
                 if _usedefaultyamlloader:
                     object_pairs_hook = None
