@@ -230,6 +230,15 @@ See [https://www.gnu.org/licenses/gpl.html](https://www.gnu.org/licenses/gpl.htm
 
 ## Changelog
 
+### 0.4.7
+Reverted: logger settings to initial state
+
+Improved: dump
+
+Merged:
+* flatten mapping from Chris Petersen <geek@ex-nerd.com>
+* arch linux package info from Peter Crighton <git@petercrighton.de>
+
 ### 0.4.6
 MERGED: fixes from mmariani
 
