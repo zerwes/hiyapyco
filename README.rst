@@ -324,9 +324,8 @@ Improved: dump
 
 Merged:
 
-  * flatten mapping from Chris Petersen geek@ex-nerd.com
- 
-  * arch linux package info from Peter Crighton git@petercrighton.de
+- flatten mapping from Chris Petersen geek@ex-nerd.com
+- arch linux package info from Peter Crighton git@petercrighton.de
 
 0.4.6
 ~~~~~
@@ -343,9 +342,8 @@ FIXED: issues #9 and #11
 
 deb packages:
 
-  * removed support for python 2.6
-
-  * include examples as doc
+- removed support for python 2.6
+- include examples as doc
 
 0.4.3
 ~~~~~

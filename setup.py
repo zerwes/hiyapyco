@@ -10,9 +10,7 @@ sys.path.insert(0, os.path.dirname(basepath))
 
 hiyapycoversion='0.4.7'
 
-long_description='A simple python lib allowing hierarchical overlay of config files in YAML syntax, offering different merge methods and variable interpolation based on jinja2'
-if os.path.exists('README.txt'):
-    long_description = open('README.txt').read()
+long_description = open('README.rst').read()
 
 installrequires = ['PyYAML', 'Jinja2',]
 try:

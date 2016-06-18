@@ -94,7 +94,7 @@ clean: distclean
 
 distclean:
 	python setup.py clean
-	rm -rf release dist build HiYaPyCo.egg-info README.txt
+	rm -rf release dist build HiYaPyCo.egg-info
 	find . -type f -name \*.pyc -exec rm -v {} \;
 
 sdist:
@@ -109,9 +109,7 @@ pypiuploadtest: pypi pypiuploaddo
 pypiupload: pypi pypiuploaddo
 pypiuploaddo:
 	# set use-agent in ~/.gnupg/gpg.conf to use the agent
-	pandoc -f markdown -t rst README.md > README.txt
 	python setup.py sdist bdist_wheel upload -r $(PYPIREPO) -s -i $(GPGKEY)
-	rm -rf README.txt
 	@echo "test the result at: https://$(PYPIREPO).python.org/pypi/HiYaPyCo"
 
 gpg-agent:
@@ -167,7 +165,7 @@ debrepo: deb
 rpm: gpg-agent
 	mkdir -p release/rpm/noarch
 	python setup.py bdist_rpm --binary-only \
-		--doc-files README.md --requires python-yaml,python-jinja2 \
+		--doc-files README.rst --requires python-yaml,python-jinja2 \
 		-d release/rpm/noarch
 	for f in release/rpm/noarch/*.rpm; do \
 		expect -c "spawn rpmsign \
