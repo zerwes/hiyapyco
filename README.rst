@@ -315,6 +315,11 @@ See
 Changelog
 ---------
 
+0.4.8
+~~~~~
+
+Fixed pypi doc
+
 0.4.7
 ~~~~~
 
