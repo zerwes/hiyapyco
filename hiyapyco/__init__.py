@@ -313,8 +313,8 @@ class HiYaPyCo():
                     if isinstance(bd, dict):
                         srcdicts.update({k:bd})
                 logger.debug('srcdicts: %s' % srcdicts)
-                for k, ad in enumerate(a):
-                    logger.debug('deepmerge ad "%s" w/ k "%s" of type %s' % (ad, k, type(ad)))
+                for ak, ad in enumerate(a):
+                    logger.debug('deepmerge ad "%s" w/ k "%s" of type %s' % (ad, ak, type(ad)))
                     if isinstance(ad, dict):
                         if k in srcdicts.keys():
                             # we merge only if at least one key in dict is matching
