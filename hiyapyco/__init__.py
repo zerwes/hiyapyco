@@ -314,22 +314,22 @@ class HiYaPyCo():
                         srcdicts.update({k:bd})
                 logger.debug('srcdicts: %s' % srcdicts)
                 for k, ad in enumerate(a):
-                    logger.debug('deepmerge ad "%s" w/ k "%s" of type %s' % (ad, k, type(ad)))
+                    logger.debug('deepmerge list of dicts ad "%s" w/ k "%s" of type %s' % (ad, k, type(ad)))
                     if isinstance(ad, dict):
-                        if k in srcdicts.keys():
-                            # we merge only if at least one key in dict is matching
-                            merge = False
-                            for ak in ad.keys():
-                                if ak in srcdicts[k].keys():
-                                    merge = True
+                        # we merge only if at least one key in dict is matching
+                        for ak in ad.keys():
+                            logger.debug('check ak %s ...' % ak)
+                            for bk in srcdicts:
+                                bd = srcdicts[bk]
+                                logger.debug('... in bd %s ...' % bd)
+                                if ak in bd.keys():
+                                    logger.debug(
+                                            'deepmerge ad: deep merge list dict elem w/ key:%s: "%s" and "%s"'
+                                            % (ak, ad, bd,)
+                                        )
+                                    a[k] = self._deepmerge(ad, bd)
+                                    del srcdicts[bk]
                                     break
-                            if merge:
-                                logger.debug(
-                                        'deepmerge ad: deep merge list dict elem w/ key:%s: "%s" and "%s"'
-                                        % (ak, ad, srcdicts[k],)
-                                    )
-                                a[k] = self._deepmerge(ad, srcdicts[k])
-                                del srcdicts[k]
                 logger.debug('deepmerge list: remaining srcdicts elems: %s' % srcdicts)
                 for k in srcdicts.keys():
                     logger.debug('deepmerge list: new dict append %s:%s' % (k, srcdicts[k]))
