@@ -139,12 +139,14 @@ class HiYaPyCo():
             self.failonmissingfiles = bool(kwargs['failonmissingfiles'])
             del kwargs['failonmissingfiles']
 
-        self.loglevelonmissingfiles = logging.ERROR
-        if not self.failonmissingfiles:
-            self.loglevelonmissingfiles = logging.WARN
         if 'loglevelmissingfiles' in kwargs:
             logging.getLogger('testlevellogger').setLevel(kwargs['loglevelmissingfiles'])
+            self.loglevelonmissingfiles = logging.getLogger('testlevellogger').getEffectiveLevel()
             del kwargs['loglevelmissingfiles']
+        else:
+            self.loglevelonmissingfiles = logging.ERROR
+            if not self.failonmissingfiles:
+                self.loglevelonmissingfiles = logging.WARN
 
         if 'loglevel' in kwargs:
             logger.setLevel(kwargs['loglevel'])
