@@ -275,7 +275,7 @@ Install the latest wheel package using:
 debian packages
 ~~~~~~~~~~~~~~~
 
-**/!\ GPG key changed /!\**
+**! GPG key changed !**
 
 ::
 
@@ -290,7 +290,7 @@ debian packages
 rpm packages
 ~~~~~~~~~~~~
 
-**/!\ GPG key changed /!\**
+**! GPG key changed !**
 
 use
 `http://repo.zero-sys.net/hiyapyco/rpm <http://repo.zero-sys.net/hiyapyco/rpm>`_
