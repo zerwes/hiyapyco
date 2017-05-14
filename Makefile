@@ -228,6 +228,6 @@ releasetest: distclean alltest testversion repo pypi
 release: distclean alltest testversion tag upload pushtag
 	@echo "done $@ for version $(HIYAPYCOVERSION)"
 
-all: releasetest pypiuploadtest release
+all: releasetest release
 	@echo "done $@ for version $(HIYAPYCOVERSION)"
 
