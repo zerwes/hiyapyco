@@ -275,23 +275,27 @@ Install the latest wheel package using:
 debian packages
 ~~~~~~~~~~~~~~~
 
+**GPG key changed**
+
 ::
 
     echo "deb http://repo.zero-sys.net/hiyapyco/deb ./" > /etc/apt/sources.list.d/hiyapyco.list
-    gpg --keyserver keys.gnupg.net --recv-key ED7D414C
+    gpg --keyserver keys.gnupg.net --recv-key 71DEC4CD
     # or use:
-    wget http://jwhoisserver.net/key.asc -O - | gpg --import -
-    gpg --armor --export ED7D414C | apt-key add -
+    wget https://repo.zero-sys.net/71DEC4CD.asc -O - | gpg --import -
+    gpg --armor --export 71DEC4CD | apt-key add -
     apt-get update
     apt-get install python3-hiyapyco python-hiyapyco
 
 rpm packages
 ~~~~~~~~~~~~
 
+**GPG key changed**
+
 use
 `http://repo.zero-sys.net/hiyapyco/rpm <http://repo.zero-sys.net/hiyapyco/rpm>`_
 as URL for the yum repo and
-`http://jwhoisserver.net/key.asc <http://jwhoisserver.net/key.asc>`_
+`https://repo.zero-sys.net/71DEC4CD.asc <https://repo.zero-sys.net/71DEC4CD.asc>`_
 as the URL for the key.
 
 Arch Linux
@@ -303,7 +307,7 @@ is available.
 License
 -------
 
-(c) 2014 - 2016 Klaus Zerwes `zero-sys.net <https://zero-sys.net>`_
+(c) 2014 - 2017 Klaus Zerwes `zero-sys.net <https://zero-sys.net>`_
 
 This package is free software.
 This software is licensed under the terms of the GNU GENERAL PUBLIC
@@ -314,6 +318,13 @@ See
 
 Changelog
 ---------
+
+0.4.9
+~~~~~
+
+FIXED: issue #23 loglevelonmissingfiles
+
+FIXED: issue #24 repo signing
 
 0.4.8
 ~~~~~

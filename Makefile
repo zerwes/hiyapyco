@@ -10,7 +10,7 @@ export PYTHONPATH
 
 HIYAPYCOVERSION=$(shell PYTHONPATH=$(PYTHONPATH)/hiyapyco:$(PYTHONPATH) python -c 'from version import VERSION; print VERSION')
 
-export GPGKEY=ED7D414C
+export GPGKEY=71DEC4CD
 
 # FIXME: why this hack! w/ -p
 DPKGBUILDPKGVERSION = $(shell dpkg-buildpackage --version | sed '1!d;s/^.* //g;s/\.$//g')
