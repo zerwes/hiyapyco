@@ -15,13 +15,13 @@ logging.basicConfig(
         format='%(levelname)s\t[%(name)s] %(funcName)s: %(message)s'
         )
 
-print '*'*70
-print '  hiyapyco %s' % hiyapyco.version.VERSION
-print '*'*70
+print('*'*70)
+print('  hiyapyco %s' % hiyapyco.version.VERSION)
+print('*'*70)
 
-print '-'*70
-print '  loglevelmissingfiles=logging.INFO + failonmissingfiles=True ...'
-print '-'*70
+print('-'*70)
+print('  loglevelmissingfiles=logging.INFO + failonmissingfiles=True ...')
+print('-'*70)
 try:
     conf = hiyapyco.load(
         os.path.join(basepath, 'olist1.yaml'),
@@ -34,9 +34,9 @@ except hiyapyco.HiYaPyCoInvocationException:
     pass
 
 
-print '-'*70
-print '  loglevelmissingfiles=logging.INFO + failonmissingfiles=False ...'
-print '-'*70
+print('-'*70)
+print('  loglevelmissingfiles=logging.INFO + failonmissingfiles=False ...')
+print('-'*70)
 conf = hiyapyco.load(
         os.path.join(basepath, 'olist1.yaml'),
         os.path.join(basepath, 'NoSuchFile.yaml'),
@@ -45,9 +45,9 @@ conf = hiyapyco.load(
         loglevelmissingfiles=logging.INFO
         )
 
-print '-'*70
-print '  loglevelmissingfiles=UNSET + failonmissingfiles=True ...'
-print '-'*70
+print('-'*70)
+print('  loglevelmissingfiles=UNSET + failonmissingfiles=True ...')
+print('-'*70)
 try:
     conf = hiyapyco.load(
         os.path.join(basepath, 'olist1.yaml'),
@@ -59,9 +59,9 @@ except hiyapyco.HiYaPyCoInvocationException:
     pass
 
 
-print '-'*70
-print '  loglevelmissingfiles=UNSET + failonmissingfiles=False ...'
-print '-'*70
+print('-'*70)
+print('  loglevelmissingfiles=UNSET + failonmissingfiles=False ...')
+print('-'*70)
 conf = hiyapyco.load(
         os.path.join(basepath, 'olist1.yaml'),
         os.path.join(basepath, 'NoSuchFile.yaml'),
