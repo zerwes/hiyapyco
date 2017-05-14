@@ -307,7 +307,8 @@ is available.
 License
 -------
 
-|copy| 2014 - 2017 Klaus Zerwes `zero-sys.net <https://zero-sys.net>`_
+Copyright |copy| 2014 - 2017 Klaus Zerwes `zero-sys.net <https://zero-sys.net>`_
+
 .. |copy| unicode:: 0xA9 .. copyright sign
 
 This package is free software.
