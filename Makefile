@@ -162,6 +162,7 @@ debrepo: deb
 		gpg --clearsign --default-key $(GPGKEY) --use-agent -o InRelease Release && \
 		gpg -abs --default-key $(GPGKEY) --use-agent -o Release.gpg Release
 	gpg --verify release/deb/Release.gpg release/deb/Release
+	gpg --check-sigs InRelease Release
 
 rpm: gpg-agent
 	mkdir -p release/rpm/noarch
