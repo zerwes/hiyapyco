@@ -10,7 +10,7 @@ export PYTHONPATH
 
 HIYAPYCOVERSION=$(shell PYTHONPATH=$(PYTHONPATH)/hiyapyco:$(PYTHONPATH) python -c 'from version import VERSION; print VERSION')
 
-export GPGKEY=71DEC4CD
+export GPGKEY=77DE7FB4
 
 # FIXME: why this hack! w/ -p
 DPKGBUILDPKGVERSION = $(shell dpkg-buildpackage --version | sed '1!d;s/^.* //g;s/\.$//g')
@@ -159,6 +159,7 @@ debrepo: deb
 	echo "Description: HiYaPyCo Debian Repository" >> release/deb/Release
 	cd release/deb && apt-ftparchive release . >> Release
 	cd release/deb && \
+		gpg --clearsign --default-key $(GPGKEY) --use-agent -o InRelease Release && \
 		gpg -abs --default-key $(GPGKEY) --use-agent -o Release.gpg Release
 	gpg --verify release/deb/Release.gpg release/deb/Release
 

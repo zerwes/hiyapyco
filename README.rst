@@ -280,10 +280,10 @@ debian packages
 ::
 
     echo "deb http://repo.zero-sys.net/hiyapyco/deb ./" > /etc/apt/sources.list.d/hiyapyco.list
-    gpg --keyserver keys.gnupg.net --recv-key 71DEC4CD
+    gpg --keyserver keys.gnupg.net --recv-key 77DE7FB4
     # or use:
-    wget https://repo.zero-sys.net/71DEC4CD.asc -O - | gpg --import -
-    gpg --armor --export 71DEC4CD | apt-key add -
+    wget https://repo.zero-sys.net/77DE7FB4.asc -O - | gpg --import -
+    gpg --armor --export 77DE7FB4 | apt-key add -
     apt-get update
     apt-get install python3-hiyapyco python-hiyapyco
 
@@ -295,7 +295,7 @@ rpm packages
 use
 `http://repo.zero-sys.net/hiyapyco/rpm <http://repo.zero-sys.net/hiyapyco/rpm>`_
 as URL for the yum repo and
-`https://repo.zero-sys.net/71DEC4CD.asc <https://repo.zero-sys.net/71DEC4CD.asc>`_
+`https://repo.zero-sys.net/77DE7FB4.asc <https://repo.zero-sys.net/77DE7FB4.asc>`_
 as the URL for the key.
 
 Arch Linux
@@ -321,12 +321,15 @@ See
 Changelog
 ---------
 
+0.4.10
+~~~~~~
+
+FIXED: issue #24 repo signing
+
 0.4.9
 ~~~~~
 
 FIXED: issue #23 loglevelonmissingfiles
-
-FIXED: issue #24 repo signing
 
 0.4.8
 ~~~~~
