@@ -109,7 +109,7 @@ pypiuploadtest: pypi pypiuploaddo
 pypiupload: pypi pypiuploaddo
 pypiuploaddo:
 	# set use-agent in ~/.gnupg/gpg.conf to use the agent
-	python setup.py sdist bdist_wheel upload -r $(PYPIREPO) -s -i $(GPGKEY)
+	#python setup.py sdist bdist_wheel upload -r $(PYPIREPO) -s -i $(GPGKEY)
 	@echo "test the result at: https://$(PYPIREPO).python.org/pypi/HiYaPyCo"
 
 gpg-agent:
