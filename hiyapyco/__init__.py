@@ -74,6 +74,7 @@ class HiYaPyCo():
         args: YAMLfile(s)
         kwargs:
           * method: one of hiyapyco.METHOD_SIMPLE | hiyapyco.METHOD_MERGE
+          * mergelists: boolean (default: True) try to merge lists (only makes sense if hiyapyco.METHOD_MERGE)
           * interpolate: boolean (default: False)
           * castinterpolated: boolean (default: False) try to cast values after interpolating
           * usedefaultyamlloader: boolean (default: False)
@@ -99,6 +100,16 @@ class HiYaPyCo():
             del kwargs['method']
         if self.method == None:
             self.method = METHOD_SIMPLE
+
+        self.mergelists = True
+        if 'mergelists' in kwargs:
+            if not isinstance(kwargs['mergelists'], bool):
+                raise HiYaPyCoInvocationException(
+                        'value of "mergelists" must be boolean (got: "%s" as %s)' %
+                        (kwargs['mergelists'], type(kwargs['mergelists']),)
+                        )
+            self.mergelists = kwargs['mergelists']
+            del kwargs['mergelists']
 
         self.interpolate = False
         self.castinterpolated = False
@@ -321,10 +332,11 @@ class HiYaPyCo():
                         if k in srcdicts.keys():
                             # we merge only if at least one key in dict is matching
                             merge = False
-                            for ak in ad.keys():
-                                if ak in srcdicts[k].keys():
-                                    merge = True
-                                    break
+                            if self.mergelists:
+                                for ak in ad.keys():
+                                    if ak in srcdicts[k].keys():
+                                        merge = True
+                                        break
                             if merge:
                                 logger.debug(
                                         'deepmerge ad: deep merge list dict elem w/ key:%s: "%s" and "%s"'
@@ -400,6 +412,7 @@ def load(*args, **kwargs):
     args: YAMLfile(s)
     kwargs:
       * method: one of hiyapyco.METHOD_SIMPLE | hiyapyco.METHOD_MERGE
+      * mergelists: boolean (default: True) try to merge lists
       * interpolate: boolean (default: False)
       * castinterpolated: boolean (default: False) try to cast values after interpolating
       * usedefaultyamlloader: boolean (default: False)

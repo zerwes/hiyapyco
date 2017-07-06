@@ -131,6 +131,8 @@ kwargs
       simple merge is performed) (default method)
    -  ``hiyapyco.METHOD_MERGE``: perform a deep merge
 
+- ``mergelists``: boolean try to merge lists of dict (default: True)
+
 -  ``interpolate``: boolean : perform interpolation after the merge
    (default: False)
 
