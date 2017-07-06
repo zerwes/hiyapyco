@@ -328,6 +328,11 @@ See
 Changelog
 ---------
 
+0.4.11
+~~~~~~
+
+IMPLEMENTED: mergelists (see issue #25)
+
 0.4.10
 ~~~~~~
 
