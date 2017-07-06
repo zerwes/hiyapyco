@@ -29,11 +29,11 @@ array_of_dicts:
 
 
 CONF = hiyapyco.load([base, layer], method=hiyapyco.METHOD_MERGE)
-print hiyapyco.dump(CONF)
+print (hiyapyco.dump(CONF))
 
-print "... using mergelists=False ..."
+print ("... using mergelists=False ...")
 CONF = hiyapyco.load([base, layer], method=hiyapyco.METHOD_MERGE, mergelists=False)
-print hiyapyco.dump(CONF)
+print (hiyapyco.dump(CONF))
 
 # vim: tabstop=4 expandtab shiftwidth=4 softtabstop=4 smartindent nu
 
