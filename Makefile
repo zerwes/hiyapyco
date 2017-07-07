@@ -17,8 +17,9 @@ DPKGBUILDPKGVERSION = $(shell dpkg-buildpackage --version | sed '1!d;s/^.* //g;s
 DPKGBUILDPKGSIGNARG = $(shell dpkg --compare-versions $DPKGBUILDPKGVERSION lt 1.17.26 && echo "-p'gpg --use-agent'")
 
 pypiupload: PYPIREPO := pypi
-# TODO: fixme required? upload works to test but the URL https://pypitest.python.org/pypi/HiYaPyCo is not working (working: https://testpypi.python.org/pypi/HiYaPyCo)
+pypiupload: PYPIREPOURL := https://pypi.python.org/pypi/HiYaPyCo
 pypiuploadtest: PYPIREPO := pypitest
+pypiuploadtest: PYPIREPOURL := https://test.pypi.org/project/HiYaPyCo/
 
 quicktest: test examples
 alltest: clean quicktest testinstall
@@ -109,8 +110,8 @@ pypiuploadtest: pypi pypiuploaddo
 pypiupload: pypi pypiuploaddo
 pypiuploaddo:
 	# set use-agent in ~/.gnupg/gpg.conf to use the agent
-	#python setup.py sdist bdist_wheel upload -r $(PYPIREPO) -s -i $(GPGKEY)
-	@echo "test the result at: https://$(PYPIREPO).python.org/pypi/HiYaPyCo"
+	python setup.py sdist bdist_wheel upload -r $(PYPIREPO) -s -i $(GPGKEY)
+	@echo "test the result at: $(PYPIREPOURL)"
 
 gpg-agent:
 	gpg-agent; \
