@@ -90,7 +90,7 @@ class HiYaPyCo():
 
         self.method = None
         if 'method' in kwargs:
-            logging.debug('parse kwarg method: %s ...' % kwargs['method'])
+            logger.debug('parse kwarg method: %s ...' % kwargs['method'])
             if kwargs['method'] not in METHODS.values():
                 raise HiYaPyCoInvocationException(
                         'undefined method used, must be one of: %s' %
