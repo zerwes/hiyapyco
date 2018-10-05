@@ -38,6 +38,7 @@ without changes. Tested versions:
 -  2.7
 -  3.2
 -  3.4
+-  3.5
 
 Usage
 -----
@@ -327,6 +328,11 @@ See
 
 Changelog
 ---------
+
+0.4.12
+~~~~~~
+
+FIXED: logging by Regev Golan
 
 0.4.11
 ~~~~~~
