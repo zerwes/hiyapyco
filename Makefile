@@ -22,9 +22,8 @@ pypiuploadtest: PYPIREPO := pypitest
 pypiuploadtest: PYPIREPOURL := https://test.pypi.org/project/HiYaPyCo/
 
 quicktest: test examples
-alltest: clean quicktest testinstall
 # FIXME: testinstallvirtualenv fails due to jinja2 2.8 error w/ python3.2 but works w/ python3.4 ... WTF
-#alltest: clean quicktest testinstall testinstallvirtualenv
+alltest: clean quicktest testinstall testinstallvirtualenv
 
 printversions:
 	@echo -e "HIYAPYCOVERSION:\t$(HIYAPYCOVERSION)"
