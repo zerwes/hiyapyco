@@ -37,8 +37,6 @@ conf = hiyapyco.load(
         usedefaultyamlloader=True
         )
 
-print conf
-
 t = conf['a']
 logger.info('test single val ... %s' % t)
 assert t == 'xxx'
@@ -59,8 +57,6 @@ conf = hiyapyco.load(
         failonmissingfiles=True,
         usedefaultyamlloader=False
         )
-
-print conf
 
 t = conf['a']
 logger.info('test single val ... %s' % t)
