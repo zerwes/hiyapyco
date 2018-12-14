@@ -1,0 +1,16 @@
+---
+a: aaa 
+b: bbb 
+d:
+        a: a
+        b: b
+        c: c
+
+...
+---
+a: xxx 
+d:
+        a: x
+        z: z
+...
+
