@@ -329,6 +329,11 @@ See
 Changelog
 ---------
 
+0.4.13
+~~~~~~
+
+IMPLEMENTED: [issue #27] support multiple yaml documents in one file
+
 0.4.12
 ~~~~~~
 
