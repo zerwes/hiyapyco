@@ -220,7 +220,7 @@ testsetupversion:
 testdebversion:
 	@if $$(dpkg --compare-versions $$(dpkg-parsechangelog | sed '/^Version: /!d; s/^Version: \([.0-9]*\).*/\1/g') lt $(HIYAPYCOVERSION)); then \
 		echo "debian version must be incremented to HIYAPYCOVERSION $(HIYAPYCOVERSION)"; \
-		echo "run make dch-version"; \
+		echo "run make dch --distribution stable --newversion $(HIYAPYCOVERSION)"; \
 		false; \
 		fi
 
