@@ -69,6 +69,10 @@ def safe_load(stream):
     """implementation of safe loader using Ordered Dict Yaml Loader"""
     return yaml.load(stream, ODYL)
 
+def safe_load_all(stream):
+    """safe parse all YAML documents in a stream using Ordered Dict Yaml Loader"""
+    return yaml.load_all(stream, ODYL)
+
 def safe_dump(data, stream=None, **kwds):
     """implementation of safe dumper using Ordered Dict Yaml Dumper"""
     return yaml.dump(data, stream=None, Dumper=ODYD, **kwds)

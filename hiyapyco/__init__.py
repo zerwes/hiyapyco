@@ -200,19 +200,20 @@ class HiYaPyCo():
                     self._files.remove(yamlfile)
                     continue
             if _usedefaultyamlloader:
-                ydata = yaml.safe_load(f)
+                ydata_generator = yaml.safe_load_all(f)
             else:
-                ydata = odyldo.safe_load(f)
-            if logger.isEnabledFor(logging.DEBUG):
-                logger.debug('yaml data: %s' % ydata)
-            if self._data is None:
-                self._data = ydata
-            else:
-                if self.method == METHOD_SIMPLE:
-                    self._data = self._simplemerge(self._data, ydata)
+                ydata_generator = odyldo.safe_load_all(f)
+            for ydata in ydata_generator:
+                if logger.isEnabledFor(logging.DEBUG):
+                    logger.debug('yaml data: %s' % ydata)
+                if self._data is None:
+                    self._data = ydata
                 else:
-                    self._data = self._deepmerge(self._data, ydata)
-                logger.debug('merged data: %s' % self._data)
+                    if self.method == METHOD_SIMPLE:
+                        self._data = self._simplemerge(self._data, ydata)
+                    else:
+                        self._data = self._deepmerge(self._data, ydata)
+                    logger.debug('merged data: %s' % self._data)
 
         if self.interpolate:
             self._data = self._interpolate(self._data)
