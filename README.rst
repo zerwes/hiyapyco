@@ -278,13 +278,6 @@ Install the latest wheel package using:
 debian packages
 ~~~~~~~~~~~~~~~
 
-**! GPG key changed !**
-you can verify the new key using::
-
-   wget https://repo.zero-sys.net/77DE7FB4.asc
-   wget https://repo.zero-sys.net/77DE7FB4.gpg
-   gpg --verify 77DE7FB4.gpg 77DE7FB4.asc
-
 install the latest debian packages from http://repo.zero-sys.net/hiyapyco::
 
     echo "deb http://repo.zero-sys.net/hiyapyco/deb ./" > /etc/apt/sources.list.d/hiyapyco.list
@@ -297,8 +290,6 @@ install the latest debian packages from http://repo.zero-sys.net/hiyapyco::
 
 rpm packages
 ~~~~~~~~~~~~
-
-**! GPG key changed !**
 
 use
 `http://repo.zero-sys.net/hiyapyco/rpm <http://repo.zero-sys.net/hiyapyco/rpm>`_
@@ -315,7 +306,7 @@ is available.
 License
 -------
 
-Copyright |copy| 2014 - 2017 Klaus Zerwes `zero-sys.net <https://zero-sys.net>`_
+Copyright |copy| 2014 - 2018 Klaus Zerwes `zero-sys.net <https://zero-sys.net>`_
 
 .. |copy| unicode:: 0xA9 .. copyright sign
 
