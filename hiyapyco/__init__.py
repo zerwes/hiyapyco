@@ -79,6 +79,7 @@ class HiYaPyCo():
           * interpolate: boolean (default: False)
           * castinterpolated: boolean (default: False) try to cast values after interpolating
           * usedefaultyamlloader: boolean (default: False)
+          * encoding: (default: 'utf-8') encoding used to read yaml files
           * loglevel: one of  the valid levels from the logging module
           * failonmissingfiles: boolean (default: True)
           * loglevelmissingfiles
