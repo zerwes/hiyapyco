@@ -164,8 +164,7 @@ class HiYaPyCo():
             logger.setLevel(kwargs['loglevel'])
             del kwargs['loglevel']
 
-        # default to platform default encoding
-        self.encoding = None
+        self.encoding = 'utf-8'
         if 'encoding' in kwargs:
             self.encoding = kwargs['encoding']
             del kwargs['encoding']
