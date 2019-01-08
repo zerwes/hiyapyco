@@ -176,7 +176,7 @@ class HiYaPyCo():
             logger.debug('yamlfile: %s ...' % yamlfile)
             if '\n' in yamlfile:
                 logger.debug('loading yaml doc from str ...')
-                f = yamlfile
+                self._load_data(_usedefaultyamlloader, yamlfile)
             else:
                 fn = yamlfile
                 if not os.path.isabs(yamlfile):
@@ -185,6 +185,7 @@ class HiYaPyCo():
                 try:
                     f = open(fn, 'r')
                     logger.debug('open4reading: file %s' % f)
+                    self._load_data(_usedefaultyamlloader, f)
                 except IOError as e:
                     logger.log(self.loglevelonmissingfiles, e)
                     if not fn == yamlfile:
@@ -199,7 +200,6 @@ class HiYaPyCo():
                             )
                     self._files.remove(yamlfile)
                     continue
-            self._load_data(_usedefaultyamlloader, f)
 
         if self.interpolate:
             self._data = self._interpolate(self._data)
