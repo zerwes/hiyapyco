@@ -183,9 +183,9 @@ class HiYaPyCo():
                     fn = os.path.join(os.getcwd(), yamlfile)
                     logger.debug('path extended for yamlfile: %s' % fn)
                 try:
-                    f = open(fn, 'r')
-                    logger.debug('open4reading: file %s' % f)
-                    self._load_data(_usedefaultyamlloader, f)
+                    with open(fn, 'r') as f:
+                        logger.debug('open4reading: file %s' % f)
+                        self._load_data(_usedefaultyamlloader, f)
                 except IOError as e:
                     logger.log(self.loglevelonmissingfiles, e)
                     if not fn == yamlfile:
