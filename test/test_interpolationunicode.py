@@ -45,6 +45,10 @@ t = conf['one']
 logger.info('test unicode val ... %s' % t)
 assert t == 'Öns'
 
+t = conf['oneKorean']
+logger.info('test unicode val ... %s' % t)
+assert t == '하나'
+
 t = conf['Zwö']
 logger.info('test unicode key ... %s' % t)
 assert t == 'ölybaba Öns zwö ... 40'
