@@ -2,6 +2,9 @@
 *~
 *.swp
 
+# PyCharm
+.idea
+
 build
 HiYaPyCo.egg-info
 dist
