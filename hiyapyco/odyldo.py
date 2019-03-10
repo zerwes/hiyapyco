@@ -75,5 +75,5 @@ def safe_load_all(stream):
 
 def safe_dump(data, stream=None, **kwds):
     """implementation of safe dumper using Ordered Dict Yaml Dumper"""
-    return yaml.dump(data, stream=None, Dumper=ODYD, **kwds)
+    return yaml.dump(data, stream=stream, Dumper=ODYD, **kwds)
 
