@@ -53,6 +53,10 @@ t = conf['UnicoDict']
 logger.info('test unicode dict ... %s' % t)
 assert t == { 'Umlkäy': 'Umlwäl', 'umlinterploate': 'UnIcöDe Umlwäl'}
 
+t = conf['Röm']
+logger.info('test Röm: \'%s\'' % t)
+assert t == 'pîine prăjită şi ţuică'
+
 print('passed test %s' % __file__)
 
 # vim: tabstop=4 expandtab shiftwidth=4 softtabstop=4 smartindent nu

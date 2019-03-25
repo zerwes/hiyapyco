@@ -6,4 +6,5 @@ Zwö: ölybaba {{ one }} zwö ... {{ t }}
 UnicoDict:
     Umlkäy: Umlwäl
     umlinterploate: "UnIcöDe {{ UnicoDict['Umlkäy'] }}" # UnicoDict.Umlkäy will NOT work!
+Röm: pîine prăjită şi ţuică
 
