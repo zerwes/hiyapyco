@@ -1,3 +1,9 @@
+hiyapyco (0.4.14-1) stable; urgency=medium
+
+  * release version 0.4.14
+
+ -- Klaus Zerwes zero-sys.net <zerwes@users.noreply.github.com>  Mon, 25 Mar 2019 23:41:32 +0100
+
 hiyapyco (0.4.13) stable; urgency=medium
 
   * support multiple yaml documents in one file 

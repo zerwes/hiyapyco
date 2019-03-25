@@ -320,6 +320,12 @@ See
 Changelog
 ---------
 
+0.4.14
+~~~~~~
+
+FIXED: issue #33
+MERGED: issue #32
+
 0.4.13
 ~~~~~~
 
