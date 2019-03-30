@@ -57,6 +57,10 @@ t = conf['Röm']
 logger.info('test Röm: \'%s\'' % t)
 assert t == 'pîine prăjită şi ţuică'
 
+t = conf['kor']
+logger.info('test kor: \'%s\'' % t)
+assert t == '韓國語똥'
+
 print('passed test %s' % __file__)
 
 # vim: tabstop=4 expandtab shiftwidth=4 softtabstop=4 smartindent nu
