@@ -132,21 +132,21 @@ kwargs
       simple merge is performed) (default method)
    -  ``hiyapyco.METHOD_MERGE``: perform a deep merge
 
-- ``mergelists``: boolean try to merge lists of dict (default: True)
+- ``mergelists``: boolean try to merge lists of dict (default: ``True``)
 
 -  ``interpolate``: boolean : perform interpolation after the merge
-   (default: False)
+   (default: ``False``)
 
 -  ``castinterpolated``: boolean : try to perform a *best possible
-   match* cast for interpolated strings
+   match* cast for interpolated strings (default: ``False``)
 
 -  ``usedefaultyamlloader``: boolean : force the usage of the default
    *PyYAML* loader/dumper instead of *HiYaPyCo*\ s implementation of a
    OrderedDict loader/dumper (see: Ordered Dict Yaml Loader / Dumper
-   aka. ODYLDo) (default: False)
+   aka. ODYLDo) (default: ``False``)
 
 -  ``failonmissingfiles``: boolean : fail if a supplied YAML file can
-   not be found (default: True)
+   not be found (default: ``True``)
 
 -  ``loglevel``: int : loglevel for the hiyapyco logger; should be one
    of the valid levels from ``logging``: 'WARN', 'ERROR', 'DEBUG', 'I
