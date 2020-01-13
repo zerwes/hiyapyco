@@ -184,15 +184,16 @@ class HiYaPyCo():
             logger.debug('yamlfile: %s ...' % yamlfile)
             if '\n' in yamlfile:
                 logger.debug('loading yaml doc from str ...')
-                f = yamlfile
+                self._load_data(_usedefaultyamlloader, yamlfile)
             else:
                 fn = yamlfile
                 if not os.path.isabs(yamlfile):
                     fn = os.path.join(os.getcwd(), yamlfile)
                     logger.debug('path extended for yamlfile: %s' % fn)
                 try:
-                    f = io.open(fn, 'r', encoding=self.encoding)
-                    logger.debug('open4reading: file %s' % f)
+                    with io.open(fn, 'r', encoding=self.encoding) as f:
+                        logger.debug('open4reading: file %s' % f)
+                        self._load_data(_usedefaultyamlloader, f)
                 except IOError as e:
                     logger.log(self.loglevelonmissingfiles, e)
                     if not fn == yamlfile:
@@ -207,35 +208,26 @@ class HiYaPyCo():
                             )
                     self._files.remove(yamlfile)
                     continue
-            if _usedefaultyamlloader:
-                ydata_generator = yaml.safe_load_all(f)
-            else:
-                ydata_generator = odyldo.safe_load_all(f)
-            try:
-                for ydata in ydata_generator:
-                    if logger.isEnabledFor(logging.DEBUG):
-                        logger.debug('yaml data: %s' % ydata)
-                    if self._data is None:
-                        self._data = ydata
-                    else:
-                        if self.method == METHOD_SIMPLE:
-                            self._data = self._simplemerge(self._data, ydata)
-                        else:
-                            self._data = self._deepmerge(self._data, ydata)
-                        logger.debug('merged data: %s' % self._data)
-            except yaml.parser.ParserError as e:
-                logger.log(self.loglevelonmissingfiles, e)
-                logger.log(self.loglevelonmissingfiles,
-                        'error while parsing yaml %s' % f)
-                if self.failonmissingfiles:
-                    raise HiYaPyCoInvocationException(
-                            'error while parsing file: \'%s\'' % f
-                        )
-                self._files.remove(yamlfile)
-                continue
 
         if self.interpolate:
             self._data = self._interpolate(self._data)
+
+    def _load_data(self, _usedefaultyamlloader, f):
+        if _usedefaultyamlloader:
+            ydata_generator = yaml.safe_load_all(f)
+        else:
+            ydata_generator = odyldo.safe_load_all(f)
+        for ydata in ydata_generator:
+            if logger.isEnabledFor(logging.DEBUG):
+                logger.debug('yaml data: %s' % ydata)
+            if self._data is None:
+                self._data = ydata
+            else:
+                if self.method == METHOD_SIMPLE:
+                    self._data = self._simplemerge(self._data, ydata)
+                else:
+                    self._data = self._deepmerge(self._data, ydata)
+                logger.debug('merged data: %s' % self._data)
 
     def _updatefiles(self, arg):
         if isinstance(arg, strTypes):
