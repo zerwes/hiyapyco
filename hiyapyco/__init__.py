@@ -182,32 +182,45 @@ class HiYaPyCo():
 
         for yamlfile in self._files[:]:
             logger.debug('yamlfile: %s ...' % yamlfile)
-            if '\n' in yamlfile:
-                logger.debug('loading yaml doc from str ...')
-                self._load_data(_usedefaultyamlloader, yamlfile)
-            else:
-                fn = yamlfile
-                if not os.path.isabs(yamlfile):
-                    fn = os.path.join(os.getcwd(), yamlfile)
-                    logger.debug('path extended for yamlfile: %s' % fn)
-                try:
-                    with io.open(fn, 'r', encoding=self.encoding) as f:
-                        logger.debug('open4reading: file %s' % f)
-                        self._load_data(_usedefaultyamlloader, f)
-                except IOError as e:
-                    logger.log(self.loglevelonmissingfiles, e)
-                    if not fn == yamlfile:
-                        logger.log(self.loglevelonmissingfiles,
-                                'file not found: %s (%s)' % (yamlfile, fn,))
-                    else:
-                        logger.log(self.loglevelonmissingfiles,
-                                'file not found: %s' % yamlfile)
-                    if self.failonmissingfiles:
-                        raise HiYaPyCoInvocationException(
-                                'yaml file not found: \'%s\'' % yamlfile
-                            )
-                    self._files.remove(yamlfile)
-                    continue
+            try:
+                if '\n' in yamlfile:
+                    logger.debug('loading yaml doc from str ...')
+                    f = yamlfile
+                    self._load_data(_usedefaultyamlloader, yamlfile)
+                else:
+                    fn = yamlfile
+                    if not os.path.isabs(yamlfile):
+                        fn = os.path.join(os.getcwd(), yamlfile)
+                        logger.debug('path extended for yamlfile: %s' % fn)
+                    try:
+                        with io.open(fn, 'r', encoding=self.encoding) as f:
+                            logger.debug('open4reading: file %s' % f)
+                            self._load_data(_usedefaultyamlloader, f)
+                    except IOError as e:
+                        logger.log(self.loglevelonmissingfiles, e)
+                        if not fn == yamlfile:
+                            logger.log(self.loglevelonmissingfiles,
+                                    'file not found: %s (%s)' % (yamlfile, fn,))
+                        else:
+                            logger.log(self.loglevelonmissingfiles,
+                                    'file not found: %s' % yamlfile)
+                        if self.failonmissingfiles:
+                            raise HiYaPyCoInvocationException(
+                                    'yaml file not found: \'%s\'' % yamlfile
+                                )
+                        self._files.remove(yamlfile)
+                        continue
+            except yaml.parser.ParserError as e:
+                logger.log(self.loglevelonmissingfiles, e)
+                logger.log(self.loglevelonmissingfiles,
+                        'error while parsing yaml %s' % f)
+                if self.failonmissingfiles:
+                    raise HiYaPyCoInvocationException(
+                            'error while parsing file: \'%s\'' % f
+                        )
+                self._files.remove(yamlfile)
+                continue
+
 
         if self.interpolate:
             self._data = self._interpolate(self._data)
