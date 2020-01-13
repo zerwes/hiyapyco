@@ -26,6 +26,7 @@ from yaml import parser
 import logging
 from distutils.util import strtobool
 import re
+import io
 from jinja2 import Environment, Undefined, DebugUndefined, StrictUndefined, TemplateError
 
 from . import odyldo
@@ -79,6 +80,7 @@ class HiYaPyCo():
           * interpolate: boolean (default: False)
           * castinterpolated: boolean (default: False) try to cast values after interpolating
           * usedefaultyamlloader: boolean (default: False)
+          * encoding: (default: 'utf-8') encoding used to read yaml files
           * loglevel: one of  the valid levels from the logging module
           * failonmissingfiles: boolean (default: True)
           * loglevelmissingfiles
@@ -164,6 +166,11 @@ class HiYaPyCo():
             logger.setLevel(kwargs['loglevel'])
             del kwargs['loglevel']
 
+        self.encoding = 'utf-8'
+        if 'encoding' in kwargs:
+            self.encoding = kwargs['encoding']
+            del kwargs['encoding']
+
         if kwargs:
             raise HiYaPyCoInvocationException('undefined keywords: %s' % ' '.join(kwargs.keys()))
 
@@ -184,7 +191,7 @@ class HiYaPyCo():
                     fn = os.path.join(os.getcwd(), yamlfile)
                     logger.debug('path extended for yamlfile: %s' % fn)
                 try:
-                    f = open(fn, 'r')
+                    f = io.open(fn, 'r', encoding=self.encoding)
                     logger.debug('open4reading: file %s' % f)
                 except IOError as e:
                     logger.log(self.loglevelonmissingfiles, e)
