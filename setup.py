@@ -8,7 +8,7 @@ from setuptools import setup
 basepath = os.path.dirname(os.path.realpath(__file__))
 sys.path.insert(0, os.path.dirname(basepath))
 
-hiyapycoversion='0.4.14'
+hiyapycoversion='0.4.15'
 
 long_description = open('README.rst').read()
 

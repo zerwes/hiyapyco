@@ -320,6 +320,11 @@ See
 Changelog
 ---------
 
+0.4.15
+~~~~~~
+
+MERGED: #30 lesiak:issue-30-utf
+
 0.4.14
 ~~~~~~
 
