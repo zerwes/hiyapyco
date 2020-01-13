@@ -145,6 +145,8 @@ kwargs
    OrderedDict loader/dumper (see: Ordered Dict Yaml Loader / Dumper
    aka. ODYLDo) (default: ``False``)
 
+- ``encoding``: string : encoding used to read yaml files (default: ``utf-8``)
+
 -  ``failonmissingfiles``: boolean : fail if a supplied YAML file can
    not be found (default: ``True``)
 
