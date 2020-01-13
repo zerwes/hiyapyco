@@ -49,7 +49,7 @@ A simple example:
 
     import hiyapyco
     conf = hiyapyco.load('yamlfile1' [,'yamlfile2' [,'yamlfile3' [...]]] [,kwargs])
-    print(hiyapyco.dump(conf))
+    print(hiyapyco.dump(conf, default_flow_style=False))
 
 real life example:
 ~~~~~~~~~~~~~~~~~~
@@ -326,12 +326,14 @@ Changelog
 ~~~~~~
 
 MERGED: #30 lesiak:issue-30-utf
+
 MERGED: #28 lesiak:issue-28
 
 0.4.14
 ~~~~~~
 
 FIXED: issue #33
+
 MERGED: issue #32
 
 0.4.13
