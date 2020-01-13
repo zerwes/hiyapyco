@@ -324,6 +324,7 @@ Changelog
 ~~~~~~
 
 MERGED: #30 lesiak:issue-30-utf
+MERGED: #28 lesiak:issue-28
 
 0.4.14
 ~~~~~~
