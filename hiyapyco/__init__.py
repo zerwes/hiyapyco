@@ -10,7 +10,7 @@ A simple python lib allowing hierarchical config files in YAML syntax.
 License
 -------
 
-(c) 2014 - 2018 Klaus Zerwes zero-sys.net
+(c) 2014 - 2020 Klaus Zerwes zero-sys.net
 This package is free software.
 This software is licensed under the terms of the
 GNU GENERAL PUBLIC LICENSE version 3 or later,
