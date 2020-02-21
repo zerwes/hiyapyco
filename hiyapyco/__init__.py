@@ -243,7 +243,7 @@ class HiYaPyCo():
                 elif self.method == METHOD_MERGE:
                     self._data = self._deepmerge(self._data, ydata)
                 else:
-                    self._data = self.__substmerge(self._data, ydata)
+                    self._data = self._substmerge(self._data, ydata)
                 logger.debug('merged data: %s' % self._data)
 
     def _updatefiles(self, arg):
@@ -334,7 +334,7 @@ class HiYaPyCo():
                     )
         return a
 
-    def __substmerge(self, a, b):
+    def _substmerge(self, a, b):
         logger.debug('>' * 30)
         logger.debug('deepmerge %s and %s' % (a, b,))
         # FIXME: make None usage configurable
