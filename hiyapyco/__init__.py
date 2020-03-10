@@ -65,11 +65,18 @@ listTypes = (list, tuple)
 # you may set this to something suitable for you
 jinja2env = Environment(undefined=Undefined)
 
-METHODS = { 'METHOD_SIMPLE':0x0001, 'METHOD_MERGE':0x0002, 'METHOD_SUBSTITUTE':0x0003 }
+METHODS = { 'METHOD_SIMPLE':0x0001, 'METHOD_MERGE':0x0002, 'METHOD_SUBSTITUTE':0x0003, }
 METHOD_SIMPLE = METHODS['METHOD_SIMPLE']
 METHOD_MERGE = METHODS['METHOD_MERGE']
 METHOD_SUBSTITUTE = METHODS['METHOD_SUBSTITUTE']
 
+
+def dump(data, **kwds):
+    """dump the data as YAML"""
+    if _usedefaultyamlloader:
+        return yaml.safe_dump(data, **kwds)
+    else:
+        return odyldo.safe_dump(data, **kwds)
 
 class HiYaPyCo():
     """Main class"""
@@ -242,8 +249,10 @@ class HiYaPyCo():
                     self._data = self._simplemerge(self._data, ydata)
                 elif self.method == METHOD_MERGE:
                     self._data = self._deepmerge(self._data, ydata)
-                else:
+                elif self.method == METHOD_SUBSTITUTE:
                     self._data = self._substmerge(self._data, ydata)
+                else:
+                    raise HiYaPyCoInvocationException('unknown merge method \'%s\'' % self.method)
                 logger.debug('merged data: %s' % self._data)
 
     def _updatefiles(self, arg):
@@ -469,13 +478,6 @@ class HiYaPyCo():
     def dump(self, **kwds):
         """dump the data as YAML"""
         return dump(self._data, **kwds)
-
-def dump(data, **kwds):
-    """dump the data as YAML"""
-    if _usedefaultyamlloader:
-        return yaml.safe_dump(data, **kwds)
-    else:
-        return odyldo.safe_dump(data, **kwds)
 
 def load(*args, **kwargs):
     """
