@@ -17,7 +17,7 @@ DPKGBUILDPKGVERSION = $(shell dpkg-buildpackage --version | sed '1!d;s/^.* //g;s
 DPKGBUILDPKGSIGNARG = $(shell dpkg --compare-versions $DPKGBUILDPKGVERSION lt 1.17.26 && echo "-p'gpg --use-agent'")
 
 pypiupload: PYPIREPO := pypi
-pypiupload: PYPIREPOURL := https://pypi.org//project/HiYaPyCo
+pypiupload: PYPIREPOURL := https://pypi.python.org/pypi/HiYaPyCo
 pypiuploadtest: PYPIREPO := pypitest
 pypiuploadtest: PYPIREPOURL := https://test.pypi.org/project/HiYaPyCo/
 
