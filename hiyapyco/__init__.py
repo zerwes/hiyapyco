@@ -65,7 +65,7 @@ listTypes = (list, tuple)
 # you may set this to something suitable for you
 jinja2env = Environment(undefined=Undefined)
 
-METHODS = { 'METHOD_SIMPLE':0x0001, 'METHOD_MERGE':0x0002, 'METHOD_SUBSTITUTE':0x0003 }
+METHODS = { 'METHOD_SUBSTITUTE':0x0000, 'METHOD_SIMPLE':0x0001, 'METHOD_MERGE':0x0002, }
 METHOD_SIMPLE = METHODS['METHOD_SIMPLE']
 METHOD_MERGE = METHODS['METHOD_MERGE']
 METHOD_SUBSTITUTE = METHODS['METHOD_SUBSTITUTE']
@@ -78,7 +78,7 @@ class HiYaPyCo():
         args: YAMLfile(s)
         kwargs:
           * method: one of hiyapyco.METHOD_SIMPLE | hiyapyco.METHOD_MERGE | hiyapyco.METHOD_SUBSTITUTE
-          * mergelists: boolean (default: True) try to merge lists (only makes sense if hiyapyco.METHOD_MERGE or hiyapyco.METHOD_SUBSTITUTE)
+          * mergelists: boolean (default: True) try to merge lists (only makes sense if hiyapyco.METHOD_MERGE)
           * interpolate: boolean (default: False)
           * castinterpolated: boolean (default: False) try to cast values after interpolating
           * usedefaultyamlloader: boolean (default: False)
@@ -485,7 +485,7 @@ def load(*args, **kwargs):
     args: YAMLfile(s)
     kwargs:
       * method: one of hiyapyco.METHOD_SIMPLE | hiyapyco.METHOD_MERGE | hiyapyco.METHOD_SUBSTITUTE
-      * mergelists: boolean (default: True) try to merge lists (only makes sense if hiyapyco.METHOD_MERGE or hiyapyco.METHOD_SUBSTITUTE)
+      * mergelists: boolean (default: True) try to merge lists (only makes sense if hiyapyco.METHOD_MERGE)
       * interpolate: boolean (default: False)
       * castinterpolated: boolean (default: False) try to cast values after interpolating
       * usedefaultyamlloader: boolean (default: False)
