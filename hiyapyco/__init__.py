@@ -242,8 +242,10 @@ class HiYaPyCo():
                     self._data = self._simplemerge(self._data, ydata)
                 elif self.method == METHOD_MERGE:
                     self._data = self._deepmerge(self._data, ydata)
-                else:
+                elif self.method == METHOD_SUBSTITUTE:
                     self._data = self._substmerge(self._data, ydata)
+                else:
+                    raise HiYaPyCoInvocationException('unknown merge method \'%s\'' % self.method)
                 logger.debug('merged data: %s' % self._data)
 
     def _updatefiles(self, arg):
