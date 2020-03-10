@@ -78,7 +78,7 @@ class HiYaPyCo():
         args: YAMLfile(s)
         kwargs:
           * method: one of hiyapyco.METHOD_SIMPLE | hiyapyco.METHOD_MERGE | hiyapyco.METHOD_SUBSTITUTE
-          * mergelists: boolean (default: True) try to merge lists (only makes sense if hiyapyco.METHOD_MERGE)
+          * mergelists: boolean (default: True) try to merge lists (only makes sense if hiyapyco.METHOD_MERGE or hiyapyco.METHOD_SUBSTITUTE)
           * interpolate: boolean (default: False)
           * castinterpolated: boolean (default: False) try to cast values after interpolating
           * usedefaultyamlloader: boolean (default: False)
@@ -487,7 +487,7 @@ def load(*args, **kwargs):
     args: YAMLfile(s)
     kwargs:
       * method: one of hiyapyco.METHOD_SIMPLE | hiyapyco.METHOD_MERGE | hiyapyco.METHOD_SUBSTITUTE
-      * mergelists: boolean (default: True) try to merge lists (only makes sense if hiyapyco.METHOD_MERGE)
+      * mergelists: boolean (default: True) try to merge lists (only makes sense if hiyapyco.METHOD_MERGE or hiyapyco.METHOD_SUBSTITUTE)
       * interpolate: boolean (default: False)
       * castinterpolated: boolean (default: False) try to cast values after interpolating
       * usedefaultyamlloader: boolean (default: False)
