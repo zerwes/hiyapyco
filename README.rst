@@ -34,7 +34,6 @@ Python Version
 HiYaPyCo was designed to run on both current major python versions
 without changes. Tested versions:
 
--  2.6
 -  2.7
 -  3.2
 -  3.4
@@ -131,6 +130,7 @@ kwargs
    -  ``hiyapyco.METHOD_SIMPLE``: replace values (except for lists a
       simple merge is performed) (default method)
    -  ``hiyapyco.METHOD_MERGE``: perform a deep merge
+   -  ``hiyapyco.METHOD_SUBSTITUTE``: perform a merge w/ lists substituted (unsupoerted)
 
 - ``mergelists``: boolean try to merge lists of dict (default: ``True``)
 
@@ -321,6 +321,11 @@ See
 
 Changelog
 ---------
+
+0.4.16
+~~~~~~
+
+MERGED: #37 alex-ber
 
 0.4.15
 ~~~~~~
