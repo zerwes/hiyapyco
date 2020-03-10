@@ -65,7 +65,7 @@ listTypes = (list, tuple)
 # you may set this to something suitable for you
 jinja2env = Environment(undefined=Undefined)
 
-METHODS = { 'METHOD_SIMPLE':0x0001, 'METHOD_MERGE':0x0002, 'METHOD_SUBSTITUTE':0x0003, }
+METHODS = { 'METHOD_SIMPLE':0x0001, 'METHOD_MERGE':0x0002, 'METHOD_SUBSTITUTE':0x0003 }
 METHOD_SIMPLE = METHODS['METHOD_SIMPLE']
 METHOD_MERGE = METHODS['METHOD_MERGE']
 METHOD_SUBSTITUTE = METHODS['METHOD_SUBSTITUTE']
@@ -242,10 +242,8 @@ class HiYaPyCo():
                     self._data = self._simplemerge(self._data, ydata)
                 elif self.method == METHOD_MERGE:
                     self._data = self._deepmerge(self._data, ydata)
-                elif self.method == METHOD_SUBSTITUTE:
-                    self._data = self._substmerge(self._data, ydata)
                 else:
-                    raise HiYaPyCoInvocationException('unknown merge method \'%s\'' % self.method)
+                    self._data = self._substmerge(self._data, ydata)
                 logger.debug('merged data: %s' % self._data)
 
     def _updatefiles(self, arg):
@@ -338,7 +336,7 @@ class HiYaPyCo():
 
     def _substmerge(self, a, b):
         logger.debug('>' * 30)
-        logger.debug('deepmerge %s and %s' % (a, b,))
+        logger.debug('substmerge %s and %s' % (a, b,))
         # FIXME: make None usage configurable
         if b is None:
             logger.debug('pass as b is None')
@@ -348,24 +346,24 @@ class HiYaPyCo():
         # subsititues list, don't merge them
 
         if a is None or isinstance(b, primitiveTypes) or isinstance(b, listTypes):
-            logger.debug('deepmerge: replace a "%s"  w/ b "%s"' % (a, b,))
+            logger.debug('substmerge: replace a "%s"  w/ b "%s"' % (a, b,))
             a = b
 
         elif isinstance(a, dict):
             if isinstance(b, dict):
-                logger.debug('deepmerge: dict ... "%s" and "%s"' % (a, b,))
+                logger.debug('substmerge: dict ... "%s" and "%s"' % (a, b,))
                 for k in b:
                     if k in a:
-                        logger.debug('deepmerge dict: loop for key "%s": "%s" and "%s"' % (k, a[k], b[k],))
-                        a[k] = self._deepmerge(a[k], b[k])
+                        logger.debug('substmerge dict: loop for key "%s": "%s" and "%s"' % (k, a[k], b[k],))
+                        a[k] = self._substmerge(a[k], b[k])
                     else:
-                        logger.debug('deepmerge dict: set key %s' % k)
+                        logger.debug('substmerge dict: set key %s' % k)
                         a[k] = b[k]
             elif isinstance(b, listTypes):
-                logger.debug('deepmerge: dict <- list ... "%s" <- "%s"' % (a, b,))
+                logger.debug('substmerge: dict <- list ... "%s" <- "%s"' % (a, b,))
                 for bd in b:
                     if isinstance(bd, dict):
-                        a = self._deepmerge(a, bd)
+                        a = self._substmerge(a, bd)
                     else:
                         raise HiYaPyCoImplementationException(
                             'can not merge element from list of type %s to dict (@ "%s" try to merge "%s")' %
@@ -376,7 +374,7 @@ class HiYaPyCo():
                     'can not merge %s to %s (@ "%s" try to merge "%s")' %
                     (type(b), type(a), a, b,)
                 )
-        logger.debug('end deepmerge part: return: "%s"' % a)
+        logger.debug('end substmerge part: return: "%s"' % a)
         logger.debug('<' * 30)
         return a
 
