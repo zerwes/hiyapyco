@@ -160,6 +160,12 @@ kwargs
    'NOTSET' (default: ``logging.ERROR`` if
    ``failonmissingfiles = True``, else ``logging.WARN``)
 
+-  ``nonemergestrategy``: bit (one of the listed below):
+
+   -  ``hiyapyco.REPLACE_ORIGINAL``: replace values with None if encountered in overlaying document
+   -  ``hiyapyco.IGNORE_NONE``: ignore None values in overlaying document, keep original value (default method)
+
+
 interpolation
 ~~~~~~~~~~~~~
 

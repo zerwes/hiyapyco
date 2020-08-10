@@ -70,6 +70,9 @@ METHOD_SIMPLE = METHODS['METHOD_SIMPLE']
 METHOD_MERGE = METHODS['METHOD_MERGE']
 METHOD_SUBSTITUTE = METHODS['METHOD_SUBSTITUTE']
 
+NONE_MERGE_STRATEGIES = {'IGNORE_NONE': 0x0004, "REPLACE_ORIGINAL": 0x0005}
+IGNORE_NONE = NONE_MERGE_STRATEGIES['IGNORE_NONE']
+REPLACE_ORIGINAL = NONE_MERGE_STRATEGIES["REPLACE_ORIGINAL"]
 
 class HiYaPyCo():
     """Main class"""
@@ -86,6 +89,7 @@ class HiYaPyCo():
           * loglevel: one of  the valid levels from the logging module
           * failonmissingfiles: boolean (default: True)
           * loglevelmissingfiles
+          * nonemergestrategy: hiyapyco.REPLACE_ORIGINAL | hiyapyco.IGNORE_NONE (default IGNORE_NONE)
 
         Returns a representation of the merged and (if requested) interpolated config.
         Will mostly be a OrderedDict (dict if usedefaultyamlloader), but can be of any other type, depending on the yaml files.
@@ -115,6 +119,17 @@ class HiYaPyCo():
                         )
             self.mergelists = kwargs['mergelists']
             del kwargs['mergelists']
+
+        if 'nonemergestrategy' in kwargs:
+            if kwargs['nonemergestrategy'] not in NONE_MERGE_STRATEGIES.values():
+                raise HiYaPyCoInvocationException(
+                        'undefined none merge strategy used, must be one of: %s' %
+                        ' '.join(NONE_MERGE_STRATEGIES.keys())
+                    )
+            self.none_merge_strategy = kwargs['nonemergestrategy']
+            del kwargs['nonemergestrategy']
+        else:
+            self.none_merge_strategy = IGNORE_NONE
 
         self.interpolate = False
         self.castinterpolated = False
@@ -304,10 +319,9 @@ class HiYaPyCo():
 
     def _simplemerge(self, a, b):
         logger.debug('simplemerge %s (%s) and %s (%s)' % (a, type(a), b, type(b),))
-        # FIXME: make None usage configurable
+        
         if b is None:
-            logger.debug('pass as b is None')
-            pass
+            a = self._mergenone(a, b)
         elif isinstance(b, primitiveTypes):
             logger.debug('simplemerge: primitiveTypes replace a "%s"  w/ b "%s"' % (a, b,))
             a = b
@@ -335,19 +349,27 @@ class HiYaPyCo():
                     (type(b), type(a), a, b,)
                     )
         return a
+    
+    def _mergenone(self, a, b):
+        if self.none_merge_strategy == IGNORE_NONE:
+            logger.debug('pass as b is None (IGNORE_NONE strategy)')
+            pass
+        elif self.none_merge_strategy == REPLACE_ORIGINAL:
+            logger.debug('nonemerge: none replace a "%s"  w/ b "%s" (REPLACE_ORIGINAL strategy)' % (a, b,))
+            a = b
+        return a
 
     def _substmerge(self, a, b):
         logger.debug('>' * 30)
         logger.debug('deepmerge %s and %s' % (a, b,))
-        # FIXME: make None usage configurable
-        if b is None:
-            logger.debug('pass as b is None')
-            pass
+        
 
         # treat listTypes as primitiveTypes in merge
         # subsititues list, don't merge them
-
-        if a is None or isinstance(b, primitiveTypes) or isinstance(b, listTypes):
+        
+        if b is None:
+            a = self._mergenone(a, b)
+        elif a is None or isinstance(b, primitiveTypes) or isinstance(b, listTypes):
             logger.debug('deepmerge: replace a "%s"  w/ b "%s"' % (a, b,))
             a = b
 
@@ -383,11 +405,10 @@ class HiYaPyCo():
     def _deepmerge(self, a, b):
         logger.debug('>'*30)
         logger.debug('deepmerge %s and %s' % (a, b,))
-        # FIXME: make None usage configurable
+        
         if b is None:
-            logger.debug('pass as b is None')
-            pass
-        if a is None or isinstance(b, primitiveTypes):
+            a = self._mergenone(a, b)
+        elif a is None or isinstance(b, primitiveTypes):
             logger.debug('deepmerge: replace a "%s"  w/ b "%s"' % (a, b,))
             a = b
         elif isinstance(a, listTypes):
