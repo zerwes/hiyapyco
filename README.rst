@@ -1,3 +1,8 @@
+This is for from https://github.com/zerwes/hiyapyco
+It was designed for feature requests, see https://github.com/zerwes/hiyapyco/pull/38 for Pull Request.
+It is almost a year was passed and merge didn't happen, so I'm archiving this project.
+
+
 hiyapyco
 ========
 
