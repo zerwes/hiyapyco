@@ -12,7 +12,7 @@ hiyapycoversion='0.4.16'
 
 long_description = open('README.rst').read()
 
-installrequires = ['PyYAML', 'Jinja2>1,<3',]
+installrequires = ['PyYAML', 'Jinja2>1,<4',]
 
 try:
     from collections import OrderedDict
