@@ -1,7 +1,9 @@
+# vim: tabstop=4 expandtab shiftwidth=4 softtabstop=4 smartindent
+
 language: python
-python:
-  - "2.7"
-  - "3.4"
-  - "3.6"
-  - "3.9"
-script: make testinstallvirtualenv
+jobs:
+  include:
+  - name: python2.7
+    python: "2.7"
+    env: PYVERSIONS=python2.7
+script: PYVERSIONS=$PYVERSIONS make testinstallvirtualenv
