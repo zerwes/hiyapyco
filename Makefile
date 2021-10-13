@@ -171,6 +171,7 @@ rpm: gpg-agent
 		--doc-files README.rst --requires python-yaml,python-jinja2 \
 		-d release/rpm/noarch
 	for f in release/rpm/noarch/*.rpm; do \
+		rm -f $$f.sig; \
 		expect -c "spawn rpmsign \
 				-D \"%__gpg_sign_cmd  %{__gpg} gpg --batch  --no-armor --use-agent --no-secmem-warning -u '\%{_gpg_name}' -sbo \%{__signature_filename} \%{__plaintext_filename}\" \
 				-D \"%__gpg_check_password_cmd  /bin/true\" \
