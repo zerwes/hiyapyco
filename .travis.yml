@@ -6,4 +6,10 @@ jobs:
   - name: python2.7
     python: "2.7"
     env: PYVERSIONS=python2.7
+  - name: python3.6
+    python: "3.6"
+    env: PYVERSIONS=python3.6
+  - name: python3.9
+    python: "3.9"
+    env: PYVERSIONS=python3.9
 script: PYVERSIONS=$PYVERSIONS make testinstallvirtualenv
