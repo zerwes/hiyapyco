@@ -113,13 +113,14 @@ pypiuploaddo:
 	@echo "test the result at: $(PYPIREPOURL)"
 
 gpg-agent:
-	gpg-agent; \
+	@gpg-agent; \
 		RET=$$?; echo "gpg agent running: $$RET"; \
 		if [ $$RET -gt 0  ]; then \
 			gpg-agent; \
 			echo 'please run eval "eval $$(gpg-agent --daemon)"'; \
 			exit 1; \
 			fi
+	gpg-connect-agent 'keyinfo --list' /bye
 dch-increment:
 	@# use this to increment the deb relese number for a existing release
 	@DEBEMAIL=$$(git config --local --get user.email) \
