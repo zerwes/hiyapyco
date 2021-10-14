@@ -26,15 +26,17 @@ setup(name='HiYaPyCo',
     author='Klaus Zerwes zero-sys.net',
     author_email='zerwes@users.noreply.github.com',
     url='https://github.com/zerwes/hiyapyco',
-    license='GPL',
+    license='GPLv3',
     classifiers=[	
         'Development Status :: 5 - Production/Stable',
         'Intended Audience :: Developers',
+        'Intended Audience :: System Administrators',
         'License :: OSI Approved :: GNU General Public License v3 or later (GPLv3+)',
         'Programming Language :: Python :: 2',
         'Programming Language :: Python :: 2.7',
         'Programming Language :: Python :: 3',
-        'Programming Language :: Python :: 3.5',
+        'Programming Language :: Python :: 3.6',
+        'Programming Language :: Python :: 3.9',
     ],
     packages=['hiyapyco'],
     keywords='configuration parser yaml',
@@ -43,4 +45,3 @@ setup(name='HiYaPyCo',
     )
 
 # vim: tabstop=4 expandtab shiftwidth=4 softtabstop=4 smartindent nu
-
