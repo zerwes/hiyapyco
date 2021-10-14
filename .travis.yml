@@ -12,4 +12,4 @@ jobs:
   - name: python3.9
     python: "3.9"
     env: PYVERSIONS=python3.9
-script: PYVERSIONS=$PYVERSIONS make test testinstallvirtualenv
+script: PYVERSIONS=$PYVERSIONS make testinstallvirtualenv
