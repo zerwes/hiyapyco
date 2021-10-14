@@ -1,3 +1,6 @@
+.. image:: https://app.travis-ci.com/zerwes/hiyapyco.svg?branch=master
+    :target: https://app.travis-ci.com/zerwes/hiyapyco
+
 hiyapyco
 ========
 
@@ -321,6 +324,11 @@ See
 
 Changelog
 ---------
+
+0.4.17
+~~~~~~
+
+MERGED: #41 Jinja2 dependency increased to include Jinja2 3.x.x
 
 0.4.16
 ~~~~~~
