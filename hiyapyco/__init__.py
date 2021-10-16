@@ -107,7 +107,7 @@ class HiYaPyCo:
                     )
             self.method = kwargs['method']
             del kwargs['method']
-        if self.method == None:
+        if self.method is None:
             self.method = METHOD_SIMPLE
 
         self.mergelists = True
