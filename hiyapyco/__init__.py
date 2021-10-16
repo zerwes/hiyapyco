@@ -18,7 +18,6 @@ as published by the Free Software Foundation.
 See https://www.gnu.org/licenses/gpl.html
 """
 
-
 import sys
 import os
 import yaml
@@ -44,7 +43,7 @@ __version__ = version.VERSION
 
 logger = logging.getLogger(__name__)
 
-_usedefaultyamlloader = False
+_USEDEFAULTYAMLLOADER = False
 
 class HiYaPyCoInvocationException(Exception):
     """dummy Exception raised on wrong invocation"""
@@ -71,7 +70,7 @@ METHOD_MERGE = METHODS['METHOD_MERGE']
 METHOD_SUBSTITUTE = METHODS['METHOD_SUBSTITUTE']
 
 
-class HiYaPyCo():
+class HiYaPyCo:
     """Main class"""
     def __init__(self, *args, **kwargs):
         """
@@ -144,8 +143,8 @@ class HiYaPyCo():
                         'value of "usedefaultyamlloader" must be boolean (got: "%s" as %s)' %
                         (kwargs['usedefaultyamlloader'], type(kwargs['usedefaultyamlloader']),)
                         )
-            global _usedefaultyamlloader
-            _usedefaultyamlloader = kwargs['usedefaultyamlloader']
+            global _USEDEFAULTYAMLLOADER
+            _USEDEFAULTYAMLLOADER = kwargs['usedefaultyamlloader']
             del kwargs['usedefaultyamlloader']
 
         self.failonmissingfiles = True
@@ -191,7 +190,7 @@ class HiYaPyCo():
                 if '\n' in yamlfile:
                     logger.debug('loading yaml doc from str ...')
                     f = yamlfile
-                    self._load_data(_usedefaultyamlloader, yamlfile)
+                    self._load_data(_USEDEFAULTYAMLLOADER, yamlfile)
                 else:
                     fn = yamlfile
                     if not os.path.isabs(yamlfile):
@@ -200,7 +199,7 @@ class HiYaPyCo():
                     try:
                         with io.open(fn, 'r', encoding=self.encoding) as f:
                             logger.debug('open4reading: file %s' % f)
-                            self._load_data(_usedefaultyamlloader, f)
+                            self._load_data(_USEDEFAULTYAMLLOADER, f)
                     except IOError as e:
                         logger.log(self.loglevelonmissingfiles, e)
                         if not fn == yamlfile:
@@ -230,8 +229,8 @@ class HiYaPyCo():
         if self.interpolate:
             self._data = self._interpolate(self._data)
 
-    def _load_data(self, _usedefaultyamlloader, f):
-        if _usedefaultyamlloader:
+    def _load_data(self, _USEDEFAULTYAMLLOADER, f):
+        if _USEDEFAULTYAMLLOADER:
             ydata_generator = yaml.safe_load_all(f)
         else:
             ydata_generator = odyldo.safe_load_all(f)
@@ -490,7 +489,7 @@ class HiYaPyCo():
 
 def dump(data, **kwds):
     """dump the data as YAML"""
-    if _usedefaultyamlloader:
+    if _USEDEFAULTYAMLLOADER:
         return yaml.safe_dump(data, **kwds)
     else:
         return odyldo.safe_dump(data, **kwds)
@@ -521,4 +520,3 @@ def load(*args, **kwargs):
     return hiyapyco.data()
 
 # vim: tabstop=4 expandtab shiftwidth=4 softtabstop=4 smartindent nu
-
