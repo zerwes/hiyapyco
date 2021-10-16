@@ -320,6 +320,7 @@ class HiYaPyCo:
         elif isinstance(b, listTypes):
             logger.debug('simplemerge: listTypes a "%s"  w/ b "%s"' % (a, b,))
             if isinstance(a, listTypes):
+                # pylint: disable=unused-variable
                 for k, v in enumerate(b):
                     try:
                         a[k] = self._simplemerge(a[k], b[k])
