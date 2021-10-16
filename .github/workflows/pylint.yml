@@ -17,7 +17,7 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        pip install pylint
+        pip install pylint yaml jinja2
     - name: Install make
       run: sudo apt-get install make
     - name: Analysing the code with pylint
