@@ -12,7 +12,12 @@ hiyapycoversion='0.4.16'
 
 long_description = open('README.rst').read()
 
-installrequires = ['PyYAML<6', 'Jinja2>1,<4;python_version>="3"','Jinja2>1,<3;python_version<"3"', 'MarkupSafe<2;python_version<"3"']
+installrequires = [
+    'PyYAML<6',
+    'Jinja2>1,<4;python_version>="3"',
+    'Jinja2>1,<3;python_version<"3"',
+    'MarkupSafe<2;python_version<"3"'
+    ]
 
 try:
     from collections import OrderedDict
@@ -27,7 +32,7 @@ setup(name='HiYaPyCo',
     author_email='zerwes@users.noreply.github.com',
     url='https://github.com/zerwes/hiyapyco',
     license='GPLv3',
-    classifiers=[	
+    classifiers=[
         'Development Status :: 5 - Production/Stable',
         'Intended Audience :: Developers',
         'Intended Audience :: System Administrators',
