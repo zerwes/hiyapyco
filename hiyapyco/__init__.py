@@ -426,6 +426,8 @@ class HiYaPyCo:
                                         merge = True
                                         break
                             if merge:
+                                # pylint: disable=undefined-loop-variable
+                                # FIXME undefined-loop-variable : this is not well readable !!!
                                 logger.debug(
                                     'deepmerge ad: deep merge list dict elem w/ '
                                     'key:%s: "%s" and "%s"' %
