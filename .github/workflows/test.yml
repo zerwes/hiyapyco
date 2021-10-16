@@ -15,7 +15,7 @@ jobs:
           - debian10
         python-version: [ '2.x', '3.x' ]
         exclude:
-          - os: debian11
+          - distro: debian11
             python-version: '2.x'
     steps:
     - uses: actions/checkout@v2
