@@ -5,6 +5,7 @@ on:
   schedule:
     # first of each month
     - cron: '0 0 1 * *'
+jobs:
   build:
     runs-on: ubuntu-latest
     steps:
