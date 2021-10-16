@@ -478,6 +478,7 @@ class HiYaPyCo:
         return a
 
     def yamlfiles(self):
+        """returns the list of parsed yaml files / strings"""
         return self._files
 
     def __str__(self):
