@@ -496,8 +496,7 @@ def dump(data, **kwds):
     """dump the data as YAML"""
     if _USEDEFAULTYAMLLOADER:
         return yaml.safe_dump(data, **kwds)
-    else:
-        return odyldo.safe_dump(data, **kwds)
+    return odyldo.safe_dump(data, **kwds)
 
 def load(*args, **kwargs):
     """
