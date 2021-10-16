@@ -1,6 +1,5 @@
 #! /usr/bin/env python -tt
 # vim: set fileencoding=utf-8
-from __future__ import unicode_literals
 """
 Hierarchical Yaml Python Config
 ===============================
@@ -17,6 +16,8 @@ GNU GENERAL PUBLIC LICENSE version 3 or later,
 as published by the Free Software Foundation.
 See https://www.gnu.org/licenses/gpl.html
 """
+
+from __future__ import unicode_literals
 
 import sys
 import os
