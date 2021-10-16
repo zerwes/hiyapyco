@@ -77,8 +77,10 @@ class HiYaPyCo():
         """
         args: YAMLfile(s)
         kwargs:
-          * method: one of hiyapyco.METHOD_SIMPLE | hiyapyco.METHOD_MERGE | hiyapyco.METHOD_SUBSTITUTE
-          * mergelists: boolean (default: True) try to merge lists (only makes sense if hiyapyco.METHOD_MERGE or hiyapyco.METHOD_SUBSTITUTE)
+          * method: one of
+            hiyapyco.METHOD_SIMPLE | hiyapyco.METHOD_MERGE | hiyapyco.METHOD_SUBSTITUTE
+          * mergelists: boolean (default: True) try to merge lists
+            (only makes sense if hiyapyco.METHOD_MERGE or hiyapyco.METHOD_SUBSTITUTE)
           * interpolate: boolean (default: False)
           * castinterpolated: boolean (default: False) try to cast values after interpolating
           * usedefaultyamlloader: boolean (default: False)
@@ -88,7 +90,8 @@ class HiYaPyCo():
           * loglevelmissingfiles
 
         Returns a representation of the merged and (if requested) interpolated config.
-        Will mostly be a OrderedDict (dict if usedefaultyamlloader), but can be of any other type, depending on the yaml files.
+        Will mostly be a OrderedDict (dict if usedefaultyamlloader), but can be of any other type,
+        depending on the yaml files.
         """
         self._data = None
         self._files = []
@@ -258,7 +261,9 @@ class HiYaPyCo():
             for larg in arg:
                 self._updatefiles(larg)
         else:
-            raise HiYaPyCoInvocationException('unable to handle arg %s of type %s' % (arg, type(arg),))
+            raise HiYaPyCoInvocationException(
+                'unable to handle arg %s of type %s' % (arg, type(arg),)
+                )
 
     def _interpolate(self, d):
         logger.debug('interpolate "%s" of type %s ...' % (d, type(d),))
@@ -356,7 +361,9 @@ class HiYaPyCo():
                 logger.debug('deepmerge: dict ... "%s" and "%s"' % (a, b,))
                 for k in b:
                     if k in a:
-                        logger.debug('deepmerge dict: loop for key "%s": "%s" and "%s"' % (k, a[k], b[k],))
+                        logger.debug(
+                            'deepmerge dict: loop for key "%s": "%s" and "%s"' % (k, a[k], b[k],)
+                            )
                         a[k] = self._deepmerge(a[k], b[k])
                     else:
                         logger.debug('deepmerge dict: set key %s' % k)
@@ -368,7 +375,8 @@ class HiYaPyCo():
                         a = self._deepmerge(a, bd)
                     else:
                         raise HiYaPyCoImplementationException(
-                            'can not merge element from list of type %s to dict (@ "%s" try to merge "%s")' %
+                            'can not merge element from list of type %s to dict '
+                            '(@ "%s" try to merge "%s")' %
                             (type(b), a, b,)
                         )
             else:
@@ -392,7 +400,10 @@ class HiYaPyCo():
             a = b
         elif isinstance(a, listTypes):
             if isinstance(b, listTypes):
-                logger.debug('deepmerge: lists extend %s:"%s" by %s:"%s"' % (type(a), a, type(b), b,))
+                logger.debug(
+                    'deepmerge: lists extend %s:"%s" by %s:"%s"' %
+                    (type(a), a, type(b), b,)
+                    )
                 a.extend(be for be in b if be not in a and
                             (isinstance(be, primitiveTypes) or isinstance(be, listTypes))
                         )
@@ -414,8 +425,9 @@ class HiYaPyCo():
                                         break
                             if merge:
                                 logger.debug(
-                                        'deepmerge ad: deep merge list dict elem w/ key:%s: "%s" and "%s"'
-                                        % (ak, ad, srcdicts[k],)
+                                    'deepmerge ad: deep merge list dict elem w/ '
+                                    'key:%s: "%s" and "%s"' %
+                                    (ak, ad, srcdicts[k],)
                                     )
                                 a[k] = self._deepmerge(ad, srcdicts[k])
                                 del srcdicts[k]
@@ -433,7 +445,10 @@ class HiYaPyCo():
                 logger.debug('deepmerge: dict ... "%s" and "%s"' % (a, b,))
                 for k in b:
                     if k in a:
-                        logger.debug('deepmerge dict: loop for key "%s": "%s" and "%s"' % (k, a[k], b[k],))
+                        logger.debug(
+                            'deepmerge dict: loop for key "%s": "%s" and "%s"' %
+                            (k, a[k], b[k],)
+                            )
                         a[k] = self._deepmerge(a[k], b[k])
                     else:
                         logger.debug('deepmerge dict: set key %s' % k)
@@ -445,9 +460,10 @@ class HiYaPyCo():
                         a = self._deepmerge(a, bd)
                     else:
                         raise HiYaPyCoImplementationException(
-                                'can not merge element from list of type %s to dict (@ "%s" try to merge "%s")' %
-                                (type(b), a, b,)
-                                )
+                            'can not merge element from list of type %s to dict '
+                            '(@ "%s" try to merge "%s")' %
+                            (type(b), a, b,)
+                            )
             else:
                 raise HiYaPyCoImplementationException(
                         'can not merge %s to %s (@ "%s" try to merge "%s")' %
@@ -487,7 +503,8 @@ def load(*args, **kwargs):
     args: YAMLfile(s)
     kwargs:
       * method: one of hiyapyco.METHOD_SIMPLE | hiyapyco.METHOD_MERGE | hiyapyco.METHOD_SUBSTITUTE
-      * mergelists: boolean (default: True) try to merge lists (only makes sense if hiyapyco.METHOD_MERGE or hiyapyco.METHOD_SUBSTITUTE)
+      * mergelists: boolean (default: True) try to merge lists
+        (only makes sense if hiyapyco.METHOD_MERGE or hiyapyco.METHOD_SUBSTITUTE)
       * interpolate: boolean (default: False)
       * castinterpolated: boolean (default: False) try to cast values after interpolating
       * usedefaultyamlloader: boolean (default: False)
@@ -497,7 +514,8 @@ def load(*args, **kwargs):
       * loglevelmissingfiles
 
     Returns a representation of the merged and (if requested) interpolated config.
-    Will mostly be a OrderedDict (dict if usedefaultyamlloader), but can be of any other type, depending on the yaml files.
+    Will mostly be a OrderedDict (dict if usedefaultyamlloader), but can be of any other type,
+    depending on the yaml files.
     """
     hiyapyco = HiYaPyCo(*args, **kwargs)
     return hiyapyco.data()
