@@ -1,6 +1,9 @@
 .. image:: https://app.travis-ci.com/zerwes/hiyapyco.svg?branch=master
     :target: https://app.travis-ci.com/zerwes/hiyapyco
 
+.. image:: https://github.com/zerwes/hiyapyco/actions/workflows/pylint.yml/badge.svg?branch=master
+    :target: https://github.com/zerwes/hiyapyco/actions/workflows/pylint.yml
+
 hiyapyco
 ========
 
