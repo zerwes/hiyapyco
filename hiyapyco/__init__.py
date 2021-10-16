@@ -436,7 +436,7 @@ class HiYaPyCo:
                                 a[k] = self._deepmerge(ad, srcdicts[k])
                                 del srcdicts[k]
                 logger.debug('deepmerge list: remaining srcdicts elems: %s' % srcdicts)
-                for k in srcdicts.keys():
+                for k in srcdicts:
                     logger.debug('deepmerge list: new dict append %s:%s' % (k, srcdicts[k]))
                     a.append(srcdicts[k])
             else:
