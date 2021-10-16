@@ -31,7 +31,7 @@ printversions:
 	@echo -e "PYVERSIONSPATHS:\t$(PYVERSIONSPATHS)"
 
 pylint:
-	pylint --disable=missing-module-docstring,unused-import setup.py
+	pylint --disable=missing-module-docstring,unused-import,consider-using-with,unspecified-encoding,consider-using-f-string setup.py
 	@# FIXME: logging-not-lazy global-statement invalid-name
 	@# py3 only: raise-missing-from
 	pylint --class-naming-style=any --disable=fixme,pointless-string-statement,missing-module-docstring,unnecessary-pass,logging-not-lazy,global-statement,invalid-name,raise-missing-from,consider-merging-isinstance,too-many-nested-blocks hiyapyco/__init__.py
