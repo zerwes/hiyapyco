@@ -28,7 +28,7 @@ jobs:
     - name: Install dependencies for ${{ matrix.python-version }}
       run: |
         sudo apt-get install python3-yaml python3-jinja2 python3-virtualenv python3-setuptools
-        pip install pylint PyYAML Jinja2 setuptools wheel
+        pip install -U pylint PyYAML Jinja2 setuptools wheel ujson
     #  if: ${{ matrix.python-version == '3.x' }}
     #- name: Install dependencies for ${{ matrix.python-version }}
     #  run: sudo apt-get install python-yaml python-jinja2 virtualenv
