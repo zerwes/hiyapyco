@@ -21,12 +21,12 @@ from __future__ import unicode_literals
 
 import sys
 import os
-import yaml
-from yaml import parser
 import logging
 from distutils.util import strtobool
 import re
 import io
+import yaml
+from yaml import parser
 from jinja2 import Environment, Undefined, DebugUndefined, StrictUndefined, TemplateError
 
 from . import odyldo
