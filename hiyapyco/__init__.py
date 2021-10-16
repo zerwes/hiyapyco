@@ -417,7 +417,7 @@ class HiYaPyCo:
                 for k, ad in enumerate(a):
                     logger.debug('deepmerge ad "%s" w/ k "%s" of type %s' % (ad, k, type(ad)))
                     if isinstance(ad, dict):
-                        if k in srcdicts.keys():
+                        if k in srcdicts:
                             # we merge only if at least one key in dict is matching
                             merge = False
                             if self.mergelists:
