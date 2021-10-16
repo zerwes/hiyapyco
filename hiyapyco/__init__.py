@@ -73,6 +73,7 @@ METHOD_SUBSTITUTE = METHODS['METHOD_SUBSTITUTE']
 
 class HiYaPyCo:
     """Main class"""
+    # pylint: disable=too-many-instance-attributes
     def __init__(self, *args, **kwargs):
         """
         args: YAMLfile(s)
