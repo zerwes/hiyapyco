@@ -8,7 +8,7 @@ from setuptools import setup
 basepath = os.path.dirname(os.path.realpath(__file__))
 sys.path.insert(0, os.path.dirname(basepath))
 
-hiyapycoversion='0.4.16'
+HIYAPYCOVERSION='0.4.16'
 
 long_description = open('README.rst').read()
 
@@ -25,7 +25,7 @@ except ImportError:
     installrequires.append('ordereddict')
 
 setup(name='HiYaPyCo',
-    version=hiyapycoversion,
+    version=HIYAPYCOVERSION,
     description='Hierarchical Yaml Python Config',
     long_description="%s" % long_description,
     author='Klaus Zerwes zero-sys.net',

@@ -86,7 +86,7 @@ testinstallvirtualenv:
 			python setup.py install; \
 			echo ""; \
 			echo " ... test install ..."; \
-			python -c 'import sys; from hiyapyco import __version__ as hiyapycoversion; print ("hiyapyco %s" % hiyapycoversion); print (sys.version)'; \
+			python -c 'import sys; from hiyapyco import __version__ as HIYAPYCOVERSION; print ("hiyapyco %s" % HIYAPYCOVERSION); print (sys.version)'; \
 			make test; \
 			deactivate; \
 		done
