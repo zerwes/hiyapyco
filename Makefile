@@ -21,7 +21,7 @@ pypiupload: PYPIREPOURL := https://pypi.python.org/pypi/HiYaPyCo
 pypiuploadtest: PYPIREPO := pypitest
 pypiuploadtest: PYPIREPOURL := https://test.pypi.org/project/HiYaPyCo/
 
-quicktest: test examples
+quicktest: pylint test examples
 # FIXME: testinstallvirtualenv fails due to jinja2 2.8 error w/ python3.2 but works w/ python3.4 ... WTF
 alltest: clean quicktest testinstall testinstallvirtualenv
 
@@ -29,6 +29,9 @@ printversions:
 	@echo -e "HIYAPYCOVERSION:\t$(HIYAPYCOVERSION)"
 	@echo -e "PYVERSIONS:\t\t$(PYVERSIONS)"
 	@echo -e "PYVERSIONSPATHS:\t$(PYVERSIONSPATHS)"
+
+pylint:
+	pylint --disable=missing-module-docstring,unused-import setup.py
 
 test:
 	@RET=0; \
