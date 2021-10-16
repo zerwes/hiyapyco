@@ -1,0 +1,37 @@
+name: Test
+on:
+  pull_request:
+  push:
+  schedule:
+    # first of each month
+    - cron: '0 0 1 * *'
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        distro:
+          - debian11
+          - debian10
+        python-version: [ '2.x', '3.x' ]
+        exclude:
+          - os: debian11
+            python-version: '2.x'
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: ${{ matrix.python-version }}
+    - name: Install dependencies for ${{ matrix.python-version }}
+      run: sudo apt-get install pip3 python3-yaml python3-jinja2
+      with:
+        python-version: '3.x'
+    - name: Install dependencies for ${{ matrix.python-version }}
+      run: sudo apt-get install pip python-yaml python-jinja2
+      with:
+        python-version: '2.x'
+    - name: Install make
+      run: sudo apt-get install make 
+    - name: test install with virtualenv and run some tests
+      run: make testinstallvirtualenv
