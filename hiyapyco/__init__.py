@@ -255,7 +255,7 @@ class HiYaPyCo:
     def _updatefiles(self, arg):
         if isinstance(arg, strTypes):
             if arg in self._files:
-                logger.warn('ignoring duplicated file %s' % arg)
+                logger.warning('ignoring duplicated file %s' % arg)
                 return
             self._files.append(arg)
         elif isinstance(arg, listTypes):
