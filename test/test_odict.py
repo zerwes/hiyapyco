@@ -69,7 +69,7 @@ source_domainDN = conf['source']['domainDN']
 logger.info('test interpolation source_domainDN and source_domain ... %s : %s' % (source_domainDN, source_domain))
 assert source_domainDN == 'dc=%s' % ',dc='.join(source_domain.split('.'))
 
-# FIXME: yaml loader seems to have changed @3.11 (debian 8: python3.4 + yaml 3.11 but NOT python2.7 + yaml 3.11 )
+# FIXME: yaml loader seems to have changed ...
 """
 source_baseDN = conf['source']['baseDN']
 logger.info('test interpolation source_baseDN ... %s' % source_baseDN)
