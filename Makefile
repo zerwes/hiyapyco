@@ -192,7 +192,7 @@ rpm: gpg-agent
 rpmrepo: rpm
 	cd release/rpm; \
 		rm -fv repodata/repomd.xml*; \
-		createrepo . ; \
+		createrepo_c . ; \
 		gpg --default-key $(GPGKEY) --use-agent -a --detach-sign repodata/repomd.xml; \
 		gpg -a --export $(KEY) > repodata/repomd.xml.key
 
