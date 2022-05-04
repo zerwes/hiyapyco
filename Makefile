@@ -8,7 +8,7 @@ PYVERSIONSPATHS = $(shell for PV in $(PYVERSIONS); do which $$PV; done)
 PYTHONPATH=$(shell pwd)
 export PYTHONPATH
 
-HIYAPYCOVERSION=$(shell PYTHONPATH=$(PYTHONPATH)/hiyapyco:$(PYTHONPATH) python -c 'from version import VERSION; print VERSION')
+HIYAPYCOVERSION=$(shell PYTHONPATH=$(PYTHONPATH)/hiyapyco:$(PYTHONPATH) python -c 'from version import VERSION; print(VERSION)')
 
 export GPGKEY=C9B1F13E67CAB37AE6D132134C2B4A1677DE7FB4
 
