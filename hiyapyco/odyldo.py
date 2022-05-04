@@ -15,17 +15,11 @@ as published by the Free Software Foundation.
 See https://www.gnu.org/licenses/gpl.html
 """
 
-try:
-    from collections import OrderedDict
-except ImportError:
-    # try importing the backported replacement
-    # requires a: `pip-2.6 install ordereddict`
-    from ordereddict import OrderedDict 
-
 import yaml
 import yaml.loader
 import yaml.dumper
 import yaml.representer
+from collections import OrderedDict
 
 # @see: yaml.resolver.DEFAULT_MAPPING_TAG
 ODYLDoYAMLMAPS = [

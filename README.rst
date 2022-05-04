@@ -234,11 +234,6 @@ This is a simple implementation of a PyYAML loader / dumper using
 **Because chaos is fun but order matters on loading dicts from a yaml
 file.**
 
-In order to use this on python 2.6, please install ordereddict:
-
-::
-
-    sudo pip-2.6 install ordereddict
 
 Install
 -------
