@@ -28,8 +28,8 @@ Key Features
 Requirements
 ------------
 
--  PyYAML aka. python-yaml
--  Jinja2 aka. python-jinja2
+-  PyYAML aka. python3-yaml
+-  Jinja2 aka. python3-jinja2
 
 Python Version
 ~~~~~~~~~~~~~~
@@ -283,7 +283,7 @@ install the latest debian packages from http://repo.zero-sys.net/hiyapyco::
     wget https://repo.zero-sys.net/77DE7FB4.asc -O - | gpg --import -
     gpg --armor --export 77DE7FB4 | apt-key add -
     apt-get update
-    apt-get install python3-hiyapyco python-hiyapyco
+    apt-get install python3-hiyapyco
 
 rpm packages
 ~~~~~~~~~~~~

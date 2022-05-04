@@ -2,25 +2,14 @@ Source: hiyapyco
 Maintainer: Klaus Zerwes zero-sys.net <zerwes@users.noreply.github.com>
 Section: python
 Priority: optional
-Build-Depends: python-setuptools (>= 0.6b3),
-		python-all (>= 2.6.6-3),
+Build-Depends: python3-setuptools,
 		python3-all (>= 3.2.3-6),
-		python-setuptools,
 		python3-setuptools,
-		python-virtualenv,
+		python3-virtualenv,
 		debhelper (>= 7)
 Standards-Version: 3.9.1
-X-Python-Version: >= 2.7
 X-Python3-Version: >= 3.2
 Vcs-Git: https://github.com/zerwes/hiyapyco/
-
-Package: python-hiyapyco
-Architecture: all
-Depends: ${misc:Depends}, ${python:Depends}
-Description: Hierarchical Yaml Python Config
- A simple python lib allowing hierarchical overlay of config files
- in YAML syntax, offering different merge methods and variable
- interpolation based on jinja2.
 
 Package: python3-hiyapyco
 Architecture: all
