@@ -1,8 +1,5 @@
 .. image:: https://badgen.net/badge/stand%20with/UKRAINE/?color=0057B8&labelColor=FFD700
 
-.. image:: https://app.travis-ci.com/zerwes/hiyapyco.svg?branch=master
-    :target: https://app.travis-ci.com/zerwes/hiyapyco
-
 .. image:: https://github.com/zerwes/hiyapyco/actions/workflows/pylint.yml/badge.svg?branch=master
     :target: https://github.com/zerwes/hiyapyco/actions/workflows/pylint.yml
 
