@@ -8,7 +8,7 @@ PY3VERS:=$(shell py3versions -r)
 
 
 %:
-	dh $@ --with python3 --buildsystem=python_distutils
+	dh $@ --with python3 --buildsystem=pybuild
 
 override_dh_auto_build:
 	dh_auto_build -p$(PACKAGE)
