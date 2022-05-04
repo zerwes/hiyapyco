@@ -30,18 +30,13 @@ Requirements
 
 -  PyYAML aka. python-yaml
 -  Jinja2 aka. python-jinja2
--  ordereddict for python2.6 (if you like to use the Ordered Dict Yaml
-   Loader / Dumper aka. ODYLDo)
 
 Python Version
 ~~~~~~~~~~~~~~
 
-HiYaPyCo was designed to run on both current major python versions
+HiYaPyCo was designed to run on current major python versions
 without changes. Tested versions:
 
--  2.7
--  3.6
--  3.7
 -  3.9
 
 Usage

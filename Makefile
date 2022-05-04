@@ -1,6 +1,6 @@
 SHELL = /bin/bash
 
-PYVERSIONS ?= $(shell pyversions -i; py3versions -i)
+PYVERSIONS ?= $(shell py3versions -i)
 PYVERSIONSPATHS = $(shell for PV in $(PYVERSIONS); do which $$PV; done)
 
 .PHONY: test examples testinstall all
