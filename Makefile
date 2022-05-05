@@ -200,13 +200,13 @@ rpmrepo: rpm
 		gpg -a --export $(KEY) > repodata/repomd.xml.key
 
 tag:
-	@git pull
-	@if [ -n "$$(git status --porcelain)" ]; then \
+	git pull --rebase --ff-only
+	if [ -n "$$(git status --porcelain)" ]; then \
 		echo "uncommited changes"; \
 		git status --porcelain; \
 		false; \
 		fi
-	@if [ -n "$$(git log --oneline --branches --not --remotes)" ]; then \
+	if [ -n "$$(git log --oneline --branches --not --remotes)" ]; then \
 		echo "unpushed changes"; \
 		git log --oneline --branches --not --remotes ; \
 		false; \
