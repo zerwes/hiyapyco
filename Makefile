@@ -107,12 +107,15 @@ distclean:
 
 sdist:
 	python setup.py sdist
+	@echo "$@ done"
 
 wheel:
 	# requires a 'sudo pip install wheel'
 	python setup.py bdist_wheel
+	@echo "$@ done"
 
 pypi: sdist wheel
+	@echo "$@ done"
 pypiuploadtest: pypi pypiuploaddo
 pypiupload: pypi pypiuploaddo
 pypiuploaddo:
