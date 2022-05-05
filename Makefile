@@ -200,15 +200,15 @@ rpmrepo: rpm
 		gpg -a --export $(KEY) > repodata/repomd.xml.key
 
 tag:
-	git pull --rebase --ff-only
-	if [ -n "$$(git status --porcelain)" ]; then \
+	@git pull --rebase --ff-only
+	@if [ -n "$$(git status --porcelain)" ]; then \
 		echo "uncommited changes"; \
 		git status --porcelain; \
 		false; \
 		fi
-	if [ -n "$$(git log --oneline --branches --not --remotes)" ]; then \
+	@if [ -n "$$(git log --branches --source --not --remotes --no-walk --oneline | awk '{print $2}' | grep \"$$(git branch --show-current)\")" ]; then \
 		echo "unpushed changes"; \
-		git log --oneline --branches --not --remotes ; \
+		git log --branches --source --not --remotes --no-walk --oneline; \
 		false; \
 		fi
 	git tag -a "release-$(HIYAPYCOVERSION)" -m "version $(HIYAPYCOVERSION) released on $$(date -R)"
