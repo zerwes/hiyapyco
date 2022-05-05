@@ -118,9 +118,9 @@ pypi: sdist wheel
 	@echo "$@ done"
 pypiuploadtest: pypi pypiuploaddo
 pypiupload: pypi pypiuploaddo
-pypiuploaddo:
+pypiuploaddo: pypi
 	# set use-agent in ~/.gnupg/gpg.conf to use the agent
-	python setup.py sdist bdist_wheel upload -r $(PYPIREPO) -s -i $(GPGKEY)
+	twine upload -s -i $(GPGKEY) -r $(PYPIREPO) dist/*
 	@echo "test the result at: $(PYPIREPOURL)"
 
 gpg-agent:
