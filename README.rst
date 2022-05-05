@@ -317,10 +317,12 @@ See
 Changelog
 ---------
 
-0.4.17
+0.5.0
 ~~~~~~
 
 MERGED: #41 Jinja2 dependency increased to include Jinja2 3.x.x
+
+REMOVED: Support for Python 2
 
 0.4.16
 ~~~~~~
