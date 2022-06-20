@@ -24,12 +24,10 @@ jobs:
         python-version: ${{ matrix.python-version }}
     - name: Install dependencies for ${{ matrix.python-version }}
       run: |
-        sudo apt-get install python3-yaml python3-jinja2 python3-virtualenv
-        sudo pip3 install pylint
-        sudo pip3 install -U setuptools wheel ujson
+        #sudo apt-get install python3-yaml python3-jinja2 python3-virtualenv
+        sudo pip3 install pylint PyYAML Jinja2
+        sudo pip3 install -U setuptools wheel ujson pip 
     - name: Install make
       run: sudo apt-get install make
-    - name: lsb_release
-      run: lsb_release -a
     - name: test install with virtualenv and run some tests
       run: PYVERSIONS=python${{ matrix.python-version }} make testinstallvirtualenv
