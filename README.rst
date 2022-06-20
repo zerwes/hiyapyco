@@ -3,6 +3,9 @@
 .. image:: https://github.com/zerwes/hiyapyco/actions/workflows/pylint.yml/badge.svg?branch=master
     :target: https://github.com/zerwes/hiyapyco/actions/workflows/pylint.yml
 
+.. image:: https://github.com/zerwes/hiyapyco/actions/workflows/test.yml/badge.svg
+     :target: https://github.com/zerwes/hiyapyco/actions/workflows/test.yml
+
 hiyapyco
 ========
 
