@@ -71,7 +71,7 @@ METHOD_MERGE = METHODS['METHOD_MERGE']
 METHOD_SUBSTITUTE = METHODS['METHOD_SUBSTITUTE']
 
 
-class HiYaPyCo:
+class HiYaPyCo():
     """Main class"""
     # pylint: disable=too-many-instance-attributes disable=too-many-branches disable=too-many-statements
     def __init__(self, *args, **kwargs):
@@ -345,7 +345,7 @@ class HiYaPyCo:
 
     def _substmerge(self, a, b):
         logger.debug('>' * 30)
-        logger.debug('deepmerge %s and %s' % (a, b,))
+        logger.debug('substmerge %s and %s' % (a, b,))
         # FIXME: make None usage configurable
         if b is None:
             logger.debug('pass as b is None')
@@ -355,26 +355,26 @@ class HiYaPyCo:
         # subsititues list, don't merge them
 
         if a is None or isinstance(b, primitiveTypes) or isinstance(b, listTypes):
-            logger.debug('deepmerge: replace a "%s"  w/ b "%s"' % (a, b,))
+            logger.debug('substmerge: replace a "%s"  w/ b "%s"' % (a, b,))
             a = b
 
         elif isinstance(a, dict):
             if isinstance(b, dict):
-                logger.debug('deepmerge: dict ... "%s" and "%s"' % (a, b,))
+                logger.debug('substmerge: dict ... "%s" and "%s"' % (a, b,))
                 for k in b:
                     if k in a:
                         logger.debug(
-                            'deepmerge dict: loop for key "%s": "%s" and "%s"' % (k, a[k], b[k],)
+                            'substmerge dict: loop for key "%s": "%s" and "%s"' % (k, a[k], b[k],)
                             )
-                        a[k] = self._deepmerge(a[k], b[k])
+                        a[k] = self._substmerge(a[k], b[k])
                     else:
-                        logger.debug('deepmerge dict: set key %s' % k)
+                        logger.debug('substmerge dict: set key %s' % k)
                         a[k] = b[k]
             elif isinstance(b, listTypes):
-                logger.debug('deepmerge: dict <- list ... "%s" <- "%s"' % (a, b,))
+                logger.debug('substmerge: dict <- list ... "%s" <- "%s"' % (a, b,))
                 for bd in b:
                     if isinstance(bd, dict):
-                        a = self._deepmerge(a, bd)
+                        a = self._substmerge(a, bd)
                     else:
                         raise HiYaPyCoImplementationException(
                             'can not merge element from list of type %s to dict '
@@ -386,7 +386,7 @@ class HiYaPyCo:
                     'can not merge %s to %s (@ "%s" try to merge "%s")' %
                     (type(b), type(a), a, b,)
                 )
-        logger.debug('end deepmerge part: return: "%s"' % a)
+        logger.debug('end substmerge part: return: "%s"' % a)
         logger.debug('<' * 30)
         return a
 
