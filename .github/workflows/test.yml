@@ -20,8 +20,9 @@ jobs:
         #  - distro: debian11
         #    python-version: '2.x'
     steps:
-    - uses: actions/checkout@v2
-    - name: Set up Python
+    - name: checkout
+      uses: actions/checkout@v2
+    - name: Set up python
       uses: actions/setup-python@v2
       with:
         python-version: ${{ matrix.python-version }}
@@ -36,4 +37,4 @@ jobs:
     - name: Install make
       run: sudo apt-get install make
     - name: test install with virtualenv and run some tests
-      run: PYVERSIONS=python3.9 make testinstallvirtualenv
+      run: PYVERSIONS=python${{ matrix.python-version }} make testinstallvirtualenv
