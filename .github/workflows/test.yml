@@ -25,7 +25,8 @@ jobs:
     - name: Install dependencies for ${{ matrix.python-version }}
       run: |
         sudo apt-get install python3-yaml python3-jinja2 python3-virtualenv python3-setuptools
-        pip install pylint PyYAML Jinja2 setuptools==44.1.1 wheel==0.34.2
+        sudo pip3 install pylint PyYAML Jinja2
+        sudo pip3 install -U --force-reinstall setuptools==44.1.1 wheel==0.34.2
         #pip install -U pylint PyYAML Jinja2 setuptools==44.1.1 wheel==0.34.2 ujson
     - name: Install make
       run: sudo apt-get install make
