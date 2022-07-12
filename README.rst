@@ -133,7 +133,7 @@ kwargs
    -  ``hiyapyco.METHOD_SIMPLE``: replace values (except for lists a
       simple merge is performed) (default method)
    -  ``hiyapyco.METHOD_MERGE``: perform a deep merge
-   -  ``hiyapyco.METHOD_SUBSTITUTE``: perform a merge w/ lists substituted (unsupoerted)
+   -  ``hiyapyco.METHOD_SUBSTITUTE``: perform a merge w/ lists substituted (unsuported)
 
 - ``mergelists``: boolean try to merge lists of dict (default: ``True``)
 
