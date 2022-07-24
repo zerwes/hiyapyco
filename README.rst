@@ -301,7 +301,7 @@ Arch Linux
 ~~~~~~~~~~
 
 An `AUR package <https://aur.archlinux.org/packages/python-hiyapyco/>`_
-is available.
+is available (provided by `Pete Crighton <https://github.com/PeteCrighton>`_ and not always up to date).
 
 License
 -------
