@@ -13,10 +13,9 @@ HIYAPYCOVERSION='0.5.0'
 long_description = open('README.rst').read()
 
 installrequires = [
-    'PyYAML<6',
-    'Jinja2>1,<4;python_version>="3"',
-    'Jinja2>1,<3;python_version<"3"',
-    'MarkupSafe<2;python_version<"3"'
+    'PyYAML<7',
+    'Jinja2>3,<4',
+    'MarkupSafe<3'
     ]
 
 setup(name='HiYaPyCo',
