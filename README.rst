@@ -320,6 +320,11 @@ See
 Changelog
 ---------
 
+0.5.1
+~~~~~~
+
+MERGED: #52 by ryanfaircloth
+
 0.5.0
 ~~~~~~
 
