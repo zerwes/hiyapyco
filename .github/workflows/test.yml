@@ -31,3 +31,5 @@ jobs:
       run: sudo apt-get install make
     - name: test install with virtualenv and run some tests
       run: PYVERSIONS=python${{ matrix.python-version }} make testinstallvirtualenv
+    - name: test building deb package
+      run: make deb
