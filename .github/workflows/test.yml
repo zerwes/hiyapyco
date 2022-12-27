@@ -34,4 +34,4 @@ jobs:
     - name: install build deps 
       run: sudo apt install python3-all python3-virtualenv dh-python debhelper
     - name: test building deb package
-      run: make deb
+      run: make debunsigned

@@ -149,6 +149,13 @@ dch-version:
 		else \
 			echo "nothing to do"; \
 		fi
+debunsigned:
+	rm -rf release/deb/build
+	mkdir -p release/deb/build
+	tar cv -Sp --exclude=dist --exclude=build --exclude='*/.git*' -f - . | ( cd release/deb/build && tar x -Sp -f - )
+	cd release/deb/build && dpkg-buildpackage -b --no-sign
+	rm -rf release/deb/build
+	lintian release/deb/*.deb
 
 deb: gpg-agent
 	rm -rf release/deb/build
