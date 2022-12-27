@@ -31,3 +31,7 @@ jobs:
       run: sudo apt-get install make
     - name: test install with virtualenv and run some tests
       run: PYVERSIONS=python${{ matrix.python-version }} make testinstallvirtualenv
+    - name: install build deps 
+      run: sudo apt install python3-all python3-virtualenv dh-python debhelper lintian
+    - name: test building deb package
+      run: make debunsigned
