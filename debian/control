@@ -5,7 +5,8 @@ Priority: optional
 Build-Depends: python3-setuptools,
                python3-all (>= 3.2.3-6),
                python3-setuptools,
-               python3-virtualenv,
+               python3-yaml,
+               python3-jinja2 <!nocheck>,
                dh-python,
                debhelper (>= 11)
 Standards-Version: 4.6.2
@@ -17,7 +18,7 @@ Rules-Requires-Root: no
 Package: python3-hiyapyco
 Architecture: all
 Depends: ${misc:Depends}, ${python3:Depends}
-Description: Hierarchical Yaml Python Config
+Description: Hierarchical YAML Python Config
  A simple python lib allowing hierarchical overlay of config files
  in YAML syntax, offering different merge methods and variable
  interpolation based on jinja2.
