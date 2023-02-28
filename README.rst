@@ -306,7 +306,7 @@ is available (provided by `Pete Crighton <https://github.com/PeteCrighton>`_ and
 License
 -------
 
-Copyright |copy| 2014 - 2022 Klaus Zerwes `zero-sys.net <https://zero-sys.net>`_
+Copyright |copy| 2014 - 2023 Klaus Zerwes `zero-sys.net <https://zero-sys.net>`_
 
 .. |copy| unicode:: 0xA9 .. copyright sign
 
