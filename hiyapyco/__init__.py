@@ -59,6 +59,7 @@ try:
     strTypes = (str, unicode)
 except NameError:
     primitiveTypes = (int, str, bool, float)
+    # pylint: disable=superfluous-parens
     strTypes = (str)
 listTypes = (list, tuple)
 
