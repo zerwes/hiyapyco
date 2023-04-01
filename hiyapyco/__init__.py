@@ -54,13 +54,9 @@ class HiYaPyCoImplementationException(Exception):
     """dummy Exception raised if we are unable to merge some YAML stuff"""
     pass
 
-try:
-    primitiveTypes = (int, str, bool, float, unicode)
-    strTypes = (str, unicode)
-except NameError:
-    primitiveTypes = (int, str, bool, float)
-    # pylint: disable=superfluous-parens
-    strTypes = (str)
+primitiveTypes = (int, str, bool, float)
+# pylint: disable=superfluous-parens
+strTypes = (str)
 listTypes = (list, tuple)
 
 # you may set this to something suitable for you
