@@ -28,7 +28,7 @@ parser.add_argument(
     '-l', '--loglevel',
     help='set loglevel',
     type=str,
-    choices=[k for k in logging._levelNames.keys() if isinstance(k, str)],
+    choices=[k for k in logging._nameToLevel.keys() if isinstance(k, str)],
     action=LoggingAction
     )
 parser.add_argument(
