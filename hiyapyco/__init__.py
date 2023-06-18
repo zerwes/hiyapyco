@@ -25,8 +25,10 @@ import logging
 from distutils.util import strtobool
 import re
 import io
-import yaml
-from yaml import parser
+#import yaml
+#from yaml import parser
+from ruamel.yaml import YAML
+yaml=YAML(typ='safe')
 from jinja2 import Environment, Undefined, DebugUndefined, StrictUndefined, TemplateError
 
 from . import odyldo
@@ -45,6 +47,7 @@ __version__ = version.VERSION
 logger = logging.getLogger(__name__)
 
 _USEDEFAULTYAMLLOADER = False
+_USERUAMEL = True
 
 class HiYaPyCoInvocationException(Exception):
     """dummy Exception raised on wrong invocation"""
@@ -229,7 +232,9 @@ class HiYaPyCo:
             self._data = self._interpolate(self._data)
 
     def _load_data(self, _USEDEFAULTYAMLLOADER, f):
-        if _USEDEFAULTYAMLLOADER:
+        if _USERUAMEL:
+            ydata_generator = yaml.load_all(f)
+        elif _USEDEFAULTYAMLLOADER:
             ydata_generator = yaml.safe_load_all(f)
         else:
             ydata_generator = odyldo.safe_load_all(f)
