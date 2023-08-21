@@ -25,10 +25,9 @@ import logging
 from distutils.util import strtobool
 import re
 import io
-#import yaml
-#from yaml import parser
+import yaml
+from yaml import parser
 from ruamel.yaml import YAML
-yaml=YAML(typ='safe')
 from jinja2 import Environment, Undefined, DebugUndefined, StrictUndefined, TemplateError
 
 from . import odyldo
@@ -47,7 +46,7 @@ __version__ = version.VERSION
 logger = logging.getLogger(__name__)
 
 _USEDEFAULTYAMLLOADER = False
-_USERUAMEL = True
+_USERUAMEL = False
 
 class HiYaPyCoInvocationException(Exception):
     """dummy Exception raised on wrong invocation"""
@@ -85,6 +84,7 @@ class HiYaPyCo:
           * interpolate: boolean (default: False)
           * castinterpolated: boolean (default: False) try to cast values after interpolating
           * usedefaultyamlloader: boolean (default: False)
+          * useruamel: boolean (default: False)
           * encoding: (default: 'utf-8') encoding used to read yaml files
           * loglevel: one of  the valid levels from the logging module
           * failonmissingfiles: boolean (default: True)
@@ -148,6 +148,17 @@ class HiYaPyCo:
             global _USEDEFAULTYAMLLOADER
             _USEDEFAULTYAMLLOADER = kwargs['usedefaultyamlloader']
             del kwargs['usedefaultyamlloader']
+
+        if 'useruamel' in kwargs:
+            if not isinstance(kwargs['useruamel'], bool):
+                raise HiYaPyCoInvocationException(
+                        'value of "useruamel" must be boolean (got: "%s" as %s)' %
+                        (kwargs['useruamel'], type(kwargs['useruamel']),)
+                        )
+            global _USERUAMEL
+            _USERUAMEL = kwargs['useruamel']
+            del kwargs['useruamel']
+            yaml = YAML(type='safe')
 
         self.failonmissingfiles = True
         if 'failonmissingfiles' in kwargs:
