@@ -280,13 +280,18 @@ debian packages
 
 install the latest debian packages from http://repo.zero-sys.net/hiyapyco::
 
-    echo "deb http://repo.zero-sys.net/hiyapyco/deb ./" > /etc/apt/sources.list.d/hiyapyco.list
+    # create the sources list file:
+    sudo echo "deb http://repo.zero-sys.net/hiyapyco/deb ./" > /etc/apt/sources.list.d/hiyapyco.list
+
+    # import the key:
     gpg --keyserver keys.gnupg.net --recv-key 77DE7FB4
     # or use:
     wget https://repo.zero-sys.net/77DE7FB4.asc -O - | gpg --import -
-    gpg --armor --export 77DE7FB4 | apt-key add -
-    apt-get update
-    apt-get install python3-hiyapyco
+
+    # apt tasks:
+    gpg --armor --export 77DE7FB4 | sudo tee /etc/apt/trusted.gpg.d/hiyapyco.asc
+    sudo apt-get update
+    sudo apt-get install python3-hiyapyco
 
 rpm packages
 ~~~~~~~~~~~~
