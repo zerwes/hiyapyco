@@ -1,3 +1,7 @@
+.. |isrf| image:: https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Flag_of_Israel.svg/64px-Flag_of_Israel.svg.png
+   :alt: Stand with the people of Israel
+|isrf| Stand with the people of Israel
+
 .. image:: https://badgen.net/badge/stand%20with/UKRAINE/?color=0057B8&labelColor=FFD700
 
 .. image:: https://github.com/zerwes/hiyapyco/actions/workflows/pylint.yml/badge.svg?branch=master
