@@ -342,7 +342,7 @@ class HiYaPyCo:
 
     def _substmerge(self, a, b):
         logger.debug('>' * 30)
-        logger.debug('deepmerge %s and %s' % (a, b,))
+        logger.debug('substmerge %s and %s' % (a, b,))
         # FIXME: make None usage configurable
         if b is None:
             logger.debug('pass as b is None')
@@ -352,7 +352,7 @@ class HiYaPyCo:
         # subsititues list, don't merge them
 
         if a is None or isinstance(b, primitiveTypes) or isinstance(b, listTypes):
-            logger.debug('deepmerge: replace a "%s"  w/ b "%s"' % (a, b,))
+            logger.debug('substmerge: replace a "%s"  w/ b "%s"' % (a, b,))
             a = b
 
         elif isinstance(a, dict):
