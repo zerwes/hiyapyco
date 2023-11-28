@@ -35,7 +35,7 @@ pylint:
 	pylint --disable=missing-module-docstring,unused-import,consider-using-with,unspecified-encoding,consider-using-f-string setup.py
 	@# FIXME: logging-not-lazy global-statement invalid-name
 	@# py3 only: raise-missing-from
-	pylint --class-naming-style=any --disable=fixme,pointless-string-statement,missing-module-docstring,unnecessary-pass,logging-not-lazy,global-statement,invalid-name,raise-missing-from,consider-merging-isinstance,too-many-nested-blocks,consider-using-f-string hiyapyco/__init__.py
+	pylint --class-naming-style=any --disable=fixme,pointless-string-statement,missing-module-docstring,unnecessary-pass,logging-not-lazy,global-statement,invalid-name,raise-missing-from,consider-merging-isinstance,too-many-nested-blocks,consider-using-f-string,deprecated-module hiyapyco/__init__.py
 
 test:
 	@RET=0; \
