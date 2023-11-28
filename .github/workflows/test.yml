@@ -12,9 +12,10 @@ jobs:
       matrix:
         distro:
           - debian11
-          #- debian10
+          - debian12
         python-version:
           - '3.9'
+          - '3.11'
     steps:
     - name: checkout
       uses: actions/checkout@v2
