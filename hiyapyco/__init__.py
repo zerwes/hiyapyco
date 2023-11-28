@@ -368,10 +368,10 @@ class HiYaPyCo:
                         logger.debug('deepmerge dict: set key %s' % k)
                         a[k] = b[k]
             elif isinstance(b, listTypes):
-                logger.debug('deepmerge: dict <- list ... "%s" <- "%s"' % (a, b,))
+                logger.debug('substmerge: dict <- list ... "%s" <- "%s"' % (a, b,))
                 for bd in b:
                     if isinstance(bd, dict):
-                        a = self._deepmerge(a, bd)
+                        a = self._substmerge(a, bd)
                     else:
                         raise HiYaPyCoImplementationException(
                             'can not merge element from list of type %s to dict '
