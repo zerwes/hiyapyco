@@ -45,6 +45,7 @@ HiYaPyCo was designed to run on current major python versions
 without changes. Tested versions:
 
 -  3.9
+-  3.11
 
 Usage
 -----
