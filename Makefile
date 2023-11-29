@@ -3,6 +3,8 @@ SHELL = /bin/bash
 PYVERSIONS ?= $(shell py3versions -i)
 PYVERSIONSPATHS = $(shell for PV in $(PYVERSIONS); do which $$PV; done)
 
+TESTLOGLEVEL ?= WARN
+
 .PHONY: test examples testinstall all
 
 PYTHONPATH=$(shell pwd)
@@ -42,7 +44,7 @@ test:
 		for p in $(PYVERSIONS); do \
 			echo "python version $$p"; \
 			for t in test/test_*.py; do \
-				$$p -t $$t; \
+				$$p -t $$t -l $(TESTLOGLEVEL); \
 				RET=$$?; \
 				if [ $$RET -gt 0 ]; then break 2; fi; \
 			done; \
