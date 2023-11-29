@@ -357,15 +357,15 @@ class HiYaPyCo:
 
         elif isinstance(a, dict):
             if isinstance(b, dict):
-                logger.debug('deepmerge: dict ... "%s" and "%s"' % (a, b,))
+                logger.debug('substmerge: dict ... "%s" and "%s"' % (a, b,))
                 for k in b:
                     if k in a:
                         logger.debug(
-                            'deepmerge dict: loop for key "%s": "%s" and "%s"' % (k, a[k], b[k],)
+                            'substmerge dict: loop for key "%s": "%s" and "%s"' % (k, a[k], b[k],)
                             )
-                        a[k] = self._deepmerge(a[k], b[k])
+                        a[k] = self._substmerge(a[k], b[k])
                     else:
-                        logger.debug('deepmerge dict: set key %s' % k)
+                        logger.debug('substmerge dict: set key %s' % k)
                         a[k] = b[k]
             elif isinstance(b, listTypes):
                 logger.debug('substmerge: dict <- list ... "%s" <- "%s"' % (a, b,))
