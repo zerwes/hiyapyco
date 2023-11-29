@@ -330,6 +330,13 @@ See
 Changelog
 ---------
 
+0.5.2
+~~~~~~
+
+FIXED: #60 recursive calls to _substmerge
+
+IMPROVED: testing and python support (3.11)
+
 0.5.1
 ~~~~~~
 
