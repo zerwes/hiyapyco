@@ -117,7 +117,11 @@ wheel:
 	python setup.py bdist_wheel
 	@echo "$@ done"
 
-pypi: sdist wheel
+twinecheckdist:
+	twine check dist/HiYaPyCo-*.tar.gz
+	@echo "$@ done"
+
+pypi: sdist wheel twinecheckdist
 	@echo "$@ done"
 pypiuploadtest: pypi pypiuploaddo
 pypiupload: pypi pypiuploaddo
