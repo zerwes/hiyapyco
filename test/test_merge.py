@@ -47,7 +47,7 @@ assert t == 10
 
 t = conf['array']
 logger.info('test list val ... %s' % t)
-assert t == ['base1', 'base2', 'baseext1', 'baseext2']
+assert t == ['baseext1', 'baseext2']
 
 t = conf['hash']
 logger.info('test simple dict ... %s' % t)
