@@ -25,7 +25,7 @@ pypiuploadtest: PYPIREPOURL := https://test.pypi.org/project/HiYaPyCo/
 
 quicktest: pylint test examples
 # FIXME: testinstallvirtualenv fails due to jinja2 2.8 error w/ python3.2 but works w/ python3.4 ... WTF
-alltest: clean quicktest testinstall testinstallvirtualenv
+alltest: clean quicktest testreadme testinstall testinstallvirtualenv
 	@echo "$@ passed"
 
 printversions:
@@ -38,6 +38,10 @@ pylint:
 	@# FIXME: logging-not-lazy global-statement invalid-name
 	@# py3 only: raise-missing-from
 	pylint --class-naming-style=any --disable=fixme,pointless-string-statement,missing-module-docstring,unnecessary-pass,logging-not-lazy,global-statement,invalid-name,raise-missing-from,consider-merging-isinstance,too-many-nested-blocks,consider-using-f-string,deprecated-module hiyapyco/__init__.py
+
+testreadme:
+	# requires python3-restructuredtext-lint
+	rst-lint README.rst
 
 test:
 	@RET=0; \
