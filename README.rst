@@ -331,7 +331,7 @@ See
 Changelog
 ---------
 
-0.5.3
+0.5.4
 ~~~~~~
 
 FIXED: #60 recursive calls to _substmerge

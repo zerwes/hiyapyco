@@ -131,6 +131,7 @@ pypiuploadtest: pypi pypiuploaddo
 pypiupload: pypi pypiuploaddo
 pypiuploaddo: pypi
 	# set use-agent in ~/.gnupg/gpg.conf to use the agent
+	rm -rf dist/HiYaPyCo-*.egg*
 	twine upload --verbose -s -i $(GPGKEY) -r $(PYPIREPO) dist/*
 	@echo "test the result at: $(PYPIREPOURL)"
 
