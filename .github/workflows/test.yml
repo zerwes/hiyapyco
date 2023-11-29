@@ -35,6 +35,8 @@ jobs:
     - name: install build deps 
       run: |
         sudo apt-get update
-        sudo apt install python3-all python3-virtualenv dh-python debhelper lintian
+        sudo apt install python3-all python3-virtualenv dh-python debhelper lintian python3-restructuredtext-lint
+    - name: test readme
+      run: make testreadme
     - name: test building deb package
       run: make debunsigned
