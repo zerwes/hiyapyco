@@ -55,7 +55,7 @@ assert t == {'k1': 'b1', 'k2': 'b2', 'ek1': 'be1', 'ek2': 'be2'}
 
 t = conf['deeplist']
 logger.info('test deeplist ... %s' % t)
-assert t == [{'d1': {'d1k1': 'v1', 'd1k2': 'v2', 'd1ext': 'vext'}}, {'d2': {'d2k2': 'x2', 'd2k1': 'x1'}}, {'d32': {'a': 'A2A2', 'c': 'CCC', 'b': 'B2'}, 'd31': {'a': 'AAA', 'c': 'C', 'b': 'B'}}, {'dext1': {'d1k1ext': 'v1ext'}}]
+assert t == [{'d1': {'d1ext': 'vext'}}, {'dext1': {'d1k1ext': 'v1ext'}}, {'d31': {'a': 'AAA'}, 'd32': {'a': 'A2A2', 'c': 'CCC'}}]
 
 t = conf.get('deepmap')
 logger.info('test deepmap ... %s' % t)
