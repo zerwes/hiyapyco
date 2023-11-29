@@ -383,7 +383,7 @@ class HiYaPyCo:
                     'can not merge %s to %s (@ "%s" try to merge "%s")' %
                     (type(b), type(a), a, b,)
                 )
-        logger.debug('end deepmerge part: return: "%s"' % a)
+        logger.debug('end substmerge part: return: "%s"' % a)
         logger.debug('<' * 30)
         return a
 
