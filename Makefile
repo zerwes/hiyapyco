@@ -230,7 +230,7 @@ tag:
 		git log --branches --source --not --remotes --no-walk --oneline; \
 		false; \
 		fi
-	git tag -a "release-$(HIYAPYCOVERSION)" -m "version $(HIYAPYCOVERSION) released on $$(date -R)"
+	git tag -s "release-$(HIYAPYCOVERSION)" -m "version $(HIYAPYCOVERSION) released on $$(date -R)"
 
 pushtag:
 	git push origin "release-$(HIYAPYCOVERSION)"
