@@ -331,6 +331,11 @@ See
 Changelog
 ---------
 
+0.5.5
+~~~~~~
+
+FIXED: #67 cosmetic changes
+
 0.5.4
 ~~~~~~
 

@@ -8,7 +8,7 @@ from setuptools import setup
 basepath = os.path.dirname(os.path.realpath(__file__))
 sys.path.insert(0, os.path.dirname(basepath))
 
-HIYAPYCOVERSION='0.5.4'
+HIYAPYCOVERSION='0.5.5'
 
 long_description = open('README.rst').read()
 
