@@ -7,7 +7,7 @@ ODYLDo - Ordered Dict Yaml Loader / Dumper
 a simple implementation of a Ordered Dict Loader for PyYAML;
 because chaos is fun but order matters on loading dicts from a yaml file;
 
-(c) 2014 - 2023 Klaus Zerwes zero-sys.net
+(c) 2014 - 2024 Klaus Zerwes zero-sys.net
 This package is free software.
 This software is licensed under the terms of the
 GNU GENERAL PUBLIC LICENSE version 3 or later,

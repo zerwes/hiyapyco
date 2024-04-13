@@ -3,12 +3,12 @@ Source: https://github.com/zerwes/hiyapyco
 Upstream-Name: HiYaPyCo
 
 Files: *
-Copyright: 2014 - 2023 Klaus Zerwes zero-sys.net
+Copyright: 2014 - 2024 Klaus Zerwes zero-sys.net
 License: GPL-3.0+
 
 Files:
  debian/*
-Copyright: 2014 - 2023 Klaus Zerwes zero-sys.net
+Copyright: 2014 - 2024 Klaus Zerwes zero-sys.net
            2022 Updates by Steffen Moeller <moeller@debian.org>
 License: GPL-3.0+
 
