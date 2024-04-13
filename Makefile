@@ -145,7 +145,7 @@ gpg-agent:
 			fi
 	gpg-connect-agent 'keyinfo --list' /bye
 dch-increment:
-	@# use this to increment the deb relese number for a existing release
+	@# use this to increment the deb release number for a existing release
 	@DEBEMAIL=$$(git config --local --get user.email) \
 		 DEBFULLNAME="Klaus Zerwes zero-sys.net" \
 		 dch -i "new debian release"
