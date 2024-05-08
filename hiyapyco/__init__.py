@@ -22,7 +22,6 @@ from __future__ import unicode_literals
 import sys
 import os
 import logging
-from distutils.util import strtobool
 import re
 import io
 import yaml
@@ -520,5 +519,14 @@ def load(*args, **kwargs):
     """
     hiyapyco = HiYaPyCo(*args, **kwargs)
     return hiyapyco.data()
+
+def strtobool(val):
+    val = val.lower()
+    if val in ("y", "yes", "t", "true", "on", "1"):
+        return 1
+    elif val in ("n", "no", "f", "false", "off", "0"):
+        return 0
+    else:
+        raise ValueError("invalid truth value %r" % (val,))
 
 # vim: tabstop=4 expandtab shiftwidth=4 softtabstop=4 smartindent nu
