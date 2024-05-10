@@ -521,12 +521,14 @@ def load(*args, **kwargs):
     return hiyapyco.data()
 
 def strtobool(val):
+    """
+    minimal implementation of the strtobool function (replaces deprecated distutils)
+    """
     val = val.lower()
     if val in ("y", "yes", "t", "true", "on", "1"):
         return 1
-    elif val in ("n", "no", "f", "false", "off", "0"):
+    if val in ("n", "no", "f", "false", "off", "0"):
         return 0
-    else:
-        raise ValueError("invalid truth value %r" % (val,))
+    raise ValueError("invalid truth value %r" % (val,))
 
 # vim: tabstop=4 expandtab shiftwidth=4 softtabstop=4 smartindent nu
