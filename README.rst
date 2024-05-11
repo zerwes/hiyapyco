@@ -334,6 +334,13 @@ Changelog
 0.5.5
 ~~~~~~
 
+MERGED: #70 by itachi-cracker
+
+FIXED: #61 (removed deprecated distutils)
+
+0.5.5
+~~~~~~
+
 FIXED: #67 cosmetic changes
 
 0.5.4
