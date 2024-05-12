@@ -2,8 +2,10 @@
     :target: https://github.com/zerwes/hiyapyco/actions/workflows/pylint.yml
 .. |test| image:: https://github.com/zerwes/hiyapyco/actions/workflows/test.yml/badge.svg
      :target: https://github.com/zerwes/hiyapyco/actions/workflows/test.yml
+.. |gpl| image:: https://img.shields.io/badge/License-GPL%20v3-blue.svg
+     :target: http://www.gnu.org/licenses/gpl-3.0
 
-|pylint| |test|
+|pylint| |test| |gpl|
 
 hiyapyco
 ========
