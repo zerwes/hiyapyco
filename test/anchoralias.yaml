@@ -1,0 +1,21 @@
+---
+
+anchorsimple: &as "anchor - string"
+anchorlist: &al
+  - alist1key: alist1val
+  - alist2key: alist2val
+  - alist3key: alist3val
+anchordict: &ad
+  adkey1: "ad value 1"
+  adkey2: "ad value 2"
+
+testvar:
+  simple: *as
+  list: *al
+  listwithmerge:
+    <<: *al
+  dict: *ad
+  dictwithmerge:
+    <<: *ad
+
+...

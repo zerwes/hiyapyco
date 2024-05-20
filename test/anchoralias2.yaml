@@ -1,0 +1,16 @@
+---
+
+testvar:
+  simple: new text 
+  list:
+    - alist1key: another value for alistkey1
+  listwithmerge:
+    - alist1key: alist1val now updated
+  dict:
+    adkey1: aaa1aa
+    adkey3: xxx
+  dictwithmerge:
+    adkey2: bb2bb
+    adkey3: yyy
+
+...
