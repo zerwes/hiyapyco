@@ -24,6 +24,7 @@ import os
 import logging
 import re
 import io
+import copy
 import yaml
 from yaml import parser
 from jinja2 import Environment, Undefined, DebugUndefined, StrictUndefined, TemplateError
@@ -305,6 +306,8 @@ class HiYaPyCo:
         return si
 
     def _simplemerge(self, a, b):
+        a = copy.deepcopy(a)
+        b = copy.deepcopy(b)
         logger.debug('simplemerge %s (%s) and %s (%s)' % (a, type(a), b, type(b),))
         # FIXME: make None usage configurable
         if b is None:
@@ -340,6 +343,8 @@ class HiYaPyCo:
         return a
 
     def _substmerge(self, a, b):
+        a = copy.deepcopy(a)
+        b = copy.deepcopy(b)
         logger.debug('>' * 30)
         logger.debug('substmerge %s and %s' % (a, b,))
         # FIXME: make None usage configurable
@@ -388,6 +393,8 @@ class HiYaPyCo:
 
     def _deepmerge(self, a, b):
         logger.debug('>'*30)
+        a = copy.deepcopy(a)
+        b = copy.deepcopy(b)
         logger.debug('deepmerge %s and %s' % (a, b,))
         # FIXME: make None usage configurable
         if b is None:
