@@ -333,6 +333,7 @@ Changelog
 ~~~~~~
 
 FIXED: #69 (weird merge behavior with anchors)
+
 MERGED: #71 (dereference anchors)
 
 0.5.6
