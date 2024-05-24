@@ -82,6 +82,7 @@ class HiYaPyCo:
           * interpolate: boolean (default: False)
           * castinterpolated: boolean (default: False) try to cast values after interpolating
           * usedefaultyamlloader: boolean (default: False)
+          * dereferenceyamlanchors: boolean (default: True)
           * encoding: (default: 'utf-8') encoding used to read yaml files
           * loglevel: one of  the valid levels from the logging module
           * failonmissingfiles: boolean (default: True)
@@ -145,6 +146,16 @@ class HiYaPyCo:
             global _USEDEFAULTYAMLLOADER
             _USEDEFAULTYAMLLOADER = kwargs['usedefaultyamlloader']
             del kwargs['usedefaultyamlloader']
+
+        self.dereferenceyamlanchors = True
+        if 'dereferenceyamlanchors' in kwargs:
+            if not isinstance(kwargs['dereferenceyamlanchors'], bool):
+                raise HiYaPyCoInvocationException(
+                        'value of "dereferenceyamlanchors" must be boolean (got: "%s" as %s)' %
+                        (kwargs['dereferenceyamlanchors'], type(kwargs['dereferenceyamlanchors']),)
+                        )
+            self.dereferenceyamlanchors = bool(kwargs['dereferenceyamlanchors'])
+            del kwargs['dereferenceyamlanchors']
 
         self.failonmissingfiles = True
         if 'failonmissingfiles' in kwargs:
@@ -306,8 +317,9 @@ class HiYaPyCo:
         return si
 
     def _simplemerge(self, a, b):
-        a = copy.deepcopy(a)
-        b = copy.deepcopy(b)
+        if self.dereferenceyamlanchors:
+            a = copy.deepcopy(a)
+            b = copy.deepcopy(b)
         logger.debug('simplemerge %s (%s) and %s (%s)' % (a, type(a), b, type(b),))
         # FIXME: make None usage configurable
         if b is None:
@@ -343,8 +355,9 @@ class HiYaPyCo:
         return a
 
     def _substmerge(self, a, b):
-        a = copy.deepcopy(a)
-        b = copy.deepcopy(b)
+        if self.dereferenceyamlanchors:
+            a = copy.deepcopy(a)
+            b = copy.deepcopy(b)
         logger.debug('>' * 30)
         logger.debug('substmerge %s and %s' % (a, b,))
         # FIXME: make None usage configurable
@@ -393,8 +406,9 @@ class HiYaPyCo:
 
     def _deepmerge(self, a, b):
         logger.debug('>'*30)
-        a = copy.deepcopy(a)
-        b = copy.deepcopy(b)
+        if self.dereferenceyamlanchors:
+            a = copy.deepcopy(a)
+            b = copy.deepcopy(b)
         logger.debug('deepmerge %s and %s' % (a, b,))
         # FIXME: make None usage configurable
         if b is None:
