@@ -1,3 +1,9 @@
+hiyapyco (0.6.0-1) stable; urgency=medium
+
+  * release version 0.6.0
+
+ -- Klaus Zerwes zero-sys.net <zerwes@users.noreply.github.com>  Fri, 24 May 2024 12:38:46 +0200
+
 hiyapyco (0.5.6-1) stable; urgency=medium
 
   * release version 0.5.6
