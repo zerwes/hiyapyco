@@ -150,6 +150,8 @@ kwargs
    OrderedDict loader/dumper (see: Ordered Dict Yaml Loader / Dumper
    aka. ODYLDo) (default: ``False``)
 
+- ``dereferenceyamlanchors``: boolean : dereference yaml anchors and use a copy (default: ``True``)
+
 - ``encoding``: string : encoding used to read yaml files (default: ``utf-8``)
 
 -  ``failonmissingfiles``: boolean : fail if a supplied YAML file can
