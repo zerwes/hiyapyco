@@ -329,7 +329,7 @@ See
 Changelog
 ---------
 
-0.5.5
+0.5.6
 ~~~~~~
 
 MERGED: #70 by itachi-cracker
