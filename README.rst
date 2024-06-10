@@ -297,6 +297,8 @@ install the latest debian packages from http://repo.zero-sys.net/hiyapyco::
     sudo apt-get update
     sudo apt-get install python3-hiyapyco
 
+a ansible playbook exists: https://github.com/zerwes/ansible-role-hiyapyco
+
 rpm packages
 ~~~~~~~~~~~~
 
