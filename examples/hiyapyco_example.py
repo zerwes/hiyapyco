@@ -33,17 +33,13 @@ parser.add_argument(
     )
 parser.add_argument(
         '-y', '--usedefaultyamlloader', dest='usedefaultyamlloader',
-        action='store_true', default=False, help='use default yamlö loader'
+        action='store_true', default=False, help='use default yaml loader'
     )
-parser.add_argument('-f', '--file', type=str, nargs='+', help='yaml file(s) to parse')
+parser.add_argument('-f', '--file', type=str, nargs='+', required=True, help='yaml file(s) to parse')
 args = parser.parse_args()
 
 if args.loglevel is None:
     logging.disable(logging.CRITICAL)
-
-# FIXME: in fact this should be the job of argparse
-if args.file is None or len(args.file) == 0:
-    raise Exception('please provide at least one yaml file!')
 
 for mergemethod in hiyapyco.METHODS.keys():
     print('='*10, 'method=', mergemethod, '='*10)
