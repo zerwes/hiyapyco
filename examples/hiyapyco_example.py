@@ -33,7 +33,7 @@ parser.add_argument(
     )
 parser.add_argument(
         '-y', '--usedefaultyamlloader', dest='usedefaultyamlloader',
-        action='store_true', default=False, help='yaml file(s) to parse'
+        action='store_true', default=False, help='use default yamlö loader'
     )
 parser.add_argument('-f', '--file', type=str, nargs='+', help='yaml file(s) to parse')
 args = parser.parse_args()
