@@ -185,6 +185,13 @@ class HiYaPyCo:
             self.encoding = kwargs['encoding']
             del kwargs['encoding']
 
+        self.mergeprimitive = lambda a, b, context: b
+        if 'mergeoverride' in kwargs:
+            logger.info("TEST")
+            # DEBT: Compare to make sure function signature is right
+            self.mergeprimitive = kwargs['mergeoverride']
+            del kwargs['mergeoverride']
+
         if kwargs:
             raise HiYaPyCoInvocationException('undefined keywords: %s' % ' '.join(kwargs.keys()))
 
@@ -404,7 +411,9 @@ class HiYaPyCo:
         logger.debug('<' * 30)
         return a
 
-    def _deepmerge(self, a, b):
+    def _deepmerge(self, a, b, context = None):
+        if context is None:
+            context = []
         logger.debug('>'*30)
         if self.dereferenceyamlanchors:
             a = copy.deepcopy(a)
@@ -416,7 +425,7 @@ class HiYaPyCo:
             pass
         if a is None or isinstance(b, primitiveTypes):
             logger.debug('deepmerge: replace a "%s"  w/ b "%s"' % (a, b,))
-            a = b
+            a = self.mergeprimitive(a, b, context)
         elif isinstance(a, listTypes):
             if isinstance(b, listTypes):
                 logger.debug(
@@ -450,7 +459,7 @@ class HiYaPyCo:
                                     'key:%s: "%s" and "%s"' %
                                     (ak, ad, srcdicts[k],)
                                     )
-                                a[k] = self._deepmerge(ad, srcdicts[k])
+                                a[k] = self._deepmerge(ad, srcdicts[k], context)
                                 del srcdicts[k]
                 logger.debug('deepmerge list: remaining srcdicts elems: %s' % srcdicts)
                 for k, v in srcdicts.items():
@@ -470,7 +479,9 @@ class HiYaPyCo:
                             'deepmerge dict: loop for key "%s": "%s" and "%s"' %
                             (k, a[k], b[k],)
                             )
-                        a[k] = self._deepmerge(a[k], b[k])
+                        context.append(k)
+                        a[k] = self._deepmerge(a[k], b[k], context)
+                        context.pop()
                     else:
                         logger.debug('deepmerge dict: set key %s' % k)
                         a[k] = b[k]
@@ -478,7 +489,7 @@ class HiYaPyCo:
                 logger.debug('deepmerge: dict <- list ... "%s" <- "%s"' % (a, b,))
                 for bd in b:
                     if isinstance(bd, dict):
-                        a = self._deepmerge(a, bd)
+                        a = self._deepmerge(a, bd, context)
                     else:
                         raise HiYaPyCoImplementationException(
                             'can not merge element from list of type %s to dict '
