@@ -1,2 +1,6 @@
 depends:
   lib1: ">=2.0.0"
+  lib2: "1.3.4"
+  #lib3: "2.7"
+  lib4: ">1"
+not_semver: b

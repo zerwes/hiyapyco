@@ -187,7 +187,6 @@ class HiYaPyCo:
 
         self.mergeprimitive = lambda a, b, context: b
         if 'mergeoverride' in kwargs:
-            logger.info("TEST")
             # DEBT: Compare to make sure function signature is right
             self.mergeprimitive = kwargs['mergeoverride']
             del kwargs['mergeoverride']
