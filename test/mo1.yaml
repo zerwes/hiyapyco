@@ -3,3 +3,5 @@ depends:
   #lib3: ">3"
   lib4: ">2"
 not_semver: a
+bypass:
+  lib1: "2.0.0"
