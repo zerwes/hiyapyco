@@ -31,6 +31,7 @@ print('start test %s for hiyapyco %s using python %s (loglevel:%s)' % (
     )
 
 def semver_merge(a, b, context):
+    if context[0] == 'bypass': return b
     if a is None or b is None: return b
     try:
         # We have to manually decompose these since lib doesn't appear to
@@ -62,8 +63,6 @@ h = hiyapyco.HiYaPyCo(
 conf = h.data()
 
 assert h.mergeprimitive is not None
-# TODO: Figure out why this doesn't activate
-#h.mergeprimitive = lambda a, b, context: a
 
 t = conf['depends']
 t = t['lib1']
@@ -73,6 +72,9 @@ assert t == '>=2.0.0'
 
 t = conf['depends']['lib2']
 assert t == '2.0.0'
+
+t = conf['bypass']['lib1']
+assert t == '1.0.0'
 
 try:
     conf['nosuchelement']

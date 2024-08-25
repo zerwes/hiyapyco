@@ -87,6 +87,7 @@ class HiYaPyCo:
           * loglevel: one of  the valid levels from the logging module
           * failonmissingfiles: boolean (default: True)
           * loglevelmissingfiles
+          * mergeoverride: optional function to customize merge for primitive values
 
         Returns a representation of the merged and (if requested) interpolated config.
         Will mostly be a OrderedDict (dict if usedefaultyamlloader), but can be of any other type,
@@ -412,6 +413,9 @@ class HiYaPyCo:
 
     def _deepmerge(self, a, b, context = None):
         if context is None:
+            # DEBT: May be better to make this a class from the get go
+            # for better forward compatibility if we add things like file
+            # name, etc.
             context = []
         logger.debug('>'*30)
         if self.dereferenceyamlanchors:
