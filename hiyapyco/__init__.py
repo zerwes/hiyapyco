@@ -186,7 +186,7 @@ class HiYaPyCo:
             self.encoding = kwargs['encoding']
             del kwargs['encoding']
 
-        self.mergeprimitive = lambda a, b, context: b
+        self.mergeprimitive = None
         if 'mergeoverride' in kwargs:
             # DEBT: Compare to make sure function signature is right
             self.mergeprimitive = kwargs['mergeoverride']
@@ -427,8 +427,12 @@ class HiYaPyCo:
             logger.debug('pass as b is None')
             pass
         if a is None or isinstance(b, primitiveTypes):
-            logger.debug('deepmerge: replace a "%s"  w/ b "%s"' % (a, b,))
-            a = self.mergeprimitive(a, b, context)
+            if self.mergeprimitive is None:
+                logger.debug('deepmerge: replace a "%s"  w/ b "%s"' % (a, b,))
+                a = b
+            else:
+                logger.debug('deepmerge: call mergeprimitive for a "%s",  b "%s" with context' % (a, b,))
+                a = self.mergeprimitive(a, b, context)
         elif isinstance(a, listTypes):
             if isinstance(b, listTypes):
                 logger.debug(
