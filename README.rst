@@ -167,6 +167,9 @@ kwargs
    'NOTSET' (default: ``logging.ERROR`` if
    ``failonmissingfiles = True``, else ``logging.WARN``)
 
+-  ``mergeoverride``: optional function to customize merge for primitive values
+   (see `PR #76 <https://github.com/zerwes/hiyapyco/pull/76>`_.)
+
 interpolation
 ~~~~~~~~~~~~~
 
@@ -330,6 +333,13 @@ See
 
 Changelog
 ---------
+
+0.6.1
+~~~~~~
+
+MERGED: #76 Override mechanism for primitive value merge by malachib
+
+IMPROVED: added link to ansible playbook
 
 0.6.0
 ~~~~~~
