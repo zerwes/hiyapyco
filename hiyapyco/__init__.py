@@ -431,7 +431,9 @@ class HiYaPyCo:
                 logger.debug('deepmerge: replace a "%s"  w/ b "%s"' % (a, b,))
                 a = b
             else:
-                logger.debug('deepmerge: call mergeprimitive for a "%s",  b "%s" with context' % (a, b,))
+                logger.debug(
+                    'deepmerge: call mergeprimitive for a "%s",  b "%s" with context' % (a, b,)
+                    )
                 a = self.mergeprimitive(a, b, context)
         elif isinstance(a, listTypes):
             if isinstance(b, listTypes):
