@@ -244,7 +244,7 @@ upload: uploadrepo pypiupload
 uploadrepo: repo
 	scp -r release/* repo.zero-sys.net:/srv/www/repo.zero-sys.net/hiyapyco/
 
-testversion: testdebversion testsetupversion
+testversion: testdebversion testsetupversion testchangelogversion
 testsetupversion:
 	@if $$(dpkg --compare-versions $$(python setup.py -V) lt $(HIYAPYCOVERSION)); then \
 		echo "setup.py version must be incremented to HIYAPYCOVERSION $(HIYAPYCOVERSION)"; \
@@ -255,6 +255,12 @@ testdebversion:
 	@if $$(dpkg --compare-versions $$(dpkg-parsechangelog | sed '/^Version: /!d; s/^Version: \([.0-9]*\).*/\1/g') lt $(HIYAPYCOVERSION)); then \
 		echo "debian version must be incremented to HIYAPYCOVERSION $(HIYAPYCOVERSION)"; \
 		echo "run make dch --distribution stable --newversion $(HIYAPYCOVERSION)"; \
+		false; \
+		fi
+
+testchangelogversion:
+	@if $$(dpkg --compare-versions $$(sed -e '/^Changelog$$/,+3!d' README.rst | sed '4!d') lt $(HIYAPYCOVERSION)); then \
+		echo "please add $(HIYAPYCOVERSION) section to the Changelog in README.rst"; \
 		false; \
 		fi
 
