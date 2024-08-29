@@ -101,6 +101,7 @@ testinstallvirtualenv:
 			echo ""; \
 			echo " ... test install ..."; \
 			python -c 'import sys; from hiyapyco import __version__ as HIYAPYCOVERSION; print ("hiyapyco %s" % HIYAPYCOVERSION); print (sys.version)'; \
+			pip install -r test/requirements.txt; \
 			make test; \
 			make examples; \
 			deactivate; \
