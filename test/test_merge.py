@@ -173,6 +173,65 @@ try:
 except KeyError as e:
     assert '%s' % e == '\'nosuchelement\''
 
-print('passed test %s' % __file__)
+
+logger.info("test none behavior DEFAULT ...")
+for method in [hiyapyco.METHOD_MERGE, hiyapyco.METHOD_SUBSTITUTE]:
+    try:
+        conf = hiyapyco.load(
+            os.path.join(basepath, "base.yaml"),
+            os.path.join(basepath, "base_none_behavior.yaml"),
+            method=method,
+            failonmissingfiles=True,
+        )
+    except hiyapyco.HiYaPyCoImplementationException:
+        pass
+    else:
+        raise AssertionError("Default None behavior is expected to fail on this merge")
+
+logger.info("test none behavior OVERRIDE ...")
+for method in hiyapyco.METHODS.values():
+    conf = hiyapyco.load(
+        os.path.join(basepath, "base.yaml"),
+        os.path.join(basepath, "base_none_behavior.yaml"),
+        none_behavior=hiyapyco.NONE_BEHAVIOR_OVERRIDE,
+        method=hiyapyco.METHOD_MERGE,
+        failonmissingfiles=True,
+    )
+
+    t = conf["singel"]
+    logger.info("test single val ... %s" % t)
+    assert t is None
+
+    t = conf["int"]
+    logger.info("test int val ... %s" % t)
+    assert t is None
+
+    t = conf["array"]
+    logger.info("test list val ... %s" % t)
+    assert t is None
+
+    t = conf["hash"]
+    logger.info("test simple dict ... %s" % t)
+    assert t is None
+
+    t = conf["deeplist"]
+    logger.info("test deeplist ... %s" % t)
+    assert t == [
+        {"d1": None},
+        {"d2": {"d2k2": "x2", "d2k1": None}},
+        {
+            "d32": {"a": "A2", "b": "B2"},
+            "d31": {"a": "A", "c": "C", "b": "B"},
+        },
+    ]
+
+    t = conf["deepmap"]
+    logger.info("test deepmap ... %s" % t)
+    assert t == {
+        "l1k1": {"l2k1": None, "l2k2": "abc"},
+        "l1k2": None,
+    }
+
+print("passed test %s" % __file__)
 
 # vim: tabstop=4 expandtab shiftwidth=4 softtabstop=4 smartindent nu
