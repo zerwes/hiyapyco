@@ -65,6 +65,10 @@ METHOD_SIMPLE = METHODS['METHOD_SIMPLE']
 METHOD_MERGE = METHODS['METHOD_MERGE']
 METHOD_SUBSTITUTE = METHODS['METHOD_SUBSTITUTE']
 
+NONE_BEHAVIORS = {"NONE_BEHAVIOR_DEFAULT": 0x0001, "NONE_BEHAVIOR_OVERRIDE": 0x0002}
+NONE_BEHAVIOR_DEFAULT = NONE_BEHAVIORS["NONE_BEHAVIOR_DEFAULT"]
+NONE_BEHAVIOR_OVERRIDE = NONE_BEHAVIORS["NONE_BEHAVIOR_OVERRIDE"]
+
 
 class HiYaPyCo:
     """Main class"""
@@ -77,6 +81,7 @@ class HiYaPyCo:
             hiyapyco.METHOD_SIMPLE | hiyapyco.METHOD_MERGE | hiyapyco.METHOD_SUBSTITUTE
           * mergelists: boolean (default: True) try to merge lists
             (only makes sense if hiyapyco.METHOD_MERGE or hiyapyco.METHOD_SUBSTITUTE)
+          * none_behavior: one of hiyapyco.NONE_BEHAVIOR_DEFAULT | hiyapyco.NONE_BEHAVIOR_OVERRIDE
           * interpolate: boolean (default: False)
           * castinterpolated: boolean (default: False) try to cast values after interpolating
           * usedefaultyamlloader: boolean (default: False)
@@ -121,6 +126,19 @@ class HiYaPyCo:
                         )
             self.mergelists = kwargs['mergelists']
             del kwargs['mergelists']
+
+        self.none_behavior = None
+        if "none_behavior" in kwargs:
+            logger.debug("parse kwarg method: %s ..." % kwargs["none_behavior"])
+            if kwargs["none_behavior"] not in NONE_BEHAVIORS.values():
+                raise HiYaPyCoInvocationException(
+                    "undefined method used, must be one of: %s"
+                    % " ".join(NONE_BEHAVIORS.keys())
+                )
+            self.none_behavior = kwargs["none_behavior"]
+            del kwargs["none_behavior"]
+        if self.none_behavior is None:
+            self.none_behavior = NONE_BEHAVIOR_DEFAULT
 
         self.interpolate = False
         self.castinterpolated = False
@@ -332,11 +350,23 @@ class HiYaPyCo:
         if self.dereferenceyamlanchors:
             a = copy.deepcopy(a)
             b = copy.deepcopy(b)
-        logger.debug('simplemerge %s (%s) and %s (%s)' % (a, type(a), b, type(b),))
-        # FIXME: make None usage configurable
+        logger.debug(
+            "simplemerge %s (%s) and %s (%s)"
+            % (
+                a,
+                type(a),
+                b,
+                type(b),
+            )
+        )
         if b is None:
             logger.debug('pass as b is None')
-            pass
+            # override -> None replaces object, no matter what.
+            if self.none_behavior == NONE_BEHAVIOR_OVERRIDE:
+                return None
+            # default behavior is to attempt merge or fail
+            else:
+                pass
         elif isinstance(b, primitiveTypes):
             logger.debug('simplemerge: primitiveTypes replace a "%s"  w/ b "%s"' % (a, b,))
             a = b
@@ -371,11 +401,21 @@ class HiYaPyCo:
             a = copy.deepcopy(a)
             b = copy.deepcopy(b)
         logger.debug('>' * 30)
-        logger.debug('substmerge %s and %s' % (a, b,))
-        # FIXME: make None usage configurable
+        logger.debug(
+            "substmerge %s and %s"
+            % (
+                a,
+                b,
+            )
+        )
         if b is None:
             logger.debug('pass as b is None')
-            pass
+            # override -> None replaces object, no matter what.
+            if self.none_behavior == NONE_BEHAVIOR_OVERRIDE:
+                return None
+            # default behavior is to attempt merge or fail
+            else:
+                pass
 
         # treat listTypes as primitiveTypes in merge
         # subsititues list, don't merge them
@@ -426,11 +466,21 @@ class HiYaPyCo:
         if self.dereferenceyamlanchors:
             a = copy.deepcopy(a)
             b = copy.deepcopy(b)
-        logger.debug('deepmerge %s and %s' % (a, b,))
-        # FIXME: make None usage configurable
+        logger.debug(
+            "deepmerge %s and %s"
+            % (
+                a,
+                b,
+            )
+        )
         if b is None:
             logger.debug('pass as b is None')
-            pass
+            # override -> None replaces object, no matter what.
+            if self.none_behavior == NONE_BEHAVIOR_OVERRIDE:
+                return None
+            # default behavior is to attempt merge or fail
+            else:
+                pass
         if a is None or isinstance(b, primitiveTypes):
             if self.mergeprimitive is None:
                 logger.debug('deepmerge: replace a "%s"  w/ b "%s"' % (a, b,))
