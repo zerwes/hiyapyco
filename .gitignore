@@ -4,6 +4,8 @@
 
 # PyCharm
 .idea
+# vscode
+.vscode
 
 build
 HiYaPyCo.egg-info
