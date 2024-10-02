@@ -86,8 +86,9 @@ class HiYaPyCo:
           * failonmissingfiles: boolean (default: True)
           * loglevelmissingfiles
           * mergeoverride: optional function to customize merge for primitive values
-          * loader_callback: optional custom callback function to load yaml files. The callback function shall
-            behave like `yaml.load_all`, taking a IO stream as input and returning a list of objects.
+          * loader_callback: optional custom callback function to load yaml files. The
+            callback function shall behave like `yaml.load_all`, taking a IO stream as
+            input and returning a list of objects.
 
         Returns a representation of the merged and (if requested) interpolated config.
         Will mostly be a OrderedDict (dict if usedefaultyamlloader), but can be of any other type,
