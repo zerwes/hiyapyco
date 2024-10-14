@@ -15,7 +15,7 @@ long_description = open('README.rst').read()
 installrequires = [
     'PyYAML<7',
     'Jinja2>3,<4',
-    'MarkupSafe<3'
+    'MarkupSafe<4'
     ]
 
 setup(name='HiYaPyCo',
