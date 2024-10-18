@@ -1,15 +1,15 @@
 # vim: tabstop=4 expandtab shiftwidth=4 softtabstop=4 smartindent
-singel: null 
-int: null 
+singel: null
+int: null
 array: null
 hash: null
 deeplist:
     - d1: null
     - d2:
-        d2k1: null 
+        d2k1: null
         d2k2: x2
 deepmap:
     l1k1:
-        l2k1: null 
+        l2k1: null
         l2k2: abc
     l1k2: null
