@@ -403,6 +403,7 @@ class HiYaPyCo:
                 return None
             # default behavior is to attempt merge or fail
             logger.debug('pass as b is None')
+            pass
 
         # treat listTypes as primitiveTypes in merge
         # subsititues list, don't merge them
