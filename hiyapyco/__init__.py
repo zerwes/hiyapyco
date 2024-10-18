@@ -401,6 +401,7 @@ class HiYaPyCo:
                 logger.debug('b is None + none_behavior in use => return None')
                 return None
             # default behavior is to attempt merge or fail
+            logger.debug('pass as b is None')
 
         # treat listTypes as primitiveTypes in merge
         # subsititues list, don't merge them
@@ -459,8 +460,7 @@ class HiYaPyCo:
             if self.none_behavior == NONE_BEHAVIOR_OVERRIDE:
                 return None
             # default behavior is to attempt merge or fail
-            else:
-                pass
+            logger.debug('pass as b is None')
         if a is None or isinstance(b, primitiveTypes):
             if self.mergeprimitive is None:
                 logger.debug('deepmerge: replace a "%s"  w/ b "%s"' % (a, b,))
