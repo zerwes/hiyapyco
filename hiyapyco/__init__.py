@@ -345,23 +345,14 @@ class HiYaPyCo:
         if self.dereferenceyamlanchors:
             a = copy.deepcopy(a)
             b = copy.deepcopy(b)
-        logger.debug(
-            "simplemerge %s (%s) and %s (%s)"
-            % (
-                a,
-                type(a),
-                b,
-                type(b),
-            )
-        )
+        logger.debug('simplemerge %s (%s) and %s (%s)' % (a, type(a), b, type(b),))
         if b is None:
-            logger.debug('pass as b is None')
             # override -> None replaces object, no matter what.
             if self.none_behavior == NONE_BEHAVIOR_OVERRIDE:
+                logger.debug('b is None + none_behavior in use => return None')
                 return None
             # default behavior is to attempt merge or fail
-            else:
-                pass
+            logger.debug('pass as b is None')
         elif isinstance(b, primitiveTypes):
             logger.debug('simplemerge: primitiveTypes replace a "%s"  w/ b "%s"' % (a, b,))
             a = b
@@ -396,21 +387,15 @@ class HiYaPyCo:
             a = copy.deepcopy(a)
             b = copy.deepcopy(b)
         logger.debug('>' * 30)
-        logger.debug(
-            "substmerge %s and %s"
-            % (
-                a,
-                b,
-            )
-        )
+        logger.debug('substmerge %s and %s' % (a, b,))
+        # FIXME: make None usage configurable
         if b is None:
             logger.debug('pass as b is None')
             # override -> None replaces object, no matter what.
             if self.none_behavior == NONE_BEHAVIOR_OVERRIDE:
+                logger.debug('b is None + none_behavior in use => return None')
                 return None
             # default behavior is to attempt merge or fail
-            else:
-                pass
 
         # treat listTypes as primitiveTypes in merge
         # subsititues list, don't merge them
@@ -461,13 +446,8 @@ class HiYaPyCo:
         if self.dereferenceyamlanchors:
             a = copy.deepcopy(a)
             b = copy.deepcopy(b)
-        logger.debug(
-            "deepmerge %s and %s"
-            % (
-                a,
-                b,
-            )
-        )
+        logger.debug('deepmerge %s and %s' % (a, b,))
+        # FIXME: make None usage configurable
         if b is None:
             logger.debug('pass as b is None')
             # override -> None replaces object, no matter what.
