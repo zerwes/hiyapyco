@@ -19,15 +19,13 @@ See https://www.gnu.org/licenses/gpl.html
 
 from __future__ import unicode_literals
 
-import sys
 import os
 import logging
 import re
 import io
 import copy
 import yaml
-from yaml import parser
-from jinja2 import Environment, Undefined, DebugUndefined, StrictUndefined, TemplateError
+from jinja2 import Environment, Undefined, TemplateError
 
 from . import odyldo
 
@@ -93,6 +91,9 @@ class HiYaPyCo:
           * failonmissingfiles: boolean (default: True)
           * loglevelmissingfiles
           * mergeoverride: optional function to customize merge for primitive values
+          * loader_callback: optional custom callback function to load yaml files. The
+            callback function shall behave like `yaml.load_all`, taking a IO stream as
+            input and returning a list of objects.
 
         Returns a representation of the merged and (if requested) interpolated config.
         Will mostly be a OrderedDict (dict if usedefaultyamlloader), but can be of any other type,
@@ -102,6 +103,8 @@ class HiYaPyCo:
         self._files = []
 
         self.method = None
+        self.loader_callback = kwargs.pop("loader_callback", None)
+
         if 'method' in kwargs:
             logger.debug('parse kwarg method: %s ...' % kwargs['method'])
             if kwargs['method'] not in METHODS.values():
@@ -265,7 +268,9 @@ class HiYaPyCo:
             self._data = self._interpolate(self._data)
 
     def _load_data(self, _USEDEFAULTYAMLLOADER, f):
-        if _USEDEFAULTYAMLLOADER:
+        if self.loader_callback is not None:
+            ydata_generator = self.loader_callback(f)
+        elif _USEDEFAULTYAMLLOADER:
             ydata_generator = yaml.safe_load_all(f)
         else:
             ydata_generator = odyldo.safe_load_all(f)
