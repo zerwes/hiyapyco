@@ -358,6 +358,7 @@ class HiYaPyCo:
                 return None
             # default behavior is to attempt merge or fail
             logger.debug('pass as b is None')
+            pass
         elif isinstance(b, primitiveTypes):
             logger.debug('simplemerge: primitiveTypes replace a "%s"  w/ b "%s"' % (a, b,))
             a = b
