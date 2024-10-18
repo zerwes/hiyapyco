@@ -463,6 +463,7 @@ class HiYaPyCo:
                 return None
             # default behavior is to attempt merge or fail
             logger.debug('pass as b is None')
+            pass
         if a is None or isinstance(b, primitiveTypes):
             if self.mergeprimitive is None:
                 logger.debug('deepmerge: replace a "%s"  w/ b "%s"' % (a, b,))
