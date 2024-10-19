@@ -4,7 +4,10 @@ import sys
 import os
 import logging
 import platform
-from ruamel.yaml import YAML
+try:
+    from ruamel_yaml import YAML
+except ModuleNotFoundError:
+    from ruamel.yaml import YAML
 
 basepath = os.path.dirname(os.path.realpath(__file__))
 sys.path.insert(0, os.path.dirname(basepath))
