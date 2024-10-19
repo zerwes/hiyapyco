@@ -4,6 +4,10 @@ import sys
 import os
 import logging
 import platform
+
+basepath = os.path.dirname(os.path.realpath(__file__))
+sys.path.insert(0, os.path.dirname(basepath))
+
 import hiyapyco
 
 sys.path.insert(
