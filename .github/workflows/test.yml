@@ -25,7 +25,7 @@ jobs:
         python-version: ${{ matrix.python-version }}
     - name: Install dependencies for ${{ matrix.python-version }}
       run: |
-        sudo pip3 install pylint PyYAML Jinja2 ruamel.yaml
+        sudo pip3 install pylint PyYAML Jinja2
         sudo pip3 install -U setuptools wheel ujson pip virtualenv
     - name: Install make
       run: sudo apt-get install make
