@@ -25,7 +25,7 @@ import re
 import io
 import copy
 import yaml
-from jinja2 import Environment, Undefined, TemplateError
+from jinja2 import Environment, Undefined, DebugUndefined, StrictUndefined, TemplateError
 
 from . import odyldo
 
