@@ -339,6 +339,17 @@ See
 Changelog
 ---------
 
+0.7.0
+~~~~~~
+
+MERGED: allow custom yaml loaders as callback functions by @grst (PR #77)
+
+MERGED: implement none-behavior strategies by @grst (PR #78)
+
+MERGED: update markupsafe requirement from <3 to <4 (#80)
+
+IMPROVED: added some example how to use ruamel
+
 0.6.1
 ~~~~~~
 
