@@ -137,9 +137,9 @@ kwargs
    -  ``hiyapyco.METHOD_MERGE``: perform a deep merge
    -  ``hiyapyco.METHOD_SUBSTITUTE``: perform a merge w/ lists substituted (unsupported)
 
-- ``mergelists``: boolean try to merge lists of dict (default: ``True``)
+-  ``mergelists``: boolean try to merge lists of dict (default: ``True``)
 
-- ``none_behavior``: bit (one of the listed below):
+-  ``none_behavior``: bit (one of the listed below):
 
    -  ``hiyapyco.NONE_BEHAVIOR_DEFAULT``: attempt to merge the value with ``None`` and fail if this is not possible (default method)
    -  ``hiyapyco.NONE_BEHAVIOR_OVERRIDE``: ``None`` always overrides any other value.
@@ -155,9 +155,9 @@ kwargs
    OrderedDict loader/dumper (see: Ordered Dict Yaml Loader / Dumper
    aka. ODYLDo) (default: ``False``)
 
-- ``dereferenceyamlanchors``: boolean : dereference yaml anchors and use a copy (default: ``True``)
+-  ``dereferenceyamlanchors``: boolean : dereference yaml anchors and use a copy (default: ``True``)
 
-- ``encoding``: string : encoding used to read yaml files (default: ``utf-8``)
+-  ``encoding``: string : encoding used to read yaml files (default: ``utf-8``)
 
 -  ``failonmissingfiles``: boolean : fail if a supplied YAML file can
    not be found (default: ``True``)
