@@ -175,6 +175,12 @@ kwargs
 -  ``mergeoverride``: optional function to customize merge for primitive values
    (see `PR #76 <https://github.com/zerwes/hiyapyco/pull/76>`_.)
 
+-  ``loader_callback``: optional custom callback function to load yaml files.
+    The callback function shall behave like ``yaml.load_all`` from PyYAML,
+    taking a IO stream as input and returning a list of objects.
+    Using this method, for example `ruamel <https://pypi.org/project/ruamel.yaml/>`_
+    can be used instead of PyYAML etc.
+
 interpolation
 ~~~~~~~~~~~~~
 
