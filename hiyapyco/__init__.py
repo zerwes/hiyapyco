@@ -65,9 +65,10 @@ METHOD_SIMPLE = METHODS['METHOD_SIMPLE']
 METHOD_MERGE = METHODS['METHOD_MERGE']
 METHOD_SUBSTITUTE = METHODS['METHOD_SUBSTITUTE']
 
-NONE_BEHAVIORS = {"NONE_BEHAVIOR_DEFAULT": 0x0001, "NONE_BEHAVIOR_OVERRIDE": 0x0002}
+NONE_BEHAVIORS = {"NONE_BEHAVIOR_DEFAULT": 0x0001, "NONE_BEHAVIOR_OVERRIDE": 0x0002, "NONE_BEHAVIOR_EMPTY_DICT": 0x0003}
 NONE_BEHAVIOR_DEFAULT = NONE_BEHAVIORS["NONE_BEHAVIOR_DEFAULT"]
 NONE_BEHAVIOR_OVERRIDE = NONE_BEHAVIORS["NONE_BEHAVIOR_OVERRIDE"]
+NONE_BEHAVIOR_EMPTY_DICT = NONE_BEHAVIORS["NONE_BEHAVIOR_EMPTY_DICT"]
 
 
 class HiYaPyCo:
@@ -81,7 +82,7 @@ class HiYaPyCo:
             hiyapyco.METHOD_SIMPLE | hiyapyco.METHOD_MERGE | hiyapyco.METHOD_SUBSTITUTE
           * mergelists: boolean (default: True) try to merge lists
             (only makes sense if hiyapyco.METHOD_MERGE or hiyapyco.METHOD_SUBSTITUTE)
-          * none_behavior: one of hiyapyco.NONE_BEHAVIOR_DEFAULT | hiyapyco.NONE_BEHAVIOR_OVERRIDE
+          * none_behavior: one of hiyapyco.NONE_BEHAVIOR_DEFAULT | hiyapyco.NONE_BEHAVIOR_OVERRIDE | hiyapyco.NONE_BEHAVIOR_EMPTY_DICT
           * interpolate: boolean (default: False)
           * castinterpolated: boolean (default: False) try to cast values after interpolating
           * usedefaultyamlloader: boolean (default: False)
@@ -351,6 +352,9 @@ class HiYaPyCo:
             a = copy.deepcopy(a)
             b = copy.deepcopy(b)
         logger.debug('simplemerge %s (%s) and %s (%s)' % (a, type(a), b, type(b),))
+        if isinstance(a, dict) and b is None and self.none_behavior == NONE_BEHAVIOR_EMPTY_DICT:
+            logger.debug('b is None + a is dict + none_behavior_empty_dict in use => b = {}')
+            b = {}
         if b is None:
             # override -> None replaces object, no matter what.
             if self.none_behavior == NONE_BEHAVIOR_OVERRIDE:
@@ -394,6 +398,9 @@ class HiYaPyCo:
             b = copy.deepcopy(b)
         logger.debug('>' * 30)
         logger.debug('substmerge %s and %s' % (a, b,))
+        if isinstance(a, dict) and b is None and self.none_behavior == NONE_BEHAVIOR_EMPTY_DICT:
+            logger.debug('b is None + a is dict + none_behavior_empty_dict in use => b = {}')
+            b = {}
         # FIXME: make None usage configurable
         if b is None:
             logger.debug('pass as b is None')
@@ -455,6 +462,9 @@ class HiYaPyCo:
             a = copy.deepcopy(a)
             b = copy.deepcopy(b)
         logger.debug('deepmerge %s and %s' % (a, b,))
+        if isinstance(a, dict) and b is None and self.none_behavior == NONE_BEHAVIOR_EMPTY_DICT:
+            logger.debug('b is None + a is dict + none_behavior_empty_dict in use => b = {}')
+            b = {}
         # FIXME: make None usage configurable
         if b is None:
             logger.debug('pass as b is None')
