@@ -232,6 +232,23 @@ for method in hiyapyco.METHODS.values():
         "l1k2": None,
     }
 
+logger.info("test none behavior EMPTY_DICT ...")
+for method in hiyapyco.METHODS.values():
+    conf = hiyapyco.load(
+        os.path.join(basepath, "base.yaml"),
+        os.path.join(basepath, "base_none_behavior_empty_dict.yaml"),
+        none_behavior=hiyapyco.NONE_BEHAVIOR_EMPTY_DICT,
+        method=hiyapyco.METHOD_MERGE,
+        failonmissingfiles=True,
+    )
+
+    t = conf["deepmap"]
+    logger.info("test deepmap ... %s" % t)
+    assert t == {
+        "l1k1": {"l2k1": "abc", "l2k2": "abcabc"},
+        "l1k2": {"l2k1": "bli", "l2k2": "bla", "l2k3": "blub"},
+    }
+
 print("passed test %s" % __file__)
 
 # vim: tabstop=4 expandtab shiftwidth=4 softtabstop=4 smartindent nu

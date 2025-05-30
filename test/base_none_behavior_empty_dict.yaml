@@ -1,0 +1,6 @@
+# vim: tabstop=4 expandtab shiftwidth=4 softtabstop=4 smartindent
+deepmap:
+    l1k1:
+        l2k1: abc
+        l2k2: abcabc
+    l1k2: null
