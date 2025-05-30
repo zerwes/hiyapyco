@@ -24,6 +24,8 @@ import logging
 import re
 import io
 import copy
+from typing import Dict, DefaultDict, OrderedDict
+
 import yaml
 from jinja2 import Environment, Undefined, DebugUndefined, StrictUndefined, TemplateError
 
@@ -56,6 +58,7 @@ primitiveTypes = (int, str, bool, float)
 # pylint: disable=superfluous-parens
 strTypes = (str)
 listTypes = (list, tuple)
+dictTypes = (dict, Dict, DefaultDict, OrderedDict)
 
 # you may set this to something suitable for you
 jinja2env = Environment(undefined=Undefined)
@@ -352,7 +355,7 @@ class HiYaPyCo:
             a = copy.deepcopy(a)
             b = copy.deepcopy(b)
         logger.debug('simplemerge %s (%s) and %s (%s)' % (a, type(a), b, type(b),))
-        if isinstance(a, dict) and b is None and self.none_behavior == NONE_BEHAVIOR_EMPTY_DICT:
+        if isinstance(a, dictTypes) and b is None and self.none_behavior == NONE_BEHAVIOR_EMPTY_DICT:
             logger.debug('b is None + a is dict + none_behavior_empty_dict in use => b = {}')
             b = {}
         if b is None:
@@ -398,7 +401,7 @@ class HiYaPyCo:
             b = copy.deepcopy(b)
         logger.debug('>' * 30)
         logger.debug('substmerge %s and %s' % (a, b,))
-        if isinstance(a, dict) and b is None and self.none_behavior == NONE_BEHAVIOR_EMPTY_DICT:
+        if isinstance(a, dictTypes) and b is None and self.none_behavior == NONE_BEHAVIOR_EMPTY_DICT:
             logger.debug('b is None + a is dict + none_behavior_empty_dict in use => b = {}')
             b = {}
         # FIXME: make None usage configurable
@@ -462,7 +465,7 @@ class HiYaPyCo:
             a = copy.deepcopy(a)
             b = copy.deepcopy(b)
         logger.debug('deepmerge %s and %s' % (a, b,))
-        if isinstance(a, dict) and b is None and self.none_behavior == NONE_BEHAVIOR_EMPTY_DICT:
+        if isinstance(a, dictTypes) and b is None and self.none_behavior == NONE_BEHAVIOR_EMPTY_DICT:
             logger.debug('b is None + a is dict + none_behavior_empty_dict in use => b = {}')
             b = {}
         # FIXME: make None usage configurable
