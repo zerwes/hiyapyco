@@ -39,7 +39,7 @@ setup(name='HiYaPyCo',
         'Programming Language :: Python :: 3.11',
     ],
     packages=['hiyapyco'],
-    keywords='configuration parser yaml',
+    keywords=['configuration', 'parser', 'yaml'],
     install_requires = installrequires,
     platforms = 'any',
     )
