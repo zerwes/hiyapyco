@@ -143,6 +143,7 @@ kwargs
 
    -  ``hiyapyco.NONE_BEHAVIOR_DEFAULT``: attempt to merge the value with ``None`` and fail if this is not possible (default method)
    -  ``hiyapyco.NONE_BEHAVIOR_OVERRIDE``: ``None`` always overrides any other value.
+   -  ``hiyapyco.NONE_BEHAVIOR_IGNORE``: ``None`` will always be ignored and the original value preserved.
 
 -  ``interpolate``: boolean : perform interpolation after the merge
    (default: ``False``)
