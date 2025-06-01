@@ -4,23 +4,16 @@ import sys
 import os
 import logging
 import platform
-import hiyapyco
 import semantic_version as semver
 
-sys.path.insert(
-        0,
-        os.path.join(
-            os.path.dirname(
-                os.path.realpath(os.path.abspath(sys.argv[0]))
-                ),
-            'lib'
-            )
-        )
+basepath = os.path.dirname(os.path.realpath(__file__))
+sys.path.insert(0, os.path.dirname(basepath))
+import hiyapyco
+
+sys.path.insert(0, os.path.join(basepath, 'lib'))
 import testsetup
 
 logger = testsetup.setup(sys.argv[1:])
-
-basepath = os.path.dirname(os.path.realpath(__file__))
 
 print('start test %s for hiyapyco %s using python %s (loglevel:%s)' % (
             __file__,
