@@ -95,6 +95,7 @@ testinstallvirtualenv:
 			make examples; \
 			deactivate; \
 		done
+	@echo "$@ done"
 
 clean: distclean
 
