@@ -65,7 +65,11 @@ METHOD_SIMPLE = METHODS['METHOD_SIMPLE']
 METHOD_MERGE = METHODS['METHOD_MERGE']
 METHOD_SUBSTITUTE = METHODS['METHOD_SUBSTITUTE']
 
-NONE_BEHAVIORS = {"NONE_BEHAVIOR_DEFAULT": 0x0001, "NONE_BEHAVIOR_OVERRIDE": 0x0002, "NONE_BEHAVIOR_IGNORE": 0x0003,}
+NONE_BEHAVIORS = {
+    "NONE_BEHAVIOR_DEFAULT": 0x0001,
+    "NONE_BEHAVIOR_OVERRIDE": 0x0002,
+    "NONE_BEHAVIOR_IGNORE": 0x0003,
+    }
 NONE_BEHAVIOR_DEFAULT = NONE_BEHAVIORS["NONE_BEHAVIOR_DEFAULT"]
 NONE_BEHAVIOR_OVERRIDE = NONE_BEHAVIORS["NONE_BEHAVIOR_OVERRIDE"]
 NONE_BEHAVIOR_IGNORE = NONE_BEHAVIORS["NONE_BEHAVIOR_IGNORE"]
@@ -82,7 +86,10 @@ class HiYaPyCo:
             hiyapyco.METHOD_SIMPLE | hiyapyco.METHOD_MERGE | hiyapyco.METHOD_SUBSTITUTE
           * mergelists: boolean (default: True) try to merge lists
             (only makes sense if hiyapyco.METHOD_MERGE or hiyapyco.METHOD_SUBSTITUTE)
-          * none_behavior: one of hiyapyco.NONE_BEHAVIOR_DEFAULT | hiyapyco.NONE_BEHAVIOR_OVERRIDE | hiyapyco.NONE_BEHAVIOR_IGNORE
+          * none_behavior: one of:
+             * hiyapyco.NONE_BEHAVIOR_DEFAULT
+             * hiyapyco.NONE_BEHAVIOR_OVERRIDE
+             * hiyapyco.NONE_BEHAVIOR_IGNORE
           * interpolate: boolean (default: False)
           * castinterpolated: boolean (default: False) try to cast values after interpolating
           * usedefaultyamlloader: boolean (default: False)
@@ -355,11 +362,11 @@ class HiYaPyCo:
         if b is None:
             # override -> None replaces object, no matter what.
             if self.none_behavior == NONE_BEHAVIOR_OVERRIDE:
-                logger.debug('b is None + none_behavior NONE_BEHAVIOR_OVERRIDE in use => return None')
+                logger.debug('b is None + NONE_BEHAVIOR_OVERRIDE in use => return None')
                 return None
             # IGNORE -> None will just preserve the original value
             if self.none_behavior == NONE_BEHAVIOR_IGNORE:
-                logger.debug('b is None + none_behavior NONE_BEHAVIOR_IGNORE in use => return a')
+                logger.debug('b is None + NONE_BEHAVIOR_IGNORE in use => return a')
                 return a
             # default behavior is to attempt merge or fail
             logger.debug('pass as b is None')
@@ -404,11 +411,11 @@ class HiYaPyCo:
             logger.debug('pass as b is None')
             # override -> None replaces object, no matter what.
             if self.none_behavior == NONE_BEHAVIOR_OVERRIDE:
-                logger.debug('b is None + none_behavior NONE_BEHAVIOR_OVERRIDE in use => return None')
+                logger.debug('b is None + NONE_BEHAVIOR_OVERRIDE in use => return None')
                 return None
             # IGNORE -> None will just preserve the original value
             if self.none_behavior == NONE_BEHAVIOR_IGNORE:
-                logger.debug('b is None + none_behavior NONE_BEHAVIOR_IGNORE in use => return a')
+                logger.debug('b is None + NONE_BEHAVIOR_IGNORE in use => return a')
                 return a
             # default behavior is to attempt merge or fail
             logger.debug('pass as b is None')
@@ -469,10 +476,11 @@ class HiYaPyCo:
             logger.debug('pass as b is None')
             # override -> None replaces object, no matter what.
             if self.none_behavior == NONE_BEHAVIOR_OVERRIDE:
+                logger.debug('b is None + NONE_BEHAVIOR_OVERRIDE in use => return None')
                 return None
             # IGNORE -> None will just preserve the original value
             if self.none_behavior == NONE_BEHAVIOR_IGNORE:
-                logger.debug('b is None + none_behavior NONE_BEHAVIOR_IGNORE in use => return a')
+                logger.debug('b is None + NONE_BEHAVIOR_IGNORE in use => return a')
                 return a
             # default behavior is to attempt merge or fail
             logger.debug('pass as b is None')
