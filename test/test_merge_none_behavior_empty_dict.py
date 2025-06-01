@@ -23,7 +23,7 @@ print('start test %s for hiyapyco %s using python %s (loglevel:%s)' % (
     )
 
 
-logger.info("test none behavior EMPTY_DICT ...")
+logger.info("test none behavior IGNORE ...")
 conf = hiyapyco.load(
     os.path.join(basepath, "base.yaml"),
     os.path.join(basepath, "base_none_behavior_empty_dict.yaml"),
