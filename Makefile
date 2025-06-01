@@ -74,12 +74,12 @@ examples:
 
 testinstall:
 	@set -e; \
-		for p in $(PYVERSIONS); do \
+		for p in $(PYVERSIONSPATHS); do \
 			rm -rf /tmp/hiyapyco; \
 			echo ""; \
 			echo "$@ w/ python version $$p ..."; \
 			echo ""; \
-			$$p setup.py install --root=/tmp/hiyapyco; \
+			pip --python $$p install --target /tmp/hiyapyco .; \
 			echo ""; \
 			echo "$@ w/ python version $$p : OK"; \
 			echo ""; \
