@@ -181,6 +181,35 @@ for method in [hiyapyco.METHOD_MERGE, hiyapyco.METHOD_SUBSTITUTE]:
     else:
         raise AssertionError("Default None behavior is expected to fail on this merge")
 
+logger.info("test none behavior IGNORE ...")
+for method in [hiyapyco.METHOD_MERGE, hiyapyco.METHOD_SUBSTITUTE]:
+    logger.info("... method: %s" % method)
+    conf = hiyapyco.load(
+        os.path.join(basepath, "base.yaml"),
+        os.path.join(basepath, "base_none_behavior.yaml"),
+        none_behavior=hiyapyco.NONE_BEHAVIOR_IGNORE,
+        method=method,
+        failonmissingfiles=True,
+    )
+    t = conf["singel"]
+    logger.info("test single val ... %s" % t)
+    assert t == 'base'
+
+    t = conf["int"]
+    logger.info("test int val ... %s" % t)
+    assert t == 1
+
+    t = conf["array"]
+    logger.info("test list val ... %s" % t)
+    assert t == ['base1', 'base2']
+
+    t = conf["hash"]["k1"]
+    logger.info("test simple dict k1 ... %s" % t)
+    assert t == "b1"
+    t = conf["hash"]["k2"]
+    logger.info("test simple dict k2 ... %s" % t)
+    assert t == "b2"
+
 logger.info("test none behavior OVERRIDE ...")
 conf = hiyapyco.load(
     os.path.join(basepath, "base.yaml"),
