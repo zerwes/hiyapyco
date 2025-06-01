@@ -25,7 +25,7 @@ pypiuploadtest: PYPIREPOURL := https://test.pypi.org/project/HiYaPyCo/
 
 quicktest: pylint test examples
 
-alltest: clean quicktest testreadme testinstall testinstallvirtualenv
+alltest: clean quicktest testreadme testinstallvirtualenv
 	@echo "$@ passed"
 
 printversions:
@@ -72,19 +72,7 @@ examples:
 		done; \
 		exit $$RET
 
-# TODO: remove this. testinstallvirtualenv is sufficient and safer
-testinstall:
-	@set -e; \
-		for p in $(PYVERSIONSPATHS); do \
-			rm -rf /tmp/hiyapyco; \
-			echo ""; \
-			echo "$@ w/ python version $$p ..."; \
-			echo ""; \
-			pip -q -q -q  --no-color --no-python-version-warning --no-cache-dir --no-input --python $$p install --target /tmp/hiyapyco .; \
-			echo ""; \
-			echo "$@ w/ python version $$p : OK"; \
-			echo ""; \
-		done
+testinstall: testinstallvirtualenv
 
 testinstallvirtualenv:
 	@set -e; \
