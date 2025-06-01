@@ -72,6 +72,7 @@ examples:
 		done; \
 		exit $$RET
 
+# TODO: remove this. testinstallvirtualenv is sufficient and safer
 testinstall:
 	@set -e; \
 		for p in $(PYVERSIONSPATHS); do \
@@ -79,7 +80,7 @@ testinstall:
 			echo ""; \
 			echo "$@ w/ python version $$p ..."; \
 			echo ""; \
-			pip --python $$p install --target /tmp/hiyapyco .; \
+			pip -q -q -q  --no-color --no-python-version-warning --no-cache-dir --no-input --python $$p install --target /tmp/hiyapyco .; \
 			echo ""; \
 			echo "$@ w/ python version $$p : OK"; \
 			echo ""; \
