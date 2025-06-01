@@ -97,7 +97,7 @@ testinstallvirtualenv:
 			source $$VENV/bin/activate; \
 			which python; \
 			python --version; \
-			python setup.py install; \
+			pip install .; \
 			echo ""; \
 			echo " ... test install ..."; \
 			python -c 'import sys; from hiyapyco import __version__ as HIYAPYCOVERSION; print ("hiyapyco %s" % HIYAPYCOVERSION); print (sys.version)'; \
