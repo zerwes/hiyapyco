@@ -137,7 +137,7 @@ kwargs
    -  ``hiyapyco.METHOD_MERGE``: perform a deep merge
    -  ``hiyapyco.METHOD_SUBSTITUTE``: perform a merge w/ lists substituted (unsupported)
 
--  ``mergelists``: boolean try to merge lists of dict (default: ``True``)
+-  ``mergelists``: boolean : try to merge lists of dict (default: ``True``)
 
 -  ``none_behavior``: bit (one of the listed below):
 
@@ -164,8 +164,8 @@ kwargs
    not be found (default: ``True``)
 
 -  ``loglevel``: int : loglevel for the hiyapyco logger; should be one
-   of the valid levels from ``logging``: 'WARN', 'ERROR', 'DEBUG', 'I
-   NFO', 'WARNING', 'CRITICAL', 'NOTSET' (default: default of
+   of the valid levels from ``logging``: 'WARN', 'ERROR', 'DEBUG', 'INFO',
+   'WARNING', 'CRITICAL', 'NOTSET' (default: default of
    ``logging``)
 
 -  ``loglevelmissingfiles``: int : one of the valid levels from
