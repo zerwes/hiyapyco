@@ -104,13 +104,13 @@ distclean:
 	rm -rf release dist build HiYaPyCo.egg-info
 	find . -type f -name \*.pyc -exec rm -v {} \;
 
+# requires apt install python3-build
 sdist:
-	python setup.py sdist
+	python -m build --sdist
 	@echo "$@ done"
 
 wheel:
-	# requires a 'sudo pip install wheel'
-	python setup.py bdist_wheel
+	python -m build --wheel
 	@echo "$@ done"
 
 twinecheckdist:
