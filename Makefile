@@ -105,19 +105,15 @@ distclean:
 	find . -type f -name \*.pyc -exec rm -v {} \;
 
 # requires apt install python3-build
-sdist:
-	python -m build --sdist
-	@echo "$@ done"
-
-wheel:
-	python -m build --wheel
+pybuild:
+	python -m build
 	@echo "$@ done"
 
 twinecheckdist:
 	twine check dist/HiYaPyCo-*.tar.gz
 	@echo "$@ done"
 
-pypi: sdist wheel twinecheckdist
+pypi: pybuild twinecheckdist
 	@echo "$@ done"
 pypiuploadtest: pypi pypiuploaddo
 pypiupload: pypi pypiuploaddo
