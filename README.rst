@@ -273,17 +273,8 @@ GitHub
     git clone https://github.com/zerwes/hiyapyco
     cd hiyapyco
     sudo python setup.py install
-
-PyPi
-^^^^
-
-Download the latest or desired version of the source package from
-`https://pypi.python.org/pypi/HiYaPyCo <https://pypi.python.org/pypi/HiYaPyCo>`_.
-Unpack the archive and install by executing:
-
-::
-
-    sudo python setup.py install
+    # or
+    sudo pip install .
 
 pip
 ~~~
