@@ -6,5 +6,3 @@ updates:
       interval: "weekly"
     pull-request-branch-name:
       separator: "-"
-    reviewers:
-      - "zerwes"
