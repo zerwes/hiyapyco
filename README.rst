@@ -288,18 +288,21 @@ Install the latest wheel package using:
 debian packages
 ~~~~~~~~~~~~~~~
 
+on trixie aka. debian 13 you can just run::
+
+    apt-get install python3-hiyapyco
+
 install the latest debian packages from http://repo.zero-sys.net/hiyapyco::
 
     # create the sources list file:
-    sudo echo "deb http://repo.zero-sys.net/hiyapyco/deb ./" > /etc/apt/sources.list.d/hiyapyco.list
+    sudo echo 'deb [signed-by=/usr/share/keyrings/hiyapyco.gpg] http://repo.zero-sys.net/hiyapyco/deb ./' > /etc/apt/sources.list.d/hiyapyco.list
 
     # import the key:
-    gpg --keyserver keys.gnupg.net --recv-key 77DE7FB4
-    # or use:
-    wget https://repo.zero-sys.net/77DE7FB4.asc -O - | gpg --import -
+    wget -O- wget https://repo.zero-sys.net/77DE7FB4.asc -O - | gpg --dearmor | sudo tee /usr/share/keyrings/hiyapyco.gpg  > /dev/null
 
     # apt tasks:
     gpg --armor --export 77DE7FB4 | sudo tee /etc/apt/trusted.gpg.d/hiyapyco.asc
+    # install:
     sudo apt-get update
     sudo apt-get install python3-hiyapyco
 
