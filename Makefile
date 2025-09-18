@@ -44,6 +44,7 @@ testreadme:
 	rst-lint README.rst
 
 test:
+	# requires python3-semantic-version
 	@RET=0; \
 		for p in $(PYVERSIONS); do \
 			echo "python version $$p"; \
