@@ -43,6 +43,7 @@ without changes. Tested versions:
 
 -  3.9
 -  3.11
+-  3.13
 
 Usage
 -----
