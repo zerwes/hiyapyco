@@ -1,2 +1,2 @@
 # test/test_mergeoverride.py
-semantic-version>2
+semantic-version>=2.10.0
